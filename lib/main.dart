@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:materials/storage/file_storage.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:http/http.dart' as http;
 
 void main() => runApp(MyApp());
 final CounterStorage storage = CounterStorage();
@@ -73,7 +74,7 @@ class FirstScreen extends StatelessWidget {
     // DBRef.child('materials/Бронза').once().then((DataSnapshot dataSnapshot) {
     int version = 0;
 
-    DBRef.child('version').once().then((DataSnapshot dataSnapshot) {
+    DBRef.child('materials/version').once().then((DataSnapshot dataSnapshot) {
       version = dataSnapshot.value;
       print('version ${dataSnapshot.value.toString()}');
 
@@ -88,24 +89,36 @@ class FirstScreen extends StatelessWidget {
 
   Future<void> copyDataBase() async {
     // DBRef.child('materials/Алюминий, сплав алюминия/Алюминиевые лигатуры/')
-    DBRef.child('materials').once().then((DataSnapshot dataSnapshot) {
-      int i = 0;
+    // DBRef.child('materials/').once().then((DataSnapshot dataSnapshot) async {
+    // int i = 0;
 
-      print('write ${dataSnapshot.value}');
+    // print('dataSnapshot.key ${dataSnapshot.key}');
+    // print('dataSnapshot.length ${dataSnapshot.key!.length}');
+    // print('==dataSnapshot.value ${dataSnapshot.value}');
 
-      storage.writeJSON(dataSnapshot.value.toString().replaceAll("___", "\""));
-      // String? key = dataSnapshot.key;
-      // String? category = dataSnapshot.value['category'];
-      // String? chem = dataSnapshot.value['chem'];
+    var url =
+        Uri.parse('https://materials-9edc1.firebaseio.com/materials.json');
+    var response = await http.post(url);
+    print('Response status: ${response.statusCode}');
 
-      // String content = '{"$key":{"category":"$category","chem":"$chem"}}';
+    String textJson = await http.read(url);
 
-      // String textDB = dataSnapshot.value.toString();
-      // print('write $content');
-
-      // storage.writeJSON(content);
-    });
+    print(textJson);
+    storage.writeJSON(textJson);
   }
+
+  // storage.writeJSON(dataSnapshot.value.toString().replaceAll("___", "\""));
+  // String? key = dataSnapshot.key;
+  // String? category = dataSnapshot.value['category'];
+  // String? chem = dataSnapshot.value['chem'];
+
+  // String content = '{"$key":{"category":"$category","chem":"$chem"}}';
+
+  // String textDB = dataSnapshot.value.toString();
+  // print('write $content');
+
+  // storage.writeJSON(content);
+
 }
 
 void showToastt(String text) {
