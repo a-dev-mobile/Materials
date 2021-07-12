@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:materials/storage/file_storage.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
@@ -81,7 +81,7 @@ class FirstScreen extends StatelessWidget {
       version = dataSnapshot.value;
       print('version ${dataSnapshot.value.toString()}');
 
-      showToastt('version $version');
+
     });
   }
 
@@ -122,15 +122,4 @@ class FirstScreen extends StatelessWidget {
 
 // storage.writeJSON(content);
 
-}
-
-void showToastt(String text) {
-  Fluttertoast.showToast(
-      msg: text,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Colors.grey,
-      textColor: Colors.white,
-      fontSize: 16.0);
 }
