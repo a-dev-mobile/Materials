@@ -7,8 +7,11 @@ import 'package:materials/storage/file_storage.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 
-void main() => runApp(MyApp());
-final CounterStorage storage = CounterStorage();
+void main() async {
+  runApp(MyApp());
+}
+
+final TextStorage storage = TextStorage();
 
 final DBRef = FirebaseDatabase.instance.reference();
 
@@ -74,7 +77,7 @@ class FirstScreen extends StatelessWidget {
     // DBRef.child('materials/Бронза').once().then((DataSnapshot dataSnapshot) {
     int version = 0;
 
-    DBRef.child('materials/version').once().then((DataSnapshot dataSnapshot) {
+    await DBRef.child('version').once().then((DataSnapshot dataSnapshot) {
       version = dataSnapshot.value;
       print('version ${dataSnapshot.value.toString()}');
 
@@ -83,7 +86,7 @@ class FirstScreen extends StatelessWidget {
   }
 
   Future<void> createFile() async {
-    storage.writeJSON("_co23423423unter");
+    storage.writeText("_co23423423unter", "123t.txt");
     print("createFile");
   }
 
@@ -104,20 +107,20 @@ class FirstScreen extends StatelessWidget {
     String textJson = await http.read(url);
 
     print(textJson);
-    storage.writeJSON(textJson);
+    storage.writeText(textJson, "123.json");
   }
 
-  // storage.writeJSON(dataSnapshot.value.toString().replaceAll("___", "\""));
-  // String? key = dataSnapshot.key;
-  // String? category = dataSnapshot.value['category'];
-  // String? chem = dataSnapshot.value['chem'];
+// storage.writeJSON(dataSnapshot.value.toString().replaceAll("___", "\""));
+// String? key = dataSnapshot.key;
+// String? category = dataSnapshot.value['category'];
+// String? chem = dataSnapshot.value['chem'];
 
-  // String content = '{"$key":{"category":"$category","chem":"$chem"}}';
+// String content = '{"$key":{"category":"$category","chem":"$chem"}}';
 
-  // String textDB = dataSnapshot.value.toString();
-  // print('write $content');
+// String textDB = dataSnapshot.value.toString();
+// print('write $content');
 
-  // storage.writeJSON(content);
+// storage.writeJSON(content);
 
 }
 
