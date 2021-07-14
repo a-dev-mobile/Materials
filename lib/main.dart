@@ -1,13 +1,14 @@
-import 'dart:io';
+
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 
-import 'package:path_provider/path_provider.dart';
 
-import '../const.dart';
+
+import 'api_client.dart';
+import 'const.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,8 +31,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -54,10 +53,13 @@ class _MyAppState extends State<MyApp> {
                 child: Text('update Offline Version DB'),
               ),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async{
+                  ApiClient appClient = ApiClient(
+                      'https://materials-9edc1.firebaseio.com/materials.json');
+                  await appClient.getMaterial();
 
                 },
-                child: Text('read name'),
+                child: Text('read json'),
               ),
               ElevatedButton(
                 onPressed: () {},
@@ -79,10 +81,10 @@ class _MyAppState extends State<MyApp> {
     print('onllineVersion $onllineVersion');
     print('offlineVersion $offlineVersion');
 
-    if (onllineVersion > offlineVersion) {
+    if (onllineVersion != offlineVersion) {
       print('UPDATE data base');
       await box.put(HiveKeys.versionDB, onllineVersion);
-    }else {
+    } else {
       print('no need to update');
     }
 
@@ -91,7 +93,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<int> getOnlineVersionDB() async {
     DataSnapshot dataSnapshot =
-        await FirebaseDatabase.instance.reference().child('version').once();
+    await FirebaseDatabase.instance.reference().child('version').once();
 
     print('dataSnapshot ${dataSnapshot.toString()}');
     var version = dataSnapshot.value;
