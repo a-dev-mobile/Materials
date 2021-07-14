@@ -1,11 +1,7 @@
-
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
-
-
+import 'package:materials/material.dart';
 
 import 'api_client.dart';
 import 'const.dart';
@@ -53,11 +49,12 @@ class _MyAppState extends State<MyApp> {
                 child: Text('update Offline Version DB'),
               ),
               ElevatedButton(
-                onPressed: () async{
+                onPressed: () async {
                   ApiClient appClient = ApiClient(
                       'https://materials-9edc1.firebaseio.com/materials.json');
-                  await appClient.getMaterial();
 
+                  List<MaterialModel> list = await appClient.getMaterial();
+                  print(list[0].name);
                 },
                 child: Text('read json'),
               ),
@@ -93,7 +90,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<int> getOnlineVersionDB() async {
     DataSnapshot dataSnapshot =
-    await FirebaseDatabase.instance.reference().child('version').once();
+        await FirebaseDatabase.instance.reference().child('version').once();
 
     print('dataSnapshot ${dataSnapshot.toString()}');
     var version = dataSnapshot.value;

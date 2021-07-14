@@ -9,7 +9,7 @@ class ApiClient {
 
   ApiClient(this._url);
 
-  Future<List<Material>> getMaterial() async {
+  Future<List<MaterialModel>> getMaterial() async {
 // Uri(scheme: 'https',host: 'materials-9edc1.firebaseio.com',path:'materials.json' )
     Uri url = Uri.parse(_url);
 
@@ -19,10 +19,10 @@ class ApiClient {
     final jsonStrings = await response.transform(utf8.decoder).toList();
     final jsonString = jsonStrings.join();
     final json = jsonDecode(jsonString) as List<dynamic>;
-    final material = json.map((dynamic e) =>
-        Material.fromJson(e as Map<String, dynamic>))
-        .toList();
     print(jsonString);
+    final material = json.map((dynamic e) =>
+        MaterialModel.fromJson(e as Map<String, dynamic>))
+        .toList();
     return material;
   }
 }

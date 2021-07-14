@@ -6,7 +6,8 @@ part of 'material.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Material _$MaterialFromJson(Map<String, dynamic> json) => Material(
+MaterialModel _$MaterialModelFromJson(Map<String, dynamic> json) =>
+    MaterialModel(
       anyInform: json['anyInform'] as String,
       category: json['category'] as String,
       chem: json['chem'] as String,
@@ -15,7 +16,8 @@ Material _$MaterialFromJson(Map<String, dynamic> json) => Material(
       use: json['use'] as String,
     );
 
-Map<String, dynamic> _$MaterialToJson(Material instance) => <String, dynamic>{
+Map<String, dynamic> _$MaterialModelToJson(MaterialModel instance) =>
+    <String, dynamic>{
       'anyInform': instance.anyInform,
       'category': instance.category,
       'chem': instance.chem,

@@ -3,8 +3,8 @@ import 'package:json_annotation/json_annotation.dart';
 part 'material.g.dart';
 
 @JsonSerializable()
-class Material {
-  Material({
+class MaterialModel {
+  MaterialModel({
     @JsonKey(name: 'add') required this.anyInform,
     required this.category,
     required this.chem,
@@ -20,8 +20,13 @@ class Material {
   String type;
   String use;
 
-  factory Material.fromJson(Map<String, dynamic> json) =>
-      _$MaterialFromJson(json);
+  factory MaterialModel.fromJson(Map<String, dynamic> json) =>
+      _$MaterialModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$MaterialToJson(this);
+  Map<String, dynamic> toJson() => _$MaterialModelToJson(this);
+
+  @override
+  String toString() {
+    return 'MaterialModel{anyInform: $anyInform, category: $category, chem: $chem, name: $name, type: $type, use: $use}';
+  }
 }
