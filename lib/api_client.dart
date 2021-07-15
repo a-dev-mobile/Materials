@@ -1,28 +1,40 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'model/material.dart';
+import 'dart:convert' as convert;
 
-import 'material.dart';
+import 'model/album.dart';
 
 class ApiClient {
-  final client = HttpClient();
-  final String _url;
 
-  ApiClient(this._url);
+  Future<dynamic> getJson(String www) async {
+    var url = Uri.parse(www);
+    var response = await http.get(url);
+    var body = await http.read(url);
+    print('Response status: ${response.statusCode}');
+    print('response.body  ${response.body}');
+    print('http.read(url) $body');
 
-  Future<List<MaterialModel>> getMaterial() async {
-// Uri(scheme: 'https',host: 'materials-9edc1.firebaseio.com',path:'materials.json' )
-    Uri url = Uri.parse(_url);
+    return "json";
+  }
 
-    final request = await client.getUrl(url);
-    final response = await request.close();
+  Future<List<Album>> fetchAlbums() async {
+    final response = await http
+        .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/'));
 
-    final jsonStrings = await response.transform(utf8.decoder).toList();
-    final jsonString = jsonStrings.join();
-    final json = jsonDecode(jsonString) as List<dynamic>;
-    print(jsonString);
-    final material = json.map((dynamic e) =>
-        MaterialModel.fromJson(e as Map<String, dynamic>))
-        .toList();
-    return material;
+    print('Response status: ${response.statusCode}');
+    print('response.body  ${response.body}');
+
+    if (response.statusCode == 200) {
+      return _parseAlbum(response.body);
+    } else {
+      throw Exception('Failed to load album');
+    }
+  }
+
+  List<Album> _parseAlbum(String responseBody) {
+    final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
+    return parsed.map<Album>((json) => Album.fromJson(json)).toList();
   }
 }

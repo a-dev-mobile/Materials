@@ -1,7 +1,8 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:materials/material.dart';
+import 'package:materials/model/material.dart';
+import 'package:materials/model/album.dart';
 
 import 'api_client.dart';
 import 'const.dart';
@@ -50,12 +51,15 @@ class _MyAppState extends State<MyApp> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  ApiClient appClient = ApiClient(
-                      'https://materials-9edc1.firebaseio.com/materials.json');
+                  List<Album> albums =await ApiClient().fetchAlbums();
+                print(albums[0].title);
+                print(albums[1].title);
+                print(albums[2].title);
+                print(albums[3].title);
+                print(albums[4].title);
 
-                  List<MaterialModel> list = await appClient.getMaterial();
-                  print(list[0].name);
-                },
+
+                  },
                 child: Text('read json'),
               ),
               ElevatedButton(
@@ -90,7 +94,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<int> getOnlineVersionDB() async {
     DataSnapshot dataSnapshot =
-        await FirebaseDatabase.instance.reference().child('version').once();
+    await FirebaseDatabase.instance.reference().child('version').once();
 
     print('dataSnapshot ${dataSnapshot.toString()}');
     var version = dataSnapshot.value;
