@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:materials/model/category.dart';
 import 'package:materials/model/db.dart';
 import 'package:materials/services/base_client.dart';
 
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
                 child: const Text('get Online Version DB'),
               ),
               ElevatedButton(
-                onPressed: () async{
+                onPressed: () async {
                   await updateOfflineVersionDB();
                 },
                 child: const Text('update Offline Version DB'),
@@ -47,8 +48,17 @@ class MyApp extends StatelessWidget {
                   },
                   child: const Text('read json')),
               ElevatedButton(
-                onPressed: () async {},
-                child: const Text('get version github'),
+                onPressed: () async {
+                  var response =
+                      await BaseClient().get(UrlDB.baseUrl, UrlDB.type);
+                  final List<Category> category = categoryFromJson(response);
+
+                  for (Category item in category) {
+                    print(item.name);
+                    print(item.type);
+                  }
+                },
+                child: const Text('get category'),
               ),
             ],
           ),
