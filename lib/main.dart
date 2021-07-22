@@ -1,11 +1,10 @@
-import 'package:firebase_database/firebase_database.dart';
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:materials/model/material.dart';
-import 'package:materials/model/album.dart';
+import 'package:materials/model/db.dart';
 import 'package:materials/services/base_client.dart';
 
-import 'api_client.dart';
 import 'const.dart';
 
 void main() async {
@@ -13,22 +12,12 @@ void main() async {
 
   await Hive.initFlutter();
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
-Future<DatabaseReference> initFireBase() async {
-  DatabaseReference dbRef = FirebaseDatabase.instance.reference();
-  return dbRef;
-}
-
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,32 +28,27 @@ class _MyAppState extends State<MyApp> {
             children: [
               ElevatedButton(
                 onPressed: () async {
-                  int ver = await getOnlineVersionDB();
-                  print('getOnlineVersionDB() == $ver');
+                  int version = await getDbOnlineVersion();
+                  print('getOnlineVersionDB() == $version');
                 },
-                child: Text('get Online Version DB'),
+                child: const Text('get Online Version DB'),
               ),
               ElevatedButton(
-                onPressed: () {
-                  updateOfflineVersionDB();
+                onPressed: () async{
+                  await updateOfflineVersionDB();
                 },
-                child: Text('update Offline Version DB'),
+                child: const Text('update Offline Version DB'),
               ),
               ElevatedButton(
                   onPressed: () async {
-                    var response = await BaseClient().get(
-                        'https://materials-9edc1.firebaseio.com',
-                        '/materials.json');
+                    var response =
+                        await BaseClient().get(UrlDB.baseUrl, UrlDB.type);
                     print(response);
                   },
-                  child: Text('read json')),
+                  child: const Text('read json')),
               ElevatedButton(
-                onPressed: () async {
-                  var response = await BaseClient()
-                      .get('https://jsonplaceholder.typicode.com', '/todos/1');
-                  print(response);
-                },
-                child: Text('new read json'),
+                onPressed: () async {},
+                child: const Text('get version github'),
               ),
             ],
           ),
@@ -73,10 +57,17 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
+  Future<int> getDbOnlineVersion() async {
+    var response = await BaseClient().get(UrlDB.baseUrl, UrlDB.version);
+    final versionModel = versionModelFromJson(response);
+    final Db db = versionModel[0];
+    return db.version;
+  }
+
   Future<void> updateOfflineVersionDB() async {
     var box = await Hive.openBox(HiveKeys.setting);
 
-    int onllineVersion = await getOnlineVersionDB();
+    int onllineVersion = await getDbOnlineVersion();
     int offlineVersion = await box.get(HiveKeys.versionDB, defaultValue: 0);
 
     print('onllineVersion $onllineVersion');
@@ -90,19 +81,5 @@ class _MyAppState extends State<MyApp> {
     }
 
     box.close();
-  }
-
-  Future<int> getOnlineVersionDB() async {
-    DataSnapshot dataSnapshot =
-        await FirebaseDatabase.instance.reference().child('version').once();
-
-    print('dataSnapshot ${dataSnapshot.toString()}');
-    var version = dataSnapshot.value;
-    if (version != null) {
-      return version;
-      /**/
-    } else {
-      return 0;
-    }
   }
 }
