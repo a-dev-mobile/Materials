@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:materials/model/material.dart';
 import 'package:materials/model/album.dart';
+import 'package:materials/services/base_client.dart';
 
 import 'api_client.dart';
 import 'const.dart';
@@ -50,21 +51,20 @@ class _MyAppState extends State<MyApp> {
                 child: Text('update Offline Version DB'),
               ),
               ElevatedButton(
-                onPressed: () async {
-                  List<Album> albums =await ApiClient().fetchAlbums();
-                print(albums[0].title);
-                print(albums[1].title);
-                print(albums[2].title);
-                print(albums[3].title);
-                print(albums[4].title);
-
-
+                  onPressed: () async {
+                    var response = await BaseClient().get(
+                        'https://materials-9edc1.firebaseio.com',
+                        '/materials.json');
+                    print(response);
                   },
-                child: Text('read json'),
-              ),
+                  child: Text('read json')),
               ElevatedButton(
-                onPressed: () {},
-                child: Text('set name'),
+                onPressed: () async {
+                  var response = await BaseClient()
+                      .get('https://jsonplaceholder.typicode.com', '/todos/1');
+                  print(response);
+                },
+                child: Text('new read json'),
               ),
             ],
           ),
@@ -94,7 +94,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<int> getOnlineVersionDB() async {
     DataSnapshot dataSnapshot =
-    await FirebaseDatabase.instance.reference().child('version').once();
+        await FirebaseDatabase.instance.reference().child('version').once();
 
     print('dataSnapshot ${dataSnapshot.toString()}');
     var version = dataSnapshot.value;
