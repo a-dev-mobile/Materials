@@ -42,13 +42,14 @@ class MyApp extends StatelessWidget {
               ElevatedButton(
                 onPressed: () async {
                   var box = await Hive.openBox(ConstHive.categoryTypeBox);
-                  List<String> values = [];
-
+                  String values;
+                  String category;
+                  List<String> typeList = [];
                   for (var item in box.keys) {
                     values = box.get(item);
-                    print('category = $item type = $values');
-                    
-                    
+                    category = values.split('^^')[0];
+                    typeList = values.split('^^')[1].split(',');
+                    print('category = $category type = $typeList');
                   }
                 },
                 child: const Text('get from hive'),
@@ -136,8 +137,10 @@ class MyApp extends StatelessWidget {
   Future<void> toHive(String boxName, Map<String, List<String>> map) async {
     var box = await Hive.openBox(boxName);
     print('start save to box $boxName');
+    int i = 0;
     for (var item in map.entries) {
-      box.put(item.key, item.value);
+      box.put(i, item.key + '^^' + item.value.toString());
+      i = i + 1;
     }
     box.close();
     print('end save to box $boxName');
