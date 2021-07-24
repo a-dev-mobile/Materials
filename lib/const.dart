@@ -16,3 +16,7 @@ abstract class ConstUrlDB {
   static const type = '/type.json';
 
 }
+abstract class ConstApp {
+  static const name = 'Material';
+ 
+}
