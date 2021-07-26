@@ -3,16 +3,18 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:materials/app/controller/base_controller.dart';
 
 
 import 'app_exception.dart';
 
-class BaseClient {
+class BaseClient{
   static const int timeOutDuration = 20;
 
   //GET
   Future<dynamic> get(String baseUrl, String api) async {
     var url = Uri.parse(baseUrl + api);
+
 
     try {
       var response =

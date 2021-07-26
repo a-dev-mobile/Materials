@@ -1,17 +1,17 @@
 // ignore_for_file: avoid_print
 
 import 'package:hive/hive.dart';
+import 'package:materials/app/controller/base_controller.dart';
+
 import 'package:materials/app/data/model/category_name.dart';
 import 'package:materials/app/data/model/category_type.dart';
 import 'package:materials/app/data/model/db.dart';
 import 'package:materials/app/data/model/material.dart';
 
-
-
 import '../../../const.dart';
 import 'base_client.dart';
 
-class DB {
+class DB with BaseController {
   Future<bool> isOldLocal() async {
     var box = await Hive.openBox(ConstHive.settingBox);
 
@@ -26,20 +26,28 @@ class DB {
       await box.put(ConstHive.versionDbKey, onllineVersion);
 
       box.close;
+      hideLoading();
 
       return true;
     } else {
       print('no need to update');
+
       box.close();
+      hideLoading();
+
       return false;
     }
   }
 
   Future<int> _getDbOnlineVersion() async {
-    var response =
-        await BaseClient().get(ConstUrlDB.baseUrl, ConstUrlDB.version);
+    showLoading();
+    var response = await BaseClient()
+        .get(ConstUrlDB.baseUrl, ConstUrlDB.version)
+        .catchError(handleError);
+
     final versionModel = versionModelFromJson(response);
     final Db db = versionModel[0];
+
     return db.version;
   }
 
@@ -53,7 +61,6 @@ class DB {
       box.add(categoryType);
     }
     print('OK save to box - $boxName');
-
   }
 
   Future<void> _toHiveCategoryName(Map<String, List<String>> map) async {
@@ -66,12 +73,12 @@ class DB {
       box.add(categoryName);
     }
     print('OK save to box - $boxName');
-
   }
 
   Future<void> updateLocalDB() async {
     var response =
         await BaseClient().get(ConstUrlDB.baseUrl, ConstUrlDB.material);
+
     final List<MaterialMod> materialsList = materialFromJson(response);
 
     List<String> categoryList = [];
