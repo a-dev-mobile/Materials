@@ -21,3 +21,8 @@ class ApiNotRespondingException extends AppException {
   ApiNotRespondingException(String message, String url)
       : super(message: message, prefix: 'Api not response', url: url);
 }
+
+class UnAuthorizedException extends AppException {
+  UnAuthorizedException(String message, String url)
+      : super(message: message, prefix: 'UnAuthorized response', url: url);
+}

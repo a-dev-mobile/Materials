@@ -1,12 +1,14 @@
 // ignore_for_file: avoid_print
 
 import 'package:hive/hive.dart';
-import 'package:materials/models/category_name.dart';
-import 'package:materials/models/category_type.dart';
-import 'package:materials/models/db.dart';
-import 'package:materials/models/material.dart';
+import 'package:materials/app/data/model/category_name.dart';
+import 'package:materials/app/data/model/category_type.dart';
+import 'package:materials/app/data/model/db.dart';
+import 'package:materials/app/data/model/material.dart';
 
-import '../const.dart';
+
+
+import '../../../const.dart';
 import 'base_client.dart';
 
 class DB {

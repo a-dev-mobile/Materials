@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:materials/services/app_exception.dart';
+
+
+import 'app_exception.dart';
 
 class BaseClient {
   static const int timeOutDuration = 20;
@@ -11,6 +13,7 @@ class BaseClient {
   //GET
   Future<dynamic> get(String baseUrl, String api) async {
     var url = Uri.parse(baseUrl + api);
+
     try {
       var response =
           await http.get(url).timeout(const Duration(seconds: timeOutDuration));
@@ -29,10 +32,13 @@ class BaseClient {
         var responseJson = utf8.decode(response.bodyBytes);
         return responseJson;
       case 400:
-      case 401:
-      case 403:
         throw BadRequestException(
             utf8.decode(response.bodyBytes), response.request!.url.toString());
+      case 401:
+      case 403:
+        throw UnAuthorizedException(
+            utf8.decode(response.bodyBytes), response.request!.url.toString());
+
       case 500:
       default:
         throw FetchDataException(
@@ -40,4 +46,6 @@ class BaseClient {
             response.request!.url.toString());
     }
   }
+
+
 }

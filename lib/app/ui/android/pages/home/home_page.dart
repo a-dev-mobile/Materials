@@ -1,12 +1,14 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:materials/models/category_name.dart';
-import 'package:materials/models/category_type.dart';
 
-import '../../const.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:materials/app/data/model/category_name.dart';
+import 'package:materials/app/data/model/category_type.dart';
+
+import '../../../../../const.dart';
+
+
 
 List<CategoryType> categoryTypeList = [];
 List<CategoryName> categoryNameList = [];
@@ -17,7 +19,8 @@ Future<void> loadToListsFromHive() async {
 }
 
 Future<void> loadNameList() async {
-  Box<CategoryName> box = await Hive.openBox<CategoryName>(ConstHive.categoryNameBox);
+  Box<CategoryName> box =
+      await Hive.openBox<CategoryName>(ConstHive.categoryNameBox);
 
   for (CategoryName item in box.values) {
     print('name');
@@ -30,7 +33,8 @@ Future<void> loadNameList() async {
 }
 
 Future<void> loadTypeList() async {
-  Box<CategoryType> box = await Hive.openBox<CategoryType>(ConstHive.categoryTypeBox);
+  Box<CategoryType> box =
+      await Hive.openBox<CategoryType>(ConstHive.categoryTypeBox);
 
   for (CategoryType item in box.values) {
     print('type');
@@ -42,20 +46,20 @@ Future<void> loadTypeList() async {
   // box.close();
 }
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
+//   @override
+//   State<HomePage> createState() => _HomePageState();
+// }
 
-class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    print('init');
-    loadToListsFromHive();
-    super.initState();
-  }
+// class _HomePageState extends State<HomePage> {
+//   @override
+//   void initState() {
+//     print('init');
+//     loadToListsFromHive();
+//     super.initState();
+//   }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +68,18 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: Text(ConstApp.name),
         ),
-        body: buildListView(),
+        body: Container(
+          child: Column(
+            children: [
+               ElevatedButton(
+                    onPressed: () {
+                      print('click');
+                    },
+                    child: Text('click')),
+              buildListView(),
+            ],
+          ),
+        ),
       ),
     );
   }

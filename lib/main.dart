@@ -1,52 +1,35 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
+import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:materials/const.dart';
-import 'package:materials/models/category_name.dart';
-import 'package:materials/models/category_type.dart';
-import 'package:materials/pages/home/home_page.dart';
+
+import 'package:materials/app/routes/app_pages.dart';
+import 'package:materials/app/routes/app_routes.dart';
 
 
-import 'package:materials/services/db.dart';
+import 'app/ui/android/pages/category/category_page.dart';
+import 'app/ui/android/theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  print('main');
   await Hive.initFlutter();
-  Hive.registerAdapter(CategoryTypeAdapter());
-  Hive.registerAdapter(CategoryNameAdapter());
+// Hive.registerAdapter(CategoryTypeAdapter());
+  // Hive.registerAdapter(CategoryNameAdapter());
 
-  DB db = DB();
-  if (await db.isOldLocal()) {
-    Fluttertoast.showToast(
-        msg: "Load DB",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.CENTER,
-        backgroundColor: Colors.black,
-        textColor: Colors.white,
-        fontSize: 16.0);
+  // DB db = DB();
+  // if (await db.isOldLocal()) {
+  // await db.updateLocalDB();
+  // }
 
-    await db.updateLocalDB();
-    Fluttertoast.cancel();
-  }
-
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: ConstApp.name,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: HomePage(),
-    );
-  }
+  runApp(GetMaterialApp(
+    debugShowCheckedModeBanner: false,
+    initialRoute: Routes.INITIAL,
+    theme: appThemeData,
+    defaultTransition: Transition.fade,
+    getPages: AppPages.pages,
+    home: CategoryPage(),
+  ));
 }
