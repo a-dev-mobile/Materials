@@ -11,18 +11,28 @@ class HomeController extends GetxController {
 
   List<dynamic> category = [].obs;
 
-  Future<void> initFirebase() async {
-    print('start to category');
-    CollectionReference materialsRef =
-        await FirebaseFirestore.instance.collection('materials');
 
-    print(materialsRef.toString());
 
-    await materialsRef.get().then((value) {
-      for (var element in value.docs) {
-        category.add(element);
-        print(element.toString());
-      }
-    });
-  }
+
+
+
+
+
+
+
+
+  // Future<void> initFirebase() async {
+  //   print('start to category');
+  //   CollectionReference materialsRef =
+  //       await FirebaseFirestore.instance.collection('materials');
+
+  //   print(materialsRef.toString());
+
+  //   await materialsRef.get().then((value) {
+  //     for (var element in value.docs) {
+  //       category.add(element);
+  //       print(element.toString());
+  //     }
+  //   });
+  // }
 }

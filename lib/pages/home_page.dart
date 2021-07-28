@@ -11,9 +11,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = Get.put(HomeController());
-    c.initFirebase();
-    print(c.category.length);
+    // final c = Get.put(HomeController());
+    // c.initFirebase();
     print('build');
     // CollectionReference users =
     //     FirebaseFirestore.instance
@@ -24,52 +23,73 @@ class HomePage extends StatelessWidget {
 // CollectionReference users = FirebaseFirestore.instance.collection('users');
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Obx(() => Text('incre ${c.i}')),
-        ),
-        body: Builder(builder: (context) {
-          return Column(
-            children: [
-              FloatingActionButton(
-                  backgroundColor: Colors.green,
-                  heroTag: "btn1",
-                  onPressed: () {
-                    c.increment();
-                  }),
-              FloatingActionButton(
-                  backgroundColor: Colors.blueGrey,
-                  heroTag: "btn2",
-                  onPressed: () {
-                    Get.toNamed(Routes.SUB);
-                  }),
-
-            ],
-          );
-        }),
+        appBar: AppBar(title: Text('incre')),
+        body: LoadWidget(),
       ),
     );
   }
-
-
 }
-              // FutureBuilder<DocumentSnapshot>(
-              //   future: users.doc("АМК").get(),
-              //   builder: (BuildContext context,
-              //       AsyncSnapshot<DocumentSnapshot> snapshot) {
-              //     if (snapshot.hasError) {
-              //       return Text("Something went wrong");
-              //     }
 
-              //     if (snapshot.hasData && !snapshot.data!.exists) {
-              //       return Text("Document does not exist");
-              //     }
+class LoadWidget extends StatelessWidget {
+  const LoadWidget({Key? key}) : super(key: key);
 
-              //     if (snapshot.connectionState == ConnectionState.done) {
-              //       Map<String, dynamic> data =
-              //           snapshot.data!.data() as Map<String, dynamic>;
-              //       return Text("Full Name: ${data['name']} ${data['use']}");
-              //     }
+  @override
+  Widget build(BuildContext context) {
+    CollectionReference materials = FirebaseFirestore.instance.collection('c1');
 
-              //     return Text("loading");
-              //   },
-              // ),
+    return FutureBuilder <DocumentSnapshot>(
+        future:getposts(),
+        builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.hasError) {
+            print("Something went wrong ${snapshot.data.toString()}");
+            return Text("Something went wrong");
+          }
+          if (snapshot.hasData && !snapshot.data!.exists) {
+            print("Document does not exist ${snapshot.data.toString()}");
+            return Text("Document does not exist");
+          }
+
+          if (snapshot.connectionState == ConnectionState.done) {
+             String datas = '';
+            // Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+            // String datas = data['name'];
+
+
+     var docs = snapshot.docs.map(doc => doc.data());
+            print('ConnectionState.done ${snapshot.data.toString()}');
+            return Text('name ${datas}');
+          }
+          print('LOAD');
+          return Text('LOAD');
+        });
+  }
+
+
+
+ Future getposts() async{
+await Firebase.initializeApp();
+var firestore = FirebaseFirestore.instance;
+  QuerySnapshot qn = await firestore.collection("c1/d1").get();
+  return qn.docs;}
+}
+// FutureBuilder<DocumentSnapshot>(
+//   future: users.doc("АМК").get(),
+//   builder: (BuildContext context,
+//       AsyncSnapshot<DocumentSnapshot> snapshot) {
+//     if (snapshot.hasError) {
+//       return Text("Something went wrong");
+//     }
+
+//     if (snapshot.hasData && !snapshot.data!.exists) {
+//       return Text("Document does not exist");
+//     }
+
+//     if (snapshot.connectionState == ConnectionState.done) {
+//       Map<String, dynamic> data =
+//           snapshot.data!.data() as Map<String, dynamic>;
+//       return Text("Full Name: ${data['name']} ${data['use']}");
+//     }
+
+//     return Text("loading");
+//   },
+// ),
