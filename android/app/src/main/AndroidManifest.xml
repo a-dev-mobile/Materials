@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="a.dev.mobile.materials.materials">
+    package="a.dev.mobile.materials">
    <application
         android:label="materials"
         android:icon="@mipmap/ic_launcher">
