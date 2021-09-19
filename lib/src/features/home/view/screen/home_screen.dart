@@ -1,10 +1,9 @@
 library home;
 
-import 'package:firebase_database/firebase_database.dart';
-
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:materials/main.dart';
 import 'package:materials/src/app/app.dart';
 
 import 'package:materials/src/config/routes/app_pages.dart';
@@ -18,9 +17,9 @@ part '../../bindings/home_binding.dart';
 // component
 
 // model
-var fireDataBase = FirebaseServices.to.database;
 
-final homeRefDB = fireDataBase.reference().child('/home');
+late HomeController c = HomeController();
+late FirebaseServices fireBaseServices = FirebaseServices();
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -35,7 +34,9 @@ class HomeScreen extends StatelessWidget {
           actions: [
             IconButton(
               icon: const Icon(Icons.settings),
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(Routes.setting);
+              },
             ),
           ],
         ),
@@ -46,15 +47,21 @@ class HomeScreen extends StatelessWidget {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  Get.toNamed(Routes.setting);
+                  fireBaseServices.updateOnlineVersionDB(2222 / 258);
                 },
-                child: Text('start setting'),
+                child: Text('set version db'),
               ),
               ElevatedButton(
-                onPressed: () async{
-                  await homeRefDB.set({'v1': 'v2', 't': 't2'});
+                onPressed: () async {
+                  logger.i(fireBaseServices.getVersionOnlineDB());
                 },
-                child: Text('set fire base'),
+                child: Text('get version '),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  print(fireBaseServices.getVersionLocal());
+                },
+                child: Text('get version local'),
               ),
             ],
           ),

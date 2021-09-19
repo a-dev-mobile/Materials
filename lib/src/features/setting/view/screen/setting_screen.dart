@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // controller
-part '../../controllers/setting_screen.dart';
+part '../../controllers/setting_controller.dart';
 // binding
 part '../../binndings/setting_binding.dart';
 

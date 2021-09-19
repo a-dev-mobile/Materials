@@ -8,9 +8,9 @@ initServices() async {
 class AppServices extends GetxService {
   static AppServices get to => Get.find<AppServices>();
 
-  @override
-  void onInit() async {
-    await Get.putAsync(() => FirebaseServices().init());
-    super.onInit();
-  }
+  // @override
+  // void onInit() async {
+  //   await Get.putAsync(() => FirebaseServices().init());
+  //   super.onInit();
+  // }
 }

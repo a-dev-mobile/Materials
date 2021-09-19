@@ -1,12 +1,18 @@
 library app;
 
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:materials/main.dart';
+import 'package:materials/src/app/constant/app_const.dart';
 import 'package:materials/src/config/routes/app_pages.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 // controller
 part 'controllers/firebase_controller.dart';
