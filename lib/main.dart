@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'src/app/app.dart';
 
@@ -15,6 +16,7 @@ var loggerNoStack = Logger(
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initServices();
+    
 
   runApp(MyApp());
 }

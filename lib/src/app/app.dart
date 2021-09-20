@@ -15,7 +15,7 @@ import 'package:materials/src/config/routes/app_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // controller
-part 'controllers/firebase_controller.dart';
+part 'controllers/firebase_service.dart';
 part 'controllers/app_controller.dart';
 //binding
 part 'bindings/app_bindings.dart';

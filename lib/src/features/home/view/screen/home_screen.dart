@@ -47,21 +47,27 @@ class HomeScreen extends StatelessWidget {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  fireBaseServices.updateOnlineVersionDB(2222 / 258);
+                  // fireBaseServices.updateOnlineVersionDB(2222 / 258);
                 },
                 child: Text('set version db'),
               ),
               ElevatedButton(
                 onPressed: () async {
-                  logger.i(fireBaseServices.getVersionOnlineDB());
+              //  fireBaseServices.updateDbLocal();
                 },
-                child: Text('get version '),
+                child: Text('update DB'),
               ),
               ElevatedButton(
                 onPressed: () async {
-                  print(fireBaseServices.getVersionLocal());
+            
                 },
                 child: Text('get version local'),
+              ),
+                ElevatedButton(
+                onPressed: () async {
+             
+                },
+                child: Text('get perfom version online'),
               ),
             ],
           ),
