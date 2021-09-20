@@ -10,18 +10,21 @@ environment:
   sdk: ">=2.15.0-120.0.dev <3.0.0"
 
 dependencies:
-  firebase_core: ^1.6.0
-  firebase_database: ^8.0.0
+
   flutter:
     sdk: flutter
 
   flutter_localizations:
     sdk: flutter
 
+  # GET
   get: ^4.3.8
+  get_storage: ^2.0.3
+  # FIREBASE
+  firebase_core: ^1.6.0
+  firebase_database: ^8.0.0
+
   logger: ^1.1.0
-  share: ^2.0.4
-  shared_preferences: ^2.0.8
   url_launcher: ^6.0.11
 
 dev_dependencies:

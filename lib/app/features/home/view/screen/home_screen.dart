@@ -1,25 +1,18 @@
-library home;
+
 
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:materials/main.dart';
-import 'package:materials/src/app/app.dart';
 
-import 'package:materials/src/config/routes/app_pages.dart';
 
-// controller
-part '../../controllers/home_controller.dart';
 
-// binding
-part '../../bindings/home_binding.dart';
+
 
 // component
 
 // model
 
-late HomeController c = HomeController();
-late FirebaseServices fireBaseServices = FirebaseServices();
+
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -30,12 +23,12 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.appTitle),
+          title: Text( "Home".tr),
           actions: [
             IconButton(
               icon: const Icon(Icons.settings),
               onPressed: () {
-                Get.toNamed(Routes.setting);
+                // Get.toNamed(Routes.SETTING);
               },
             ),
           ],

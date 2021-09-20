@@ -1,4 +1,5 @@
-part of setting;
+
+import 'package:get/get.dart';
 
 class SettingBinding extends Bindings{
   @override

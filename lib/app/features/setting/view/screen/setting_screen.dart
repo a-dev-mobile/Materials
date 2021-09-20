@@ -1,12 +1,7 @@
-library setting;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-// controller
-part '../../controllers/setting_controller.dart';
-// binding
-part '../../binndings/setting_binding.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({Key? key}) : super(key: key);
