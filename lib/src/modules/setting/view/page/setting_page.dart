@@ -23,7 +23,7 @@ class SettingPage extends StatelessWidget {
               FirebaseServ.to.getVersionOnlineDB();
              
             },
-            child: Obx(() => Text('get version ${firebase.versionDB}'))),
+            child: Text('get version')),
       ),
     );
   }
