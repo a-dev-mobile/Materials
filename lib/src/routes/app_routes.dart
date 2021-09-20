@@ -1,3 +1,4 @@
 abstract class Routes {
-  static const HOME = '/home';
+  static const home = '/home';
+  static const setting = '/setting';
 }
