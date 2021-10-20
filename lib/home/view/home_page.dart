@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:materials/home/controller/home_controller.dart';
+import 'package:materials/services/remote_config.dart';
 
 late HomeController c = HomeController.to;
+late RemoteConfigServices s = RemoteConfigServices.to;
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,10 +13,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.lazyPut<HomeController>(() => HomeController());
     Size size = MediaQuery.of(context).size;
-    var w = size.width;
-    var h = size.height;
+
     return Scaffold(
-      appBar: AppBar(title: Text('Materials')),
+      appBar: AppBar(title: Obx(() => Text(s.appName.value))),
       body: Column(
         children: [
           Obx(() => Expanded(
