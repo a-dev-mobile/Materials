@@ -11,9 +11,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await firebase_core.Firebase.initializeApp();
 
-//  await Get.putAsync(() => RemoteConfigServices().init());
+ await Get.putAsync(() => RemoteConfigServices().init());
 
-  // await firebase_core.Firebase.initializeApp();
   runApp(const MyApp());
 }
 

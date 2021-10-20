@@ -19,7 +19,7 @@ class RemoteConfigServices extends GetxService {
   Future<void> _initConfig() async {
     await _remoteConfig.setConfigSettings(RemoteConfigSettings(
         fetchTimeout: const Duration(seconds: 1),
-        minimumFetchInterval: const Duration(seconds: 10)));
+        minimumFetchInterval: const Duration(seconds: 1)));
 
     _fetchConfig();
   }
@@ -35,18 +35,5 @@ class RemoteConfigServices extends GetxService {
    
     return this;
 
-/* 
-Поскольку выборка включает в себя сетевые вызовы, 
-Remote Config позволяет указать, как долго 
-действуют кэшированные параметры и как 
-долго выборка должна ждать до истечения 
-времени. Эти настройки можно задать с 
-помощью метода setConfigSettings() 
-вашего экземпляра RemoteConfig:
- */
-    // await remoteConfig.setConfigSettings(RemoteConfigSettings(
-    //   fetchTimeout: const Duration(seconds: 10),
-    //   minimumFetchInterval: const Duration(hours: 1),
-    // ));
   }
 }

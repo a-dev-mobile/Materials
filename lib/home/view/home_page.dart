@@ -24,33 +24,10 @@ class HomePage extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     // print({'URLLLL    ${c.getUrl('1.webp')}'});
                     return ListTile(
-                      leading: FutureBuilder(
-                        future: c.getUrl('${c.sumClasses[index].id}.webp'),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.done) {
-                            return SizedBox(
-                              width: 50,
-                              height: 35,
-                              child: Image.network(
-                                snapshot.data.toString(),
-                              ),
-                            );
-                          }
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const SizedBox(
-                              width: 50,
-                              height: 35,
-                              child: CircularProgressIndicator(),
-                            );
-                          }
-                          return Placeholder(
-                            fallbackWidth: 50,
-                            fallbackHeight: 50,
-                          );
-                        },
-                      ),
+                      onTap: () {
+                        print(' id = ${c.sumClasses[index].id}');
+                      },
+                      leading: const Icon(Icons.access_alarm),
                       // leading: buildImage(index, w, h),
                       title: Text(c.sumClasses[index].class_),
                       subtitle: Text(
@@ -60,15 +37,5 @@ class HomePage extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Future<Image> _getImage(String imageName) async {
-    late Image image;
-    await c.getUrl(imageName).then((value) {
-      image = Image.network(
-        value.toString(),
-      );
-    });
-    return image;
   }
 }
