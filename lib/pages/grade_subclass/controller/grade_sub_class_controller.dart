@@ -22,25 +22,23 @@ class GradeSubClassController extends GetxController {
 
   late StreamSubscription<Event> _gradeSubClassStream;
 
-  final _db = FirebaseDatabase.instance.reference();
-
+  late DatabaseReference _reference;
   @override
   void onInit() {
+    FirebaseDatabase database;
+    database = FirebaseDatabase.instance;
 
+
+    _reference =
+        database.reference().child("$GRADE_SUBCLASS_PATH/${s.idClass}/");
+
+    _listen();
+    print('start');
     super.onInit();
   }
 
-@override
-  void onReady() {
-    _listen();
-    super.onReady();
-  }
-
-
   void _listen() {
-    print("$GRADE_SUBCLASS_PATH/${s.idClass}/");
-    _gradeSubClassStream =
-        _db.child("$GRADE_SUBCLASS_PATH/${s.idClass}/").onValue.listen((event) {
+    _gradeSubClassStream = _reference.onValue.listen((event) {
       final allData = Map<String, dynamic>.from(event.snapshot.value);
       _gradeSubClassList.value = allData.values
           .map((jsonData) =>
@@ -51,7 +49,11 @@ class GradeSubClassController extends GetxController {
 
   @override
   void onClose() {
-    _gradeSubClassStream.cancel();
+    print('closssss');
+    // _gradeSubClassStream.cancel();
+    // _gradeSubClassList.clear();
+
+    // _reference.remove();
     super.onClose();
   }
 }

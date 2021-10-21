@@ -16,6 +16,10 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await firebase_core.Firebase.initializeApp();
 
+
+
+
+
   Get.putAsync<GlobalServ>(() async => GlobalServ());
 
   SystemChrome.setPreferredOrientations(
