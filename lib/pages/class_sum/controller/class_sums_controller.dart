@@ -6,17 +6,19 @@ import 'package:firebase_database/firebase_database.dart';
 
 
 import 'package:get/get.dart';
-import 'package:materials/home/models/sum_class.dart';
+import 'package:materials/pages/class_sum/models/class_sums_model.dart';
+import 'package:materials/pages/home/models/sum_class.dart';
 
 
-class HomeController extends GetxController {
-  static HomeController get to => Get.find();
+
+class ClassSumsController extends GetxController {
+  static ClassSumsController get to => Get.find();
 
   static const SUM_CLASS_PATH = 'database/classesAndSums/';
 
-  final _sumClass = <SumClass>[].obs;
+  final _sumClass = <ClassSumsModel>[].obs;
 
-  RxList<SumClass> get sumClasses => _sumClass;
+  RxList<ClassSumsModel> get sumClasses => _sumClass;
 
   late StreamSubscription<Event> _sumClassStream;
 
@@ -34,7 +36,7 @@ class HomeController extends GetxController {
       final allSumClass = Map<String, dynamic>.from(event.snapshot.value);
       _sumClass.value = allSumClass.values
           .map((sumClassAsJson) =>
-              SumClass.fromRTDB(Map<String, dynamic>.from(sumClassAsJson)))
+              ClassSumsModel.fromRTDB(Map<String, dynamic>.from(sumClassAsJson)))
           .toList();
     });
   }

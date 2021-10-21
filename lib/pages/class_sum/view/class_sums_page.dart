@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:materials/home/controller/home_controller.dart';
+import 'package:materials/pages/class_sum/controller/class_sums_controller.dart';
 import 'package:materials/services/remote_config.dart';
 
-late HomeController c = HomeController.to;
-late RemoteConfigServices s = RemoteConfigServices.to;
+late ClassSumsController c = ClassSumsController.to;
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+
+class ClassSumsPage extends StatelessWidget {
+  const ClassSumsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut<HomeController>(() => HomeController());
+
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
