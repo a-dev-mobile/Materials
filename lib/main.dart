@@ -6,16 +6,21 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
-import 'package:materials/pages/class_sum/view/class_sums_page.dart';
+import 'package:logger/logger.dart';
+
 import 'package:materials/services/global_serv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'pages/home/view/home_page.dart';
 import 'routes/app_page.dart';
 
 Future<void> main() async {
+
+
   WidgetsFlutterBinding.ensureInitialized();
   await firebase_core.Firebase.initializeApp();
 
+  // Logger.level = Level.nothing; //TODO on LOG
 
 
 
@@ -36,7 +41,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
-      initialRoute: Routes.classSum,
+      initialRoute: Routes.home,
       defaultTransition: Transition.rightToLeft,
       getPages: AppPage.pages,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -52,6 +57,6 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClassSumsPage();
+    return  HomePage();
   }
 }
