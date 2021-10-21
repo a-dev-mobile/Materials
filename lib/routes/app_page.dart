@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:materials/pages/class_sum/controller/class_sums_controller.dart';
 import 'package:materials/pages/class_sum/view/class_sums_page.dart';
+import 'package:materials/pages/grade_subclass/controller/grade_sub_class_controller.dart';
+import 'package:materials/pages/grade_subclass/view/grade_sub_class_page.dart';
 
 abstract class Routes {
   static const classSum = '/classSum';
@@ -17,7 +19,9 @@ class AppPage {
         })),
     GetPage(
         name: Routes.gradeSubclass,
-        page: () => const ClassSumsPage(),
-        binding: BindingsBuilder(() {})),
+        page: () => const GradeSubClassPage(),
+        binding: BindingsBuilder(() {
+          Get.put<GradeSubClassController>(GradeSubClassController());
+        })),
   ];
 }

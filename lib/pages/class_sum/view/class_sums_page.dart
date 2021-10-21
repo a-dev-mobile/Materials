@@ -29,7 +29,9 @@ class ClassSumsPage extends StatelessWidget {
                       onTap: () {
                         Get.toNamed(Routes.gradeSubclass);
                         idClass = c.sumClasses[index].idClass;
+                        // TODO save data for page 2
                         s.idClass = idClass;
+                        s.nameClass = c.sumClasses[index].class_;
 
                         print(' id = $idClass');
                       },

@@ -5,7 +5,8 @@ import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 
 import 'package:get/get.dart';
-import 'package:materials/pages/class_sum/models/class_sums_model.dart';
+import 'package:materials/pages/grade_subclass/models/grade_sub_class_model.dart';
+
 import 'package:materials/services/global_serv.dart';
 
 late GlobalServ s = GlobalServ.to;
@@ -25,17 +26,25 @@ class GradeSubClassController extends GetxController {
 
   @override
   void onInit() {
-    _listen();
+
     super.onInit();
   }
 
+@override
+  void onReady() {
+    _listen();
+    super.onReady();
+  }
+
+
   void _listen() {
+    print("$GRADE_SUBCLASS_PATH/${s.idClass}/");
     _gradeSubClassStream =
-        _db.child("$GRADE_SUBCLASS_PATH/${s.idClass}").onValue.listen((event) {
+        _db.child("$GRADE_SUBCLASS_PATH/${s.idClass}/").onValue.listen((event) {
       final allData = Map<String, dynamic>.from(event.snapshot.value);
       _gradeSubClassList.value = allData.values
-          .map((jsonData) => GradeSubClassModel.fromRTDB(
-              Map<String, dynamic>.from(jsonData)))
+          .map((jsonData) =>
+              GradeSubClassModel.fromRTDB(Map<String, dynamic>.from(jsonData)))
           .toList();
     });
   }

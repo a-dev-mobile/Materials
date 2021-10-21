@@ -7,7 +7,7 @@ import 'package:firebase_database/firebase_database.dart';
 
 import 'package:get/get.dart';
 import 'package:materials/pages/class_sum/models/class_sums_model.dart';
-import 'package:materials/pages/home/models/sum_class.dart';
+
 
 
 

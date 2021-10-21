@@ -17,7 +17,7 @@ class GradeSubClassPage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     int idGrade = 0;
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.appTitle)),
+      appBar: AppBar(title: Text(s.nameClass)),
       body: Column(
         children: [
           Text('Search'),
@@ -28,17 +28,15 @@ class GradeSubClassPage extends StatelessWidget {
                     // print({'URLLLL    ${c.getUrl('1.webp')}'});
                     return ListTile(
                       onTap: () {
-                      
-                        idGrade = c.gradeSubClassList[index].idClass;
-                        s.idClass = idGrade;
+                        idGrade = c.gradeSubClassList[index].idGrade;
+                        s.idGrade = idGrade;
 
                         print(' id = $idGrade');
                       },
                       leading: const Icon(Icons.access_alarm),
                       // leading: buildImage(index, w, h),
-                      title: Text(c.sumClasses[index].class_),
-                      subtitle: Text(
-                          '${c.sumClasses[index].sumSubClass} Types and ${c.sumClasses[index].sumGradle} Grades of Materials\n'),
+                      title: Text(c.gradeSubClassList[index].grade),
+                      subtitle: Text(c.gradeSubClassList[index].subClass),
                     );
                   })))
         ],

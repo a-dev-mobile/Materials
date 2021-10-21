@@ -8,11 +8,5 @@ class GlobalServ extends GetxService {
   int idGrade = 0;
   int idClass = 0;
 
-
-
-
-
-
-
-
+  String nameClass = '';
 }
