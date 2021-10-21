@@ -1,45 +1,23 @@
-
-
 import 'package:get/get.dart';
+import 'package:materials/pages/class_sum/controller/class_sums_controller.dart';
+import 'package:materials/pages/class_sum/view/class_sums_page.dart';
 
 abstract class Routes {
-  static const initial = welcome;
-  static const welcome = '/welcome';
-  static const selectShape = '/selectShape';
-
-  static const calculateTrapezoid = '/calculateTrapezoid';
-
-  static const setting = '/setting';
+  static const classSum = '/classSum';
+  static const gradeSubclass = '/gradeSubclass';
 }
 
 class AppPage {
   static final pages = [
     GetPage(
-        name: Routes.welcome,
-        page: () => const WelcomePage(),
+        name: Routes.classSum,
+        page: () => const ClassSumsPage(),
         binding: BindingsBuilder(() {
-          Get.put<SettingContrl>(SettingContrl());
+          Get.put<ClassSumsController>(ClassSumsController());
         })),
     GetPage(
-        name: Routes.selectShape,
-        page: () => const SelectShapePage(),
-        binding: BindingsBuilder(() {
-          Get.put<SelectShapeController>(SelectShapeController(),
-              permanent: true);
-        })),
-    GetPage(
-        name: Routes.calculateTrapezoid,
-        transition: Transition.leftToRight,
-        page: () => const CalculateTrapezoidPage(),
-        binding: BindingsBuilder(() {
-          Get.put<TrapezoidController>(TrapezoidController(), permanent: true);
-        })),
-    GetPage(
-        name: Routes.setting,
-        page: () => SettingPage(),
-        transition: Transition.leftToRight,
-        binding: BindingsBuilder(() {
-          Get.put<SettingContrl>(SettingContrl());
-        })),
+        name: Routes.gradeSubclass,
+        page: () => const ClassSumsPage(),
+        binding: BindingsBuilder(() {})),
   ];
 }
