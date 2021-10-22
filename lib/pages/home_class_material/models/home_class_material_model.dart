@@ -12,7 +12,7 @@ class HomeClassMaterialModel {
 
   factory HomeClassMaterialModel.fromRTDB(Map<String, dynamic> data) {
     return HomeClassMaterialModel(
-      class_: data['class'] ?? '',
+      class_: data['class'] ?? 'no data',
       idClass: data['idClass'] ?? 0,
       sumGradle: data['sumGrade'] ?? 0,
       sumSubClass: data['sumSubClass'] ?? 0,

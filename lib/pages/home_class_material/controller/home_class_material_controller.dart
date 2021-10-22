@@ -12,38 +12,25 @@ class HomeClassMaterialController extends GetxController {
   static HomeClassMaterialController get to => Get.find();
   static const SUM_CLASS_PATH = 'database/classesAndSums/';
 
-  final _sumClass = <HomeClassMaterialModel>[].obs;
 
-  RxList<HomeClassMaterialModel> get sumClasses => _sumClass;
-
-  late StreamSubscription<Event> _sumClassStream;
-
-  final _db = FirebaseDatabase.instance.reference();
-
-  @override
-  void onInit() {
-    _listenToSumClass();
-    super.onInit();
-  }
+  final _database = FirebaseDatabase.instance.reference();
 
 
-  void _listenToSumClass() {
-    _sumClassStream = _db.child(SUM_CLASS_PATH).onValue.listen((event) {
-      final allSumClass = Map<String, dynamic>.from(event.snapshot.value);
-      _sumClass.value = allSumClass.values
-          .map((sumClassAsJson) =>
-              HomeClassMaterialModel.fromRTDB(Map<String, dynamic>.from(sumClassAsJson)))
-          .toList();
+
+
+
+  Stream<List<HomeClassMaterialModel>> getNameMaterialModelStream() {
+    final homeClassMaterialStream =
+        _database.child(SUM_CLASS_PATH).onValue;
+    final streamToPublish = homeClassMaterialStream.map((event) {
+      final dataMap = Map<String, dynamic>.from(event.snapshot.value);
+      final modelList = dataMap.entries.map((e) {
+        return HomeClassMaterialModel.fromRTDB(Map<String, dynamic>.from(e.value));
+      }).toList();
+      return modelList;
     });
+    return streamToPublish;
   }
 
 
-
-
-
-  @override
-  void onClose() {
-    _sumClassStream.cancel();
-    super.onClose();
-  }
 }

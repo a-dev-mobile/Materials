@@ -11,8 +11,8 @@ import 'package:materials/utils/logger.dart';
 
 late GlobalServ s = GlobalServ.to;
 
-class NameMaterialController extends GetxController {
-  static NameMaterialController get to => Get.find();
+class MaterialInfoController extends GetxController {
+  static MaterialInfoController get to => Get.find();
   static const GRADE_SUBCLASS_PATH = 'database/nameSubClass';
 
   final _database = FirebaseDatabase.instance.reference();

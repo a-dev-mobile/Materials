@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:materials/pages/home_class_material/controller/home_class_material_controller.dart';
+import 'package:materials/pages/home_class_material/models/home_class_material_model.dart';
 
 import 'package:materials/services/remote_controller.dart';
 
@@ -25,28 +26,37 @@ class HomeClassMaterialPage extends StatelessWidget {
       body: Column(
         children: [
           Text('Search'),
-          Obx(() => Expanded(
-              child: ListView.builder(
-                  itemCount: c.sumClasses.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    // print({'URLLLL    ${c.getUrl('1.webp')}'});
+          StreamBuilder(
+              stream: c.getNameMaterialModelStream(),
+              builder: (context, snapshot) {
+                final tilesList = <ListTile>[];
+
+                if (snapshot.hasData) {
+                  final nameMaterialModelList =
+                      snapshot.data as List<HomeClassMaterialModel>;
+                  tilesList.addAll(nameMaterialModelList.map((nextItem) {
                     return ListTile(
+                      leading: const Icon(Icons.access_alarm),
+                      title: Text(nextItem.class_),
+                      subtitle: Text(
+                          '${nextItem.sumSubClass} Types and ${nextItem.sumGradle}'),
                       onTap: () {
-                        Get.toNamed(Routes.nameMaterial);
-                        idClass = c.sumClasses[index].idClass;
-                        // TODO save data for page 2
-                        s.idClass = idClass;
-                        s.nameClass = c.sumClasses[index].class_;
+                        s.idClass = nextItem.idClass;
+                        s.nameClass = nextItem.class_;
 
                         print(' id = $idClass');
+                        Get.toNamed(Routes.nameMaterial);
                       },
-                      leading: const Icon(Icons.access_alarm),
-                      // leading: buildImage(index, w, h),
-                      title: Text(c.sumClasses[index].class_),
-                      subtitle: Text(
-                          '${c.sumClasses[index].sumSubClass} Types and ${c.sumClasses[index].sumGradle} Grades of Materials\n'),
                     );
-                  })))
+                  }));
+                } else {
+                  return const CircularProgressIndicator();
+                }
+                return Expanded(
+                    child: ListView(
+                  children: tilesList,
+                ));
+              }),
         ],
       ),
     );

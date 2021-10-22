@@ -1,19 +1,19 @@
 class NameMaterialModel {
-  final String grade;
-  final int idGrade;
+  final String nameMaterial;
+  final int idNameMaterial;
   final String subClass;
 
   NameMaterialModel({
-    required this.grade,
-    required this.idGrade,
+    required this.nameMaterial,
+    required this.idNameMaterial,
     required this.subClass,
   });
 
   factory NameMaterialModel.fromRTDB(Map<String, dynamic> data) {
     return NameMaterialModel(
-      grade: data['grade'] ?? '',
-      subClass: data['subClass'] ?? '',
-      idGrade: data['idGrade'] ?? 0,
+      nameMaterial: data['grade'] ?? 'no data',
+      subClass: data['subClass'] ?? 'no data',
+      idNameMaterial: data['idGrade'] ?? 0,
     );
   }
 }
