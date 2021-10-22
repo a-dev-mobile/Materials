@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
@@ -35,10 +36,26 @@ class MaterialInfoController extends GetxController {
     });
   }
 
+  getFuture() async {
+    var path = '$_GRADE_SUBCLASS_PATH/${s.idNameMaterial}';
+    final futureToPublish = _database.child(path).get();
+
+// final dataMap = MaterialInfoModel.fromJson(futureToPublish.)
+    // log.w(modelStream.value);
+    // final streamToPublish = modelStream.map((event) {
+    //   final dataMap = Map<String, dynamic>.from(event.snapshot.value);
+    //   final nameMaterialModelList = dataMap.entries.map((e) {
+    //     return NameMaterialModel.fromRTDB(Map<String, dynamic>.from(e.value));
+    //   }).toList();
+    //   return nameMaterialModelList;
+    // });
+    return futureToPublish;
+  }
+
   @override
   void onInit() {
     _listenMaterialInfo();
-
+    getFuture();
     super.onInit();
   }
 

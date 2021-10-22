@@ -22,26 +22,40 @@ class MaterialInfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var model = c.model.value;
+    // var model = c.model.value;
     Size size = MediaQuery.of(context).size;
     int idGrade = 0;
+    MaterialInfoModel model = MaterialInfoModel();
     return Scaffold(
       appBar: AppBar(
           title: Text(
         '${s.nameClass} \n> ${s.nameSubMaterial} \n> ${s.nameMaterial}',
         style: TextStyle(fontSize: 10),
       )),
-      body:  Obx(() => Column(
+      body: Column(
         children: [
-         Text('is load ${c.isLoadData}'),
-          Text('nameClass ${model.nameClass}'),
-          Text('nameSubClass ${model.nameSubClass}'),
-          Text('nameMaterial ${model.nameMaterial}'),
-          Text('otherNameMaterial ${model.otherNameMaterial}'),
-          Text('use ${model.use}'),
-          Text('addInfo ${model.addInfo}'),
+          FutureBuilder(
+              future: c.getFuture(),
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                if (snapshot.hasData) {
+                  model = MaterialInfoModel.fromJson(
+                      Map<String, dynamic>.from(snapshot.data!.value));
+                  log.w(snapshot.data!.value);
+                  return Column(
+                    children: [
+                      Text('nameClass ${model.nameClass}'),
+                      Text('nameSubClass ${model.nameSubClass}'),
+                      Text('nameMaterial ${model.nameMaterial}'),
+                      Text('otherNameMaterial ${model.otherNameMaterial}'),
+                      Text('use ${model.use}'),
+                      Text('addInfo ${model.addInfo}'),
+                    ],
+                  );
+                }
+                return const CircularProgressIndicator();
+              }),
         ],
       ),
-     ) );
+    );
   }
 }

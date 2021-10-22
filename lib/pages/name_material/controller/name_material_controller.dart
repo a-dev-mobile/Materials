@@ -20,6 +20,7 @@ class NameMaterialController extends GetxController {
   Stream<List<NameMaterialModel>> getNameMaterialModelStream() {
     final nameMaterialModelStream =
         _database.child("$GRADE_SUBCLASS_PATH/${s.idClass}/").onValue;
+        
     final streamToPublish = nameMaterialModelStream.map((event) {
       final dataMap = Map<String, dynamic>.from(event.snapshot.value);
       final nameMaterialModelList = dataMap.entries.map((e) {
