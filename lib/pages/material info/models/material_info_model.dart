@@ -4,26 +4,29 @@ class MaterialInfoModel {
   final String nameMaterial;
   final String use;
   final String substitute;
-  final String otherGrade;
+  final String otherNameMaterial;
   final String addInfo;
 
   MaterialInfoModel({
-    required this.nameClass,
-    required this.nameSubClass,
-    required this.nameMaterial,
-    required this.use,
-    required this.substitute,
-    required this.otherGrade,
-    required this.addInfo,
+    this.nameClass='',
+     this.nameSubClass='',
+    this.nameMaterial='',
+     this.use='',
+     this.substitute='',
+    this.otherNameMaterial='',
+    this.addInfo='',
   });
-
-  factory MaterialInfoModel.fromRTDB(Map<String, dynamic> data) {
+@override
+String toString() {
+  return nameClass+' | '+ nameSubClass+' | '+ nameSubClass ;
+}
+  factory MaterialInfoModel.fromJson(Map<String, dynamic> data) {
     return MaterialInfoModel(
       nameMaterial: data['grade'] ?? 'no data',
       addInfo: data['addInfo'] ?? 'no data',
       nameClass: data['class'] ?? 'no data',
       nameSubClass: data['subClass'] ?? 'no data',
-      otherGrade: data['otherGrade'] ?? 'no data',
+      otherNameMaterial: data['otherGrade'] ?? 'no data',
       substitute: data['substitute'] ?? 'no data',
       use: data['use'] ?? 'no data',
     );

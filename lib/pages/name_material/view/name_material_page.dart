@@ -34,23 +34,22 @@ class NameMaterialPage extends StatelessWidget {
                 if (snapshot.hasData) {
                   final nameMaterialModelList =
                       snapshot.data as List<NameMaterialModel>;
+                           
                   tilesList.addAll(nameMaterialModelList.map((nextItem) {
                     return ListTile(
                       leading: const Icon(Icons.access_alarm),
                       title: Text(nextItem.nameMaterial),
                       subtitle: Text(nextItem.subClass),
-                      onTap: (){
-
-
+                      onTap: () {
+                        
                         s.idNameMaterial = nextItem.idNameMaterial;
-                        s.nameClass = nextItem.nameMaterial;
+                        s.nameMaterial = nextItem.nameMaterial;
+                        s.nameSubMaterial = nextItem.subClass;
 
+                        Get.toNamed(Routes.materialInfo);
                         print(' id nameMaterial = ${s.idNameMaterial}');
                         // Get.toNamed(Routes.nameMaterial);
                       },
-
-
-              
                     );
                   }));
                 } else {

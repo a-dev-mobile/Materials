@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:materials/pages/home_class_material/controller/home_class_material_controller.dart';
-import 'package:materials/pages/material%20info/controller/material%20info_controller.dart';
-import 'package:materials/pages/material%20info/models/material%20info_model.dart';
+import 'package:materials/pages/material%20info/controller/material_info_controller.dart';
+import 'package:materials/pages/material%20info/models/material_info_model.dart';
 import 'package:materials/pages/name_material/controller/name_material_controller.dart';
 import 'package:materials/pages/name_material/models/name_material_model.dart';
 
@@ -22,23 +22,26 @@ class MaterialInfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var model = c.model.value;
     Size size = MediaQuery.of(context).size;
     int idGrade = 0;
     return Scaffold(
-      appBar: AppBar(title: Text(s.nameClass)),
-      body: Column(
+      appBar: AppBar(
+          title: Text(
+        '${s.nameClass} \n> ${s.nameSubMaterial} \n> ${s.nameMaterial}',
+        style: TextStyle(fontSize: 10),
+      )),
+      body:  Obx(() => Column(
         children: [
-          Text('Search'),
-         FutureBuilder(future: c.getModelFuture(),   
-         builder: (context,snapshot){
-
-
-
-
-
-         })
+         Text('is load ${c.isLoadData}'),
+          Text('nameClass ${model.nameClass}'),
+          Text('nameSubClass ${model.nameSubClass}'),
+          Text('nameMaterial ${model.nameMaterial}'),
+          Text('otherNameMaterial ${model.otherNameMaterial}'),
+          Text('use ${model.use}'),
+          Text('addInfo ${model.addInfo}'),
         ],
       ),
-    );
+     ) );
   }
 }
