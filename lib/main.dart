@@ -7,11 +7,12 @@ import 'package:get/get.dart';
 
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:logger/logger.dart';
+import 'package:materials/pages/home_class_material/view/home_class_material_page.dart';
 
 import 'package:materials/services/global_serv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'pages/home/view/home_page.dart';
+
 import 'routes/app_page.dart';
 
 Future<void> main() async {
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
-      initialRoute: Routes.home,
+       initialRoute: Routes.homeClassMaterial,
       defaultTransition: Transition.rightToLeft,
       getPages: AppPage.pages,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -57,6 +58,6 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  HomePage();
+    return  HomeClassMaterialPage();
   }
 }
