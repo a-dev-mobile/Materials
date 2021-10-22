@@ -37,6 +37,10 @@ class HomeClassMaterialController extends GetxController {
     });
   }
 
+
+
+
+
   @override
   void onClose() {
     _sumClassStream.cancel();

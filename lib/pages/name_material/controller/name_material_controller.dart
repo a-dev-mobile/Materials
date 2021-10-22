@@ -22,9 +22,7 @@ class NameMaterialController extends GetxController {
 
   @override
   void onInit() {
- 
-
-   log.w("onInit");
+    log.w("onInit");
     super.onInit();
   }
 
@@ -32,7 +30,6 @@ class NameMaterialController extends GetxController {
     log.i("$GRADE_SUBCLASS_PATH/${s.idClass}/");
 
     _database
-        .reference()
         .child("$GRADE_SUBCLASS_PATH/${s.idClass}/")
         .get()
         .then((snapshot) {
@@ -43,17 +40,30 @@ class NameMaterialController extends GetxController {
           .toList();
     });
   }
-@override
+
+  Stream<List<NameMaterialModel>> getNameMaterialModelStream() {
+    final nameMaterialModelStream =
+        _database.child("$GRADE_SUBCLASS_PATH/${s.idClass}/").onValue;
+    final streamToPublish = nameMaterialModelStream.map((event) {
+      final dataMap = Map<String, dynamic>.from(event.snapshot.value);
+      final nameMaterialModelList = dataMap.entries.map((e) {
+        return NameMaterialModel.fromRTDB(Map<String, dynamic>.from(e.value));
+      }).toList();
+      return nameMaterialModelList;
+    });
+    return streamToPublish;
+  }
+
+  @override
   void onClose() {
-   log.w("onClose");
+    log.w("onClose");
     super.onClose();
   }
 
-
-@override
+  @override
   void onReady() {
- log.w("onReady");
-     _performSingleFetch();
+    log.w("onReady");
+    // _performSingleFetch();
     super.onReady();
   }
   // _reference.onValue.listen((event) {

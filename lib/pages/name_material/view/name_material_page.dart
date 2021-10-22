@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:materials/pages/home_class_material/controller/home_class_material_controller.dart';
 import 'package:materials/pages/name_material/controller/name_material_controller.dart';
+import 'package:materials/pages/name_material/models/name_material_model.dart';
 
 import 'package:materials/services/remote_controller.dart';
 
@@ -13,10 +14,10 @@ import 'package:materials/utils/logger.dart';
 late NameMaterialController c = NameMaterialController.to;
 late GlobalServ s = GlobalServ.to;
 
-class  NameMaterialPage extends StatelessWidget {
-  const  NameMaterialPage({Key? key}) : super(key: key);
+class NameMaterialPage extends StatelessWidget {
+  const NameMaterialPage({Key? key}) : super(key: key);
 
-   @override
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     int idGrade = 0;
@@ -25,7 +26,30 @@ class  NameMaterialPage extends StatelessWidget {
       body: Column(
         children: [
           Text('Search'),
-          Obx(() => Expanded(
+          StreamBuilder(
+              stream: c.getNameMaterialModelStream(),
+              builder: (context, snapshot) {
+                final tilesList = <ListTile>[];
+
+                if (snapshot.hasData) {
+                  final nameMaterialModelList =
+                      snapshot.data as List<NameMaterialModel>;
+                  tilesList.addAll(nameMaterialModelList.map((nextItem) {
+                    return ListTile(
+                      leading: const Icon(Icons.access_alarm),
+                      title: Text(nextItem.grade),
+                      subtitle: Text(nextItem.subClass),
+                    );
+                  }));
+                } else {
+                  return const CircularProgressIndicator();
+                }
+                return Expanded(
+                    child: ListView(
+                  children: tilesList,
+                ));
+              }),
+          /*  Obx(() => Expanded(
               child: ListView.builder(
                   itemCount: c.nameMaterialModelList.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -42,7 +66,7 @@ class  NameMaterialPage extends StatelessWidget {
                       title: Text(c.nameMaterialModelList[index].grade),
                       subtitle: Text(c.nameMaterialModelList[index].subClass),
                     );
-                  })))
+                  }))) */
         ],
       ),
     );
