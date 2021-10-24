@@ -1,38 +1,30 @@
 import 'package:get/get.dart';
-import 'package:materials/pages/home_class_material/controller/home_class_material_controller.dart';
+import 'package:materials/pages/1_material_classes/controller/material_classes_controller.dart';
+import 'package:materials/pages/1_material_classes/view/material_classes_page.dart';
+import 'package:materials/pages/2_material_sub_classes/controller/material_sub_classes_controller.dart';
+import 'package:materials/pages/2_material_sub_classes/view/material_sub_classes_page.dart';
 
-import 'package:materials/pages/home_class_material/view/home_class_material_page.dart';
-import 'package:materials/pages/material%20info/controller/material_info_controller.dart';
-import 'package:materials/pages/material%20info/view/material_info_page.dart';
-import 'package:materials/pages/name_material/controller/name_material_controller.dart';
-import 'package:materials/pages/name_material/view/name_material_page.dart';
-import 'package:materials/services/remote_controller.dart';
 
 abstract class Routes {
-  static const homeClassMaterial = '/homeClassMaterial';
-  static const nameMaterial = '/nameMaterial';
+  static const materialClasses = '/materialClasses';
+  static const materialSubClasses = '/materialSubClasses';
   static const materialInfo = '/materialInfo';
 }
 
 class AppPage {
   static final pages = [
     GetPage(
-        name: Routes.homeClassMaterial,
-        page: () => const HomeClassMaterialPage(),
+        name: Routes.materialClasses,
+        page: () => const MaterialClassesPage(),
         binding: BindingsBuilder(() {
-          Get.put<HomeClassMaterialController>(HomeClassMaterialController());
+          Get.put<MaterialClassesController>(MaterialClassesController());
         })),
     GetPage(
-        name: Routes.nameMaterial,
-        page: () => const NameMaterialPage(),
+        name: Routes.materialSubClasses,
+        page: () => const MaterialSubClassesPage(),
         binding: BindingsBuilder(() {
-          Get.put<NameMaterialController>(NameMaterialController());
+          Get.put<MaterialSubClassesController>(MaterialSubClassesController());
         })),
-        GetPage(
-        name: Routes.materialInfo,
-        page: () => const MaterialInfoPage(),
-        binding: BindingsBuilder(() {
-          Get.put<MaterialInfoController>(MaterialInfoController());
-        })),
+      
   ];
 }

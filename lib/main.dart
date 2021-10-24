@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:logger/logger.dart';
-import 'package:materials/pages/home_class_material/view/home_class_material_page.dart';
+
 
 import 'package:materials/services/global_serv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
-       initialRoute: Routes.homeClassMaterial,
+       initialRoute: Routes.materialClasses,
       defaultTransition: Transition.rightToLeft,
       getPages: AppPage.pages,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -51,13 +51,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MainPage extends StatelessWidget {
-  const MainPage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return  HomeClassMaterialPage();
-  }
-}
