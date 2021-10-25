@@ -15,7 +15,7 @@ String toString() {
       required this.numberUniqMaterials,
       required this.numberUniqSubClass});
 
-  factory MaterialClassesModel.fromRTDB(Map<String, dynamic> data) {
+  factory MaterialClassesModel.fromJson(Map<String, dynamic> data) {
     return MaterialClassesModel(
       nameClass: data['name_class'] ??AppConstString.NO_DATA,
       idClass: data['id_class'] ?? 0,

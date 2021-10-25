@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -13,52 +14,49 @@ import 'package:materials/utils/logger.dart';
 late MaterialSubClassesController c = MaterialSubClassesController.to;
 late GlobalServ s = GlobalServ.to;
 
-class  MaterialSubClassesPage extends StatelessWidget {
-  const  MaterialSubClassesPage({Key? key}) : super(key: key);
+class MaterialSubClassesPage extends StatelessWidget {
+  const MaterialSubClassesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     int idGrade = 0;
+    List<MaterialSubClassesModel> modelList;
+    MaterialSubClassesModel model;
     return Scaffold(
       appBar: AppBar(title: Text(s.nameClass)),
       body: Column(
         children: [
           Text('Search'),
-          StreamBuilder(
-              stream: c.getNameMaterialModelStream(),
-              builder: (context, snapshot) {
-                final tilesList = <ListTile>[];
-
-                if (snapshot.hasData) {
-                  final nameMaterialModelList =
-                      snapshot.data as List<MaterialSubClassesModel>;
-                           
-                  tilesList.addAll(nameMaterialModelList.map((nextItem) {
-                    return ListTile(
-                      leading: const Icon(Icons.access_alarm),
-                      title: Text(nextItem.nameSubClass),
-                      subtitle: Text(nextItem.numberUniqMaterial),
-                      onTap: () {
-                        
-                        // s.idNameMaterial = nextItem.idNameMaterial;
-                        // s.nameMaterial = nextItem.nameMaterial;
-                        // s.nameSubMaterial = nextItem.subClass;
-
-                        Get.toNamed(Routes.materialInfo);
-                        print(' id nameMaterial = ${s.idNameMaterial}');
-                        // Get.toNamed(Routes.nameMaterial);
-                      },
-                    );
-                  }));
-                } else {
-                  return const CircularProgressIndicator();
-                }
+          FutureBuilder(
+            // get futture data
+            future: c.getFutureData(),
+            builder:
+                (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                modelList = c.getModelList(snapshot);
                 return Expanded(
-                    child: ListView(
-                  children: tilesList,
-                ));
-              }),
+                  child: ListView.builder(
+                    itemCount: modelList.length,
+                    itemBuilder: (context, index) {
+                      model = modelList[index];
+                      return ListTile(
+                        title: Text(model.nameSubClass),
+                        subtitle: Text(
+                            '${model.numberUniqMaterial}'),
+                        onTap: () {
+                          s.idClass = model.idClass;
+                          Get.toNamed(Routes.materialSubClasses);
+                        },
+                      );
+                    },
+                  ),
+                );
+              } else {
+                return const CircularProgressIndicator();
+              }
+            },
+          )
           /*  Obx(() => Expanded(
               child: ListView.builder(
                   itemCount: c.nameMaterialModelList.length,

@@ -4,7 +4,7 @@ class MaterialSubClassesModel {
   final String nameSubClass;
   final int idSubClass;
   final int idClass;
-  final String numberUniqMaterial;
+  final int numberUniqMaterial;
 
   MaterialSubClassesModel({
     required this.idClass,
@@ -17,7 +17,7 @@ class MaterialSubClassesModel {
     return MaterialSubClassesModel(
       nameSubClass: data['name_sub_class'] ?? AppConstString.NO_DATA,
       numberUniqMaterial:
-          data['number_unique_materials_by_subclass'] ?? AppConstString.NO_DATA,
+          data['number_unique_materials_by_subclass'] ?? 0,
       idSubClass: data['id_sub_class'] ?? 0,
       idClass: data['id_class'] ?? 0,
     );

@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -21,43 +22,45 @@ class MaterialClassesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     int idClass = 0;
+    List<MaterialClassesModel> modelList;
+   
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.appTitle)),
       body: Column(
+        // ignore: prefer_const_literals_to_create_immutables
         children: [
-          Text('Search'),
-          StreamBuilder(
-              stream: c.getNameMaterialModelStream(),
-              builder: (context, snapshot) {
-                final tilesList = <ListTile>[];
-                logger.w(snapshot.data);
-                if (snapshot.hasData) {
-                logger.w(snapshot.data);
-                  final nameMaterialModelList =
-                      snapshot.data as List<MaterialClassesModel>;
-                  tilesList.addAll(nameMaterialModelList.map((nextItem) {
-                    return ListTile(
-                      leading: const Icon(Icons.access_alarm),
-                      title: Text(nextItem.nameClass),
-                      subtitle: Text(
-                          '${nextItem.numberUniqSubClass} Types and ${nextItem.numberUniqMaterials}'),
-                      onTap: () {
-                        s.idClass = nextItem.idClass;
-                        s.nameClass = nextItem.nameClass;
-
-                        print(' id = $idClass');
-                        Get.toNamed(Routes.materialSubClasses);
-                      },
-                    );
-                  }));
-                } else {
-                  return const CircularProgressIndicator();
-                }
+          const Text('Search'),
+          FutureBuilder(
+            // get futture data
+            future: c.getFutureData(),
+            builder:
+                (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                modelList = c.getModelList(snapshot);
                 return Expanded(
-                    child: ListView(
-                  children: tilesList,
-                ));
-              }),
+                  child: ListView.builder(
+                    itemCount: modelList.length,
+                    itemBuilder: (context, index) {
+                   
+                      return ListTile(
+                        title: Text(modelList[index].nameClass),
+                        subtitle: Text(
+                            '${modelList[index].numberUniqSubClass} | ${modelList[index].numberUniqMaterials} | ${modelList[index].idClass}'),
+                        onTap: () {
+                          s.idClass = modelList[index].idClass;
+                          s.nameClass = modelList[index].nameClass;
+                          // logger.e(s.idClass);
+                          Get.toNamed(Routes.materialSubClasses);
+                        },
+                      );
+                    },
+                  ),
+                );
+              } else {
+                return const CircularProgressIndicator();
+              }
+            },
+          )
         ],
       ),
     );
