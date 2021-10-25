@@ -45,36 +45,19 @@ class MaterialSubClassesPage extends StatelessWidget {
                         subtitle: Text(
                             '${ modelList[index].numberUniqMaterial}'),
                         onTap: () {
-                          s.idClass =  modelList[index].idClass;
-                          Get.toNamed(Routes.materialSubClasses);
+                               s.idSubClass =  modelList[index].idSubClass;
+                          Get.toNamed(Routes.materialNames);
                         },
                       );
                     },
                   ),
                 );
               } else {
-                return const CircularProgressIndicator();
+                return const LinearProgressIndicator();
               }
             },
           )
-          /*  Obx(() => Expanded(
-              child: ListView.builder(
-                  itemCount: c.nameMaterialModelList.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    // print({'URLLLL    ${c.getUrl('1.webp')}'});
-                    return ListTile(
-                      onTap: () {
-                        idGrade = c.nameMaterialModelList[index].idGrade;
-                        s.idGrade = idGrade;
-
-                        print(' id = $idGrade');
-                      },
-                      leading: const Icon(Icons.access_alarm),
-                      // leading: buildImage(index, w, h),
-                      title: Text(c.nameMaterialModelList[index].grade),
-                      subtitle: Text(c.nameMaterialModelList[index].subClass),
-                    );
-                  }))) */
+        
         ],
       ),
     );

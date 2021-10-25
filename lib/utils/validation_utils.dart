@@ -39,7 +39,7 @@ class ValidationUtils {
     if (!value.contains('.')) return false;
 
     int i = value.length - (value.toString().indexOf('.') + 1);
-    // logger.i('accuracy $i > $declaredAccuracy');
+
 
     if (i > declaredAccuracy) return true;
 

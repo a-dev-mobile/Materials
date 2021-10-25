@@ -22,12 +22,19 @@ class MaterialClassesController extends GetxController {
 
   List<MaterialClassesModel> getModelList(AsyncSnapshot<DataSnapshot> snapshot) {
     List<MaterialClassesModel> models = [];
-    for (var value in snapshot.data!.value) {
-      logger.w(value);
+var listValues = [];
+    // перебираю чтобы забрать значения буз ключей
+
+    snapshot.data!.value.forEach((key, value) {
+      listValues.add(value);
+    });
+
+
+    for (var value in listValues) {
+
       models
           .add(MaterialClassesModel.fromJson(Map<String, dynamic>.from(value)));
     }
     return models;
   }
-
 }

@@ -2,8 +2,8 @@ import 'package:materials/utils/app_const.dart';
 
 class MaterialSubClassesModel {
   final String nameSubClass;
-  final int idSubClass;
-  final int idClass;
+  final String idSubClass;
+  final String idClass;
   final int numberUniqMaterial;
 
   MaterialSubClassesModel({
@@ -18,8 +18,8 @@ class MaterialSubClassesModel {
       nameSubClass: data['name_sub_class'] ?? AppConstString.NO_DATA,
       numberUniqMaterial:
           data['number_unique_materials_by_subclass'] ?? 0,
-      idSubClass: data['id_sub_class'] ?? 0,
-      idClass: data['id_class'] ?? 0,
+      idSubClass: data['id_sub_class'] ??  AppConstString.NO_DATA,
+      idClass: data['id_class'] ??  AppConstString.NO_DATA,
     );
   }
 }

@@ -2,8 +2,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:materials/pages/1_material_classes/controller/material_classes_controller.dart';
-import 'package:materials/pages/1_material_classes/models/material_classes_model.dart';
+import 'package:materials/pages/3_material_names/controller/material_names_controller.dart';
+import 'package:materials/pages/3_material_names/models/material_names_model.dart';
 
 import 'package:materials/services/remote_controller.dart';
 
@@ -11,25 +11,23 @@ import 'package:materials/routes/app_page.dart';
 import 'package:materials/services/global_serv.dart';
 import 'package:materials/utils/logger.dart';
 
-late MaterialClassesController c = MaterialClassesController.to;
-late RemoteConfigController remote = RemoteConfigController.to;
+late MaterialNamesController c = MaterialNamesController.to;
 late GlobalServ s = GlobalServ.to;
 
-class MaterialClassesPage extends StatelessWidget {
-  const MaterialClassesPage({Key? key}) : super(key: key);
+class MaterialNamesPage extends StatelessWidget {
+  const MaterialNamesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    int idClass = 0;
-    List<MaterialClassesModel> modelList;
+    int idGrade = 0;
+    List<MaterialNamesModel> modelList;
 
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.appTitle)),
+      appBar: AppBar(title: Text(s.nameClass)),
       body: Column(
-        // ignore: prefer_const_literals_to_create_immutables
         children: [
-          const Text('Search'),
+          Text('Search'),
           FutureBuilder(
             // get futture data
             future: c.getFutureData(),
@@ -41,25 +39,25 @@ class MaterialClassesPage extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: modelList.length,
                     itemBuilder: (context, index) {
+                    
                       return ListTile(
-                        title: Text(modelList[index].nameClass),
+                        title: Text( modelList[index].nameMaterial),
                         subtitle: Text(
-                            '${modelList[index].numberUniqSubClass} | ${modelList[index].numberUniqMaterials} | ${modelList[index].idClass}'),
+                            modelList[index].nameOtherMaterial),
                         onTap: () {
-                          s.idClass = modelList[index].idClass;
-                          s.nameClass = modelList[index].nameClass;
-                      
-                          Get.toNamed(Routes.materialSubClasses);
+                          s.idMaterial =  modelList[index].idMaterial;
+                          Get.toNamed(Routes.materialInfo);
                         },
                       );
                     },
                   ),
                 );
               } else {
-                return const CircularProgressIndicator();
+                return const LinearProgressIndicator();
               }
             },
           )
+        
         ],
       ),
     );

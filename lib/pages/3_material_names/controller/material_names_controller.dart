@@ -7,28 +7,29 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:materials/pages/2_material_sub_classes/models/material_sub_classes_model.dart';
+import 'package:materials/pages/3_material_names/models/material_names_model.dart';
 import 'package:materials/services/global_serv.dart';
 import 'package:materials/utils/logger.dart';
 
 late GlobalServ s = GlobalServ.to;
 
-class MaterialSubClassesController extends GetxController {
-  static MaterialSubClassesController get to => Get.find();
+class MaterialNamesController extends GetxController {
+  static MaterialNamesController get to => Get.find();
       
 
 
   final _database = FirebaseDatabase.instance.reference();
 
   Future<DataSnapshot> getFutureData() {
-final String _pathDB = 'data_base/material_sub_classes/${s.idClass}/';
+final String _pathDB = 'data_base/material_names/${s.idSubClass}/';
     var data = _database.child(_pathDB).once();
 
     return data;
   }
 
-  List<MaterialSubClassesModel> getModelList(
+  List<MaterialNamesModel> getModelList(
       AsyncSnapshot<DataSnapshot> snapshot) {
-    List<MaterialSubClassesModel> models = [];
+    List<MaterialNamesModel> models = [];
     var listValues = [];
     // перебираю чтобы забрать значения буз ключей
 
@@ -39,7 +40,7 @@ final String _pathDB = 'data_base/material_sub_classes/${s.idClass}/';
     // for (var value in snapshot.data!.value) {
     for (var value in listValues) {
       models.add(
-          MaterialSubClassesModel.fromJson(Map<String, dynamic>.from(value)));
+          MaterialNamesModel.fromJson(Map<String, dynamic>.from(value)));
     }
 
     return models;
