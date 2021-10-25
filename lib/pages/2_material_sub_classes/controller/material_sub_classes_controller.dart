@@ -15,14 +15,14 @@ late GlobalServ s = GlobalServ.to;
 class MaterialSubClassesController extends GetxController {
   static MaterialSubClassesController get to => Get.find();
 
- 
+
 
   final _database = FirebaseDatabase.instance.reference();
 
   Future<DataSnapshot> getFutureData() {
-     final String _pathDB = 'data_base/material_sub_classes/${s.idClass}/';
+      final String _pathDB = 'data_base/material_sub_classes/${s.idClass}/';
     var data = _database.child(_pathDB).once();
-    logger.w(_pathDB);
+    // logger.w(_pathDB);
     return data;
   }
 
@@ -31,12 +31,13 @@ class MaterialSubClassesController extends GetxController {
     List<MaterialSubClassesModel> models = [];
     var listValues = [];
     // перебираю чтобы забрать значения буз ключей
-        logger.w(snapshot.data!.value);
-    snapshot.data!.value.forEach((key, value) {
-      listValues.add(value);
-    });
+    logger.w(snapshot.data!.value);
+    // snapshot.data!.value.forEach((key, value) {
+    //   listValues.add(value);
+    // });
 
-    for (var value in listValues) {
+    for (var value in snapshot.data!.value) {
+    // for (var value in listValues) {
       models.add(
           MaterialSubClassesModel.fromJson(Map<String, dynamic>.from(value)));
     }

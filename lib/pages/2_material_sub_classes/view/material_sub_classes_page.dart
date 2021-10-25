@@ -22,7 +22,7 @@ class MaterialSubClassesPage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     int idGrade = 0;
     List<MaterialSubClassesModel> modelList;
-    MaterialSubClassesModel model;
+
     return Scaffold(
       appBar: AppBar(title: Text(s.nameClass)),
       body: Column(
@@ -39,13 +39,13 @@ class MaterialSubClassesPage extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: modelList.length,
                     itemBuilder: (context, index) {
-                      model = modelList[index];
+                    
                       return ListTile(
-                        title: Text(model.nameSubClass),
+                        title: Text( modelList[index].nameSubClass),
                         subtitle: Text(
-                            '${model.numberUniqMaterial}'),
+                            '${ modelList[index].numberUniqMaterial}'),
                         onTap: () {
-                          s.idClass = model.idClass;
+                          s.idClass =  modelList[index].idClass;
                           Get.toNamed(Routes.materialSubClasses);
                         },
                       );
