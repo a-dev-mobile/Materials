@@ -5,14 +5,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:materials/pages/3_material_names/controller/material_names_controller.dart';
 import 'package:materials/pages/3_material_names/models/material_names_model.dart';
 
-import 'package:materials/services/remote_controller.dart';
+import 'package:materials/services/app_remote_serv.dart';
 
 import 'package:materials/routes/app_page.dart';
-import 'package:materials/services/global_serv.dart';
+import 'package:materials/services/app_global_serv.dart';
 import 'package:materials/utils/logger.dart';
 
 late MaterialNamesController c = MaterialNamesController.to;
-late GlobalServ s = GlobalServ.to;
+late AppGlobalServ s = AppGlobalServ.to;
 
 class MaterialNamesPage extends StatelessWidget {
   const MaterialNamesPage({Key? key}) : super(key: key);

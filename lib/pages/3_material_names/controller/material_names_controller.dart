@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:materials/pages/2_material_sub_classes/models/material_sub_classes_model.dart';
 import 'package:materials/pages/3_material_names/models/material_names_model.dart';
-import 'package:materials/services/global_serv.dart';
+import 'package:materials/services/app_global_serv.dart';
 import 'package:materials/utils/logger.dart';
 
-late GlobalServ s = GlobalServ.to;
+late AppGlobalServ s = AppGlobalServ.to;
 
 class MaterialNamesController extends GetxController {
   static MaterialNamesController get to => Get.find();

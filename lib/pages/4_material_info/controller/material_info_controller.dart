@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:materials/pages/4_material_info/models/material_info_model.dart';
-import 'package:materials/services/global_serv.dart';
+import 'package:materials/services/app_global_serv.dart';
 import 'package:materials/utils/logger.dart';
 
-late GlobalServ s = GlobalServ.to;
+late AppGlobalServ s = AppGlobalServ.to;
 
 class MaterialInfoController extends GetxController {
   static MaterialInfoController get to => Get.find();

@@ -6,14 +6,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:materials/pages/4_material_info/controller/material_info_controller.dart';
 import 'package:materials/pages/4_material_info/models/material_info_model.dart';
 
-import 'package:materials/services/remote_controller.dart';
+import 'package:materials/services/app_remote_serv.dart';
 
 import 'package:materials/routes/app_page.dart';
-import 'package:materials/services/global_serv.dart';
+import 'package:materials/services/app_global_serv.dart';
 import 'package:materials/utils/logger.dart';
 
 late MaterialInfoController c = MaterialInfoController.to;
-late GlobalServ s = GlobalServ.to;
+late AppGlobalServ s = AppGlobalServ.to;
 
 class MaterialInfoPage extends StatelessWidget {
   const MaterialInfoPage({Key? key}) : super(key: key);

@@ -7,10 +7,10 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:materials/pages/2_material_sub_classes/models/material_sub_classes_model.dart';
-import 'package:materials/services/global_serv.dart';
+import 'package:materials/services/app_global_serv.dart';
 import 'package:materials/utils/logger.dart';
 
-late GlobalServ s = GlobalServ.to;
+late AppGlobalServ s = AppGlobalServ.to;
 
 class MaterialSubClassesController extends GetxController {
   static MaterialSubClassesController get to => Get.find();
