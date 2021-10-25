@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
       initialRoute: Routes.materialClasses,
-      defaultTransition: Transition.rightToLeft,
+      defaultTransition: Transition.noTransition,
       getPages: AppPage.pages,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,

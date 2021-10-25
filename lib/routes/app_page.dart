@@ -38,7 +38,7 @@ class AppPage {
         })),
          GetPage(
         name: Routes.materialInfo,
-        page: () => const MaterialInfoPage(),
+        page: () =>  MaterialInfoPage(),
         binding: BindingsBuilder(() {
           Get.put<MaterialInfoController>(MaterialInfoController());
         })),
