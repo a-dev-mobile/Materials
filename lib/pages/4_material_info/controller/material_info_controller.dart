@@ -1,7 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -18,14 +17,29 @@ class MaterialInfoController extends GetxController {
 
   final _database = FirebaseDatabase.instance.reference();
 
-  Future<DataSnapshot> getFutureData() {
+  Future<DataSnapshot> getFutureDataInfo() {
     final String _pathDB = 'data_base/material_info/${s.idMaterial}/';
     var data = _database.child(_pathDB).once();
 
     return data;
   }
 
-  MaterialInfoModel getModel(AsyncSnapshot<DataSnapshot> snapshot) {
+  Future<DataSnapshot> getFutureDataChem() async {
+    final String _pathDB = 'data_base/material_chem/${s.idMaterial}/';
+    var data = _database.child(_pathDB).once();
+    return data;
+  }
+
+  Map<String, String> getMapChem(AsyncSnapshot<DataSnapshot> snapshot) {
+    Map<String, String> mapChem = {};
+    snapshot.data!.value.forEach((key, value) {
+      mapChem[key] = value;
+    });
+
+    return mapChem;
+  }
+
+  MaterialInfoModel getModelInfo(AsyncSnapshot<DataSnapshot> snapshot) {
     MaterialInfoModel model = MaterialInfoModel.fromJson(
         Map<String, dynamic>.from(snapshot.data!.value));
 

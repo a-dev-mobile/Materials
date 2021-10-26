@@ -30,11 +30,11 @@ class MaterialInfoModel {
       addInfo: data['add_info'] ?? AppConstString.NO_DATA,
       idClass: data['id_class'] ?? AppConstString.NO_DATA,
       idMaterial: data['id_name_material'] ?? AppConstString.NO_DATA,
-      idSubClass: data['id_sub_class:'] ?? AppConstString.NO_DATA,
+      idSubClass: data['id_sub_class'] ?? AppConstString.NO_DATA,
       nameClass: data['name_class'] ?? AppConstString.NO_DATA,
       nameMaterial: data['name_material'] ?? AppConstString.NO_DATA,
       nameOtherMaterial: data['name_other_material'] ?? AppConstString.NO_DATA,
-      nameSubClass: data['name_sub_class:'] ?? AppConstString.NO_DATA,
+      nameSubClass: data['name_sub_class'] ?? AppConstString.NO_DATA,
       replaceMaterial: data['replace_material'] ?? AppConstString.NO_DATA,
       use: data['use'] ?? AppConstString.NO_DATA,
     );
