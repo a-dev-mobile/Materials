@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:materials/pages/1_material_classes/controller/material_classes_controller.dart';
+import 'package:materials/pages/1_material_classes/controller/search_controller.dart';
 import 'package:materials/pages/1_material_classes/view/material_classes_page.dart';
 import 'package:materials/pages/2_material_sub_classes/controller/material_sub_classes_controller.dart';
 import 'package:materials/pages/2_material_sub_classes/view/material_sub_classes_page.dart';
@@ -23,6 +24,7 @@ class AppPage {
         page: () => const MaterialClassesPage(),
         binding: BindingsBuilder(() {
           Get.put<MaterialClassesController>(MaterialClassesController());
+          Get.put<SearchController>(SearchController());
         })),
     GetPage(
         name: Routes.materialSubClasses,

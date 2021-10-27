@@ -11,6 +11,8 @@ import 'package:materials/routes/app_page.dart';
 import 'package:materials/services/app_global_serv.dart';
 import 'package:materials/utils/logger.dart';
 
+import 'material_search.dart';
+
 late MaterialClassesController c = MaterialClassesController.to;
 late AppRemoteServ remote = AppRemoteServ.to;
 late AppGlobalServ s = AppGlobalServ.to;
@@ -28,7 +30,7 @@ class MaterialClassesPage extends StatelessWidget {
         // ignore: prefer_const_literals_to_create_immutables
         children: [
           Text('Search '),
-        
+        MaterialSearchWidget(),
           Text(remote.author),
           Text(remote.welcome),
           Text(' is dark ${remote.isDark}'),
