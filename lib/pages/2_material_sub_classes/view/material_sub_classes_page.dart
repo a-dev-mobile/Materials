@@ -42,8 +42,9 @@ class MaterialSubClassesPage extends StatelessWidget {
                     
                       return ListTile(
                         title: Text( modelList[index].nameSubClass),
-                        subtitle: Text(
+                        trailing: Text(
                             '${ modelList[index].numberUniqMaterial}'),
+            
                         onTap: () {
                                s.idSubClass =  modelList[index].idSubClass;
                           Get.toNamed(Routes.materialNames);

@@ -41,8 +41,8 @@ dev_dependencies:
 
 flutter: 
   generate: true
-  assets:
-    - assets/
+  # assets:
+  #   - assets/
  
   uses-material-design: true
 

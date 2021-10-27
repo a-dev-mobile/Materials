@@ -39,17 +39,17 @@ class MaterialClassesPage extends StatelessWidget {
       body: Column(
         children: [
           //! future for search
-          FutureBuilder(
-              future: c.getFutureSearchData(),
+             future: c.getFutureSearchData(),
               builder:
                   (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  //* РїРµСЂРµРґР°РµРј СЃРѕР±СЂР°РЅРЅС‹Рµ РґР°РЅРЅС‹Рµ РїРѕ Р±Р°Р·Рµ РєРѕС‚РѕСЂР°СЏ РґР»СЏ РїРѕРёСЃРєР°
+                  //* передаем собранные данные по базе которая для поиска
                   c.listSearchAllData = c.getSearchModelList(snapshot);
                   return buildSearch();
                 } else {
                   return const LinearProgressIndicator();
                 }
+           
               }),
           //! future for name class
           FutureBuilder(
@@ -65,8 +65,8 @@ class MaterialClassesPage extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return ListTile(
                         title: Text(modelList[index].nameClass),
-                        subtitle: Text(
-                            '${modelList[index].numberUniqSubClass} | ${modelList[index].numberUniqMaterials} | ${modelList[index].idClass}'),
+                        trailing: Text(
+                            '${modelList[index].numberUniqSubClass} | ${modelList[index].numberUniqMaterials}'),
                         onTap: () {
                           s.idClass = modelList[index].idClass;
                           s.nameClass = modelList[index].nameClass;

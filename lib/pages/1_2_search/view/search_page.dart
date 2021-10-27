@@ -53,15 +53,22 @@ class SearchPage extends StatelessWidget {
     for (var item in list) {
       listWidget.add(itemFindText(
           title: item.nameMaterial,
-          subTitle: '${item.nameClass} > ${item.nameSubClass}'));
+          subTitle: item.nameSubClass,
+          idMaterial: item.idMaterial));
     }
 
     return Column(children: listWidget);
   }
 
-  Widget itemFindText({required String title, required String subTitle}) {
+  Widget itemFindText(
+      {required String title,
+      required String subTitle,
+      required String idMaterial}) {
     return ListTile(
       title: Text(title),
+      onTap: () {
+        log.i(' id material  = $idMaterial');
+      },
       subtitle: Text(subTitle),
     );
   }

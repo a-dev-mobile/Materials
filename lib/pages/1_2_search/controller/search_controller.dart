@@ -23,20 +23,45 @@ class SearchController extends GetxController {
 
   Future<List<SearchModel>> getFutureFilteredData(String textSearch) {
     var listFilteredData = <SearchModel>[];
+    var listOldFilteredData = <SearchModel>[];
 
-    if (textSearch.isEmpty || listSearchData.isEmpty) {
-      listFilteredData.clear();
-    } else {
-      for (int i = 0; i < listSearchData.length; i++) {
-        if (listSearchData[i]
-                .nameMaterial
-                .toLowerCase()
-                .contains(textSearch.toLowerCase()) ||
-            listSearchData[i]
-                .nameSubClass
-                .toLowerCase()
-                .contains(textSearch.toLowerCase())) {
-          listFilteredData.add(listSearchData[i]);
+    if (textSearch.split(' ').length == 1) {
+      if (textSearch.isEmpty || listSearchData.isEmpty) {
+        listFilteredData.clear();
+      } else {
+        for (int i = 0; i < listSearchData.length; i++) {
+          if (listSearchData[i]
+                  .nameMaterial
+                  .toLowerCase()
+                  .contains(textSearch.toLowerCase()) ||
+              listSearchData[i]
+                  .nameSubClass
+                  .toLowerCase()
+                  .contains(textSearch.toLowerCase())) {
+            listFilteredData.add(listSearchData[i]);
+          }
+        }
+      }
+    }
+    if (textSearch.split(' ').length == 2) {
+      textSearch = textSearch.split(' ')[1];
+
+      listOldFilteredData = listFilteredData;
+   
+      if (textSearch.isEmpty || listOldFilteredData.isEmpty) {
+        listFilteredData.clear();
+      } else {
+        for (int i = 0; i < listSearchData.length; i++) {
+          if (listOldFilteredData[i]
+                  .nameMaterial
+                  .toLowerCase()
+                  .contains(textSearch.toLowerCase()) ||
+              listOldFilteredData[i]
+                  .nameSubClass
+                  .toLowerCase()
+                  .contains(textSearch.toLowerCase())) {
+            listFilteredData.add(listOldFilteredData[i]);
+          }
         }
       }
     }
