@@ -2,14 +2,14 @@ class SearchModel {
   final String nameMaterial;
   final String nameSubClass;
   final String nameClass;
-  final String use;
+
   final String idMaterial;
 
   SearchModel(
       {required this.nameMaterial,
       required this.nameSubClass,
       required this.nameClass,
-      required this.use,
+
       required this.idMaterial});
 @override
 String toString() {
@@ -21,7 +21,7 @@ String toString() {
       nameClass: data['name_class'],
       nameSubClass: data['name_sub_class'],
       nameMaterial: data['name_material'],
-      use: data['use'],
+ 
     );
   }
 
