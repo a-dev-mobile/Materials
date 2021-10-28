@@ -1,70 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:materials/pages/1_1_material_classes/controller/material_classes_controller.dart';
 import 'package:materials/pages/1_1_material_classes/models/search_model.dart';
 
 import 'package:materials/pages/1_2_search/controller/search_controller.dart';
+import 'package:materials/routes/app_page.dart';
+import 'package:materials/services/app_global_serv.dart';
 import 'package:materials/utils/logger.dart';
 
-SearchController c = SearchController.to;
+late SearchController c = SearchController.to;
+late AppGlobalServ sGlob = AppGlobalServ.to;
+late MaterialClassesController cClass = MaterialClassesController.to;
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String searchText = '';
+    String findText = '';
     return Scaffold(
       appBar: AppBar(
-        title: Text('search'),
+        title: const Text('search'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(c.listSearchData[10].toString()),
-            Container(
-              color: Colors.black12,
-              width: Get.width,
-              height: Get.height * 0.1,
-              child: TextField(
-                onChanged: (text) {
-                  // c.findText(text);
-                  searchText = text;
-                },
-              ),
+      body: Column(
+        children: [
+          Text(cClass.listDataForSearch[10].toString()),
+          Container(
+            color: Colors.black12,
+            width: Get.width,
+            height: Get.height * 0.1,
+            child: TextField(
+              onChanged: (text) {
+                // c.findText(text);
+                c.findText.value = text;
+              },
             ),
-            ElevatedButton(
-                onPressed: () {
-                  c.startComputer(searchText);
-                },
-                child: Text('start compure')),
-            Obx(() {
-              return FutureBuilder(
-                  future: c.getFutureFilteredData(c.findText.value),
-                  builder: (BuildContext context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      return buildWidgetFilteredData(
-                          snapshot.data as List<SearchModel>);
-                    } else {
-                      return CircularProgressIndicator();
-                    }
-                  });
-            })
-          ],
-        ),
+          ),
+          ElevatedButton(
+              onPressed: () {
+                c.searchLogicRun();
+              },
+              child: const Text('start compure')),
+          Obx(() => Text('Find count = ${c.listFilteredData.length}')),
+          Obx(() => c.isLoading.value
+              ? const LinearProgressIndicator()
+              : const Text('OK')),
+          Obx(() {
+            return Expanded(
+              child: ListView.builder(
+                  itemCount: c.listFilteredData.length,
+                  itemBuilder: (context, index) => itemFindText(
+                        title: c.listFilteredData[index].nameMaterial,
+                        subTitle: c.listFilteredData[index].nameSubClass,
+                        idMaterial: c.listFilteredData[index].idMaterial,
+                      )),
+            );
+          })
+        ],
       ),
     );
-  }
-
-  Widget buildWidgetFilteredData(List<SearchModel> list) {
-    List<Widget> listWidget = [];
-    for (var item in list) {
-      listWidget.add(itemFindText(
-          title: item.nameMaterial,
-          subTitle: item.nameSubClass,
-          idMaterial: item.idMaterial));
-    }
-
-    return Column(children: listWidget);
   }
 
   Widget itemFindText(
@@ -74,7 +68,8 @@ class SearchPage extends StatelessWidget {
     return ListTile(
       title: Text(title),
       onTap: () {
-        log.i(' id material  = $idMaterial');
+        sGlob.idMaterial = idMaterial;
+        Get.toNamed(Routes.materialInfo);
       },
       subtitle: Text(subTitle),
     );

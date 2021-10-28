@@ -16,7 +16,7 @@ class MaterialClassesController extends GetxController {
   static const _MATERIAL_CLASS_PATH = 'data_base/material_classes/';
   static const _SEARCH_PATH = 'search_data/';
 
-var listSearchAllData = <SearchModel>[];
+var listDataForSearch = <SearchModel>[];
 
   Future<DataSnapshot> getFutureNameClass() {
     return FirebaseDatabase.instance

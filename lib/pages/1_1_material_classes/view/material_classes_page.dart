@@ -45,7 +45,7 @@ class MaterialClassesPage extends StatelessWidget {
                   (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
               
-                  c.listSearchAllData = c.getSearchModelList(snapshot);
+                  c.listDataForSearch = c.getSearchModelList(snapshot);
                   return buildSearch();
                 } else {
                   return const LinearProgressIndicator();

@@ -50,7 +50,7 @@ class MaterialInfoPage extends StatelessWidget {
                     
                     ]);
                   } else {
-                    return Center(child: Text('LOAD...'));
+                    return const LinearProgressIndicator();
                   }
                 },
               ),
@@ -82,7 +82,7 @@ FutureBuilder(
  */
 
 
-          Expanded(
+          const Expanded(
             flex: 1,
             child: Placeholder()
           ),
