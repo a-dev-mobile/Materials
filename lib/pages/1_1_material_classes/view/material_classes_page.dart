@@ -39,11 +39,12 @@ class MaterialClassesPage extends StatelessWidget {
       body: Column(
         children: [
           //! future for search
+          FutureBuilder(
              future: c.getFutureSearchData(),
               builder:
                   (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  //* передаем собранные данные по базе которая для поиска
+              
                   c.listSearchAllData = c.getSearchModelList(snapshot);
                   return buildSearch();
                 } else {

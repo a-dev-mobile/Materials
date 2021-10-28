@@ -12,6 +12,7 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String searchText = '';
     return Scaffold(
       appBar: AppBar(
         title: Text('search'),
@@ -26,10 +27,16 @@ class SearchPage extends StatelessWidget {
               height: Get.height * 0.1,
               child: TextField(
                 onChanged: (text) {
-                  c.findText(text);
+                  // c.findText(text);
+                  searchText = text;
                 },
               ),
             ),
+            ElevatedButton(
+                onPressed: () {
+                  c.startComputer(searchText);
+                },
+                child: Text('start compure')),
             Obx(() {
               return FutureBuilder(
                   future: c.getFutureFilteredData(c.findText.value),

@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:computer/computer.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 import 'dart:async' show Future;
@@ -18,13 +19,64 @@ class SearchController extends GetxController {
   static SearchController get to => Get.find();
 
   List<SearchModel> listSearchData = [];
-
+  var listFilteredData = <SearchModel>[];
+  var listOldFilteredData = <SearchModel>[];
   RxString findText = ''.obs;
+  final computer = Computer();
+
+  List<SearchModel> getfromcomputerData(String textSearch) {
+    if (textSearch.isEmpty || listSearchData.isEmpty) {
+      listFilteredData.clear();
+    } else {
+      for (int i = 0; i < listSearchData.length; i++) {
+        if (listSearchData[i]
+                .nameMaterial
+                .toLowerCase()
+                .contains(textSearch.toLowerCase()) ||
+            listSearchData[i]
+                .nameSubClass
+                .toLowerCase()
+                .contains(textSearch.toLowerCase())) {
+          listFilteredData.add(listSearchData[i]);
+          listOldFilteredData.add(listSearchData[i]);
+        }
+      }
+    }
+    return listFilteredData;
+  }
+
+  void startComputer(String textSearch) async {
+    await computer.turnOn(
+      workersCount: 1,
+      verbose: true,
+    );
+
+    try {
+      log.w('start computer');
+      final a =
+          await computer.compute<String, List<String>>(asyncFib, param: 'text');
+      if (a.isEmpty) print('empty');
+      if (a.isNotEmpty) print('NOTempty');
+      for (var item in a) {
+        log.w(item);
+      }
+    } catch (error) {
+      print(error);
+      print('Task a failed');
+    }
+  }
+
+  static Future<List<String>> asyncFib(String n) async {
+    // await Future<void>.delayed(const Duration(seconds: 2));
+    List<String> listString = [];
+    var i = 0;
+    for (i = 0; i < 10000000; i++) {
+      listString.add('$i = a = $n');
+    }
+    return listString;
+  }
 
   Future<List<SearchModel>> getFutureFilteredData(String textSearch) {
-    var listFilteredData = <SearchModel>[];
-    var listOldFilteredData = <SearchModel>[];
-
     if (textSearch.split(' ').length == 1) {
       if (textSearch.isEmpty || listSearchData.isEmpty) {
         listFilteredData.clear();
@@ -39,19 +91,18 @@ class SearchController extends GetxController {
                   .toLowerCase()
                   .contains(textSearch.toLowerCase())) {
             listFilteredData.add(listSearchData[i]);
+            listOldFilteredData.add(listSearchData[i]);
           }
         }
       }
     }
+
     if (textSearch.split(' ').length == 2) {
       textSearch = textSearch.split(' ')[1];
-
-      listOldFilteredData = listFilteredData;
-   
-      if (textSearch.isEmpty || listOldFilteredData.isEmpty) {
+      if (textSearch != "") {
         listFilteredData.clear();
-      } else {
-        for (int i = 0; i < listSearchData.length; i++) {
+
+        for (int i = 0; i < listOldFilteredData.length; i++) {
           if (listOldFilteredData[i]
                   .nameMaterial
                   .toLowerCase()
