@@ -26,7 +26,7 @@ class MaterialInfoPage extends StatelessWidget {
     MaterialInfoModel model;
     Map<String, String> mapChem = {};
     return Scaffold(
-        appBar: AppBar(title: Text(s.nameClass)),
+        appBar: AppBar(title: Text(s.nameMaterial)),
         body: Column(children: [
           // Text('Search'),
           Expanded(

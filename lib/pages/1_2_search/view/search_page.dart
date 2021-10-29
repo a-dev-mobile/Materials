@@ -24,15 +24,15 @@ class SearchPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Text(cClass.listDataForSearch[10].toString()),
+
           Container(
-            color: Colors.black12,
+
             width: Get.width,
             height: Get.height * 0.1,
             child: TextField(
-              onChanged: (text) {
-                // c.findText(text);
-                c.findText.value = text;
+                autofocus: true,
+              onChanged: (inputText) {
+                c.findText = inputText;
               },
             ),
           ),
@@ -42,9 +42,7 @@ class SearchPage extends StatelessWidget {
               },
               child: const Text('start compure')),
           Obx(() => Text('Find count = ${c.listFilteredData.length}')),
-          Obx(() => c.isLoading.value
-              ? const LinearProgressIndicator()
-              : const Text('OK')),
+          
           Obx(() {
             return Expanded(
               child: ListView.builder(
