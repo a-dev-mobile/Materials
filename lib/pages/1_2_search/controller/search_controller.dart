@@ -21,19 +21,7 @@ class SearchController extends GetxController {
   }
 
   Future<void> searchLogicRun() async {
-
-
-
-for (var i = 0; i < 5; i++) {
-    findText = findText.replaceAll("  ", " ");
-    findText = findText.replaceAll(".", "");
-
-}
-    findText = findText.replaceAll("?", "");
-    findText = findText.replaceAll(",", "");
-
-    findText = findText.trimLeft();
-    findText = findText.trimRight();
+ prepareText();
 
     var text = findText.split(' ');
 // Depending on the number of sample spaces
@@ -57,6 +45,20 @@ for (var i = 0; i < 5; i++) {
         break;
     }
   }
+
+  void prepareText() {
+    for (var i = 0; i < 5; i++) {
+         findText = findText.replaceAll("  ", " ");
+         findText = findText.replaceAll(".", "");
+       }
+       findText = findText.replaceAll("?", "");
+       findText = findText.replaceAll(",", "");
+    
+       findText = findText.trimLeft();
+       findText = findText.trimRight();
+  }
+
+
 
   Future<List<SearchModel>> _firstSearch(
       String findText, List<SearchModel> listData) async {
