@@ -18,7 +18,7 @@ late AppGlobalServ s = AppGlobalServ.to;
 
 class MaterialInfoPage extends StatelessWidget {
   const MaterialInfoPage({Key? key}) : super(key: key);
-
+  static const titleItemsMaterialInfo = [];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -27,66 +27,74 @@ class MaterialInfoPage extends StatelessWidget {
     Map<String, String> mapChem = {};
     return Scaffold(
         appBar: AppBar(title: Text(s.nameMaterial)),
-        body: Column(children: [
-          // Text('Search'),
-          Expanded(
-            flex: 2,
-            child: SingleChildScrollView(
-              child: FutureBuilder(
-                // get futture data
-                future: c.getFutureDataInfo(),
-                builder:
-                    (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    model = c.getModelInfo(snapshot);
-                    return Column(children: [
-                      buildInfoWidget(title: model.nameClass, subTitle: 'Класс'),
-                      buildInfoWidget(title: model.nameSubClass, subTitle: 'Тип'),
-                      buildInfoWidget(title: model.nameMaterial, subTitle: 'Марка Материала'),
-                      buildInfoWidget(title: model.nameOtherMaterial, subTitle: 'Другое обозначение марки материала'),
-                      buildInfoWidget(title: model.addInfo, subTitle: 'Дополнительная информация'),
-                      buildInfoWidget(title: model.use, subTitle: 'Использование'),
-                      buildInfoWidget(title: model.replaceMaterial, subTitle: 'Замена'),
-                    
-                    ]);
-                  } else {
-                    return const LinearProgressIndicator();
-                  }
-                },
-              ),
-            ),
+        body:SingleChildScrollView(
+          child: Column(children: [
+                // Text('Search'),
+                FutureBuilder(
+                  // get futture data
+                  future: c.getFutureDataInfo(),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      model = c.getModelInfo(snapshot);
+                      return Column(
+                        
+                        children: [
+                          buildInfoWidget(
+                              title: model.nameClass, subTitle: 'Класс'),
+                          buildInfoWidget(
+                              title: model.nameSubClass, subTitle: 'Тип'),
+                          buildInfoWidget(
+                              title: model.nameMaterial,
+                              subTitle: 'Марка Материала'),
+                          buildInfoWidget(
+                              title: model.nameOtherMaterial,
+                              subTitle: 'Другое обозначение марки материала'),
+                          buildInfoWidget(
+                              title: model.addInfo,
+                              subTitle: 'Дополнительная информация'),
+                          buildInfoWidget(
+                              title: model.use, subTitle: 'Использование'),
+                          buildInfoWidget(
+                              title: model.replaceMaterial, subTitle: 'Замена'),
+                        ],
+                      );
+                    } else {
+                      return const LinearProgressIndicator();
+                    }
+                  },
+                ),
+              
+                FutureBuilder(
+                  future: c.getFutureDataChem(),
+                  builder: (context, AsyncSnapshot<DataSnapshot> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      mapChem = c.getMapChem(snapshot);
+                        
+                      return ListView.builder(
+                        shrinkWrap:true,
+                        itemCount: mapChem.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ListTile(
+                            leading: Text(mapChem.keys.elementAt(index)),
+                            trailing: Text(mapChem.values.elementAt(index)),
+                          );
+                        },
+                      );
+                    } else {
+                      return LinearProgressIndicator();
+                    }
+                  },
+                ),
+              
+                // const Expanded(
+                //   flex: 1,
+                //   child: Placeholder()
+                // ),
+              ]
+            
           ),
-        
-
-/* 
-
-FutureBuilder(
-              future: c.getFutureDataChem(),
-              builder: (context, AsyncSnapshot<DataSnapshot> snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  mapChem = c.getMapChem(snapshot);
-                  
-                  return GridView.count(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 10,
-
-                    crossAxisSpacing: 10,
-                    children: buildChemWidget(mapChem),
-                  );
-                } else {
-                  return Center(child: Text('LOAD...'));
-                }
-              },
-            ),
-
- */
-
-
-          const Expanded(
-            flex: 1,
-            child: Placeholder()
-          ),
-        ]));
+        ));
   }
 
   Widget buildInfoWidget({required String title, required String subTitle}) {

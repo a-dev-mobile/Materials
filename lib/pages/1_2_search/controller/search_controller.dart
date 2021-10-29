@@ -21,44 +21,48 @@ class SearchController extends GetxController {
   }
 
   Future<void> searchLogicRun() async {
- prepareText();
-
-    var text = findText.split(' ');
+    prepareText();
+    if (findText.isEmpty) {
+      listFilteredData.clear();
+    } else {
+      var text = findText.split(' ');
 // Depending on the number of sample spaces
-    switch (text.length) {
-      case 1:
-        listFilteredData.value =
-            await _firstSearch(text[0], _listDataForSearch);
-        break;
-      case 2:
-        listFilteredData.value =
-            await _firstSearch(text[0], _listDataForSearch);
-        listFilteredData.value = await _firstSearch(text[1], listFilteredData);
-        break;
-      case 3:
-        listFilteredData.value =
-            await _firstSearch(text[0], _listDataForSearch);
-        listFilteredData.value = await _firstSearch(text[1], listFilteredData);
+      switch (text.length) {
+        case 1:
+          listFilteredData.value =
+              await _firstSearch(text[0], _listDataForSearch);
+          break;
+        case 2:
+          listFilteredData.value =
+              await _firstSearch(text[0], _listDataForSearch);
+          listFilteredData.value =
+              await _firstSearch(text[1], listFilteredData);
+          break;
+        case 3:
+          listFilteredData.value =
+              await _firstSearch(text[0], _listDataForSearch);
+          listFilteredData.value =
+              await _firstSearch(text[1], listFilteredData);
 
-        listFilteredData.value = await _firstSearch(text[2], listFilteredData);
+          listFilteredData.value =
+              await _firstSearch(text[2], listFilteredData);
 
-        break;
+          break;
+      }
     }
   }
 
   void prepareText() {
     for (var i = 0; i < 5; i++) {
-         findText = findText.replaceAll("  ", " ");
-         findText = findText.replaceAll(".", "");
-       }
-       findText = findText.replaceAll("?", "");
-       findText = findText.replaceAll(",", "");
-    
-       findText = findText.trimLeft();
-       findText = findText.trimRight();
+      findText = findText.replaceAll("  ", " ");
+      findText = findText.replaceAll(".", "");
+    }
+    findText = findText.replaceAll("?", "");
+    findText = findText.replaceAll(",", "");
+
+    findText = findText.trimLeft();
+    findText = findText.trimRight();
   }
-
-
 
   Future<List<SearchModel>> _firstSearch(
       String findText, List<SearchModel> listData) async {

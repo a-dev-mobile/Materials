@@ -21,16 +21,15 @@ class SearchPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('search'),
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.add))],
       ),
       body: Column(
         children: [
-
           Container(
-
             width: Get.width,
             height: Get.height * 0.1,
             child: TextField(
-                autofocus: true,
+              autofocus: true,
               onChanged: (inputText) {
                 c.findText = inputText;
               },
@@ -42,7 +41,6 @@ class SearchPage extends StatelessWidget {
               },
               child: const Text('start compure')),
           Obx(() => Text('Find count = ${c.listFilteredData.length}')),
-          
           Obx(() {
             return Expanded(
               child: ListView.builder(
@@ -67,6 +65,8 @@ class SearchPage extends StatelessWidget {
       title: Text(title),
       onTap: () {
         sGlob.idMaterial = idMaterial;
+        sGlob.nameMaterial = title;
+        sGlob.nameSubMaterial = subTitle;
         Get.toNamed(Routes.materialInfo);
       },
       subtitle: Text(subTitle),
