@@ -16,8 +16,8 @@ import 'package:materials/utils/logger.dart';
 late MaterialInfoController c = MaterialInfoController.to;
 late AppGlobalServ s = AppGlobalServ.to;
 
-class MaterialInfoPage extends StatelessWidget {
-  const MaterialInfoPage({Key? key}) : super(key: key);
+class MaterialInfo extends StatelessWidget {
+  const MaterialInfo({Key? key}) : super(key: key);
   static const titleItemsMaterialInfo = [];
   @override
   Widget build(BuildContext context) {

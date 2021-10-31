@@ -19,15 +19,14 @@ class MaterialSubClassesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    int idGrade = 0;
+
     List<MaterialSubClassesModel> modelList;
 
     return Scaffold(
       appBar: AppBar(title: Text(s.nameClass)),
       body: Column(
         children: [
-          Text('Search'),
+
           FutureBuilder(
             // get futture data
             future: c.getFutureData(),

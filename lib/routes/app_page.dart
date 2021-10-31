@@ -10,7 +10,8 @@ import 'package:materials/pages/2_material_sub_classes/view/material_sub_classes
 import 'package:materials/pages/3_material_names/controller/material_names_controller.dart';
 import 'package:materials/pages/3_material_names/view/material_names_page.dart';
 import 'package:materials/pages/4_material_info/controller/material_info_controller.dart';
-import 'package:materials/pages/4_material_info/view/material_info_page.dart';
+import 'package:materials/pages/4_material_info/view/material_all_info_page.dart';
+import 'package:materials/pages/4_material_info/view/material_info.dart';
 
 abstract class Routes {
   static const materialClasses = '/materialClasses';
@@ -53,7 +54,7 @@ class AppPage {
         })),
     GetPage(
         name: Routes.materialInfo,
-        page: () => MaterialInfoPage(),
+        page: () => MaterialAllInfoPage(),
         binding: BindingsBuilder(() {
           Get.put<MaterialInfoController>(MaterialInfoController());
         })),
