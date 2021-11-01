@@ -20,7 +20,7 @@ class ChemWidget extends StatelessWidget {
               onPressed: () {
                 c.isReverse.value = !(c.isReverse.value);
               },
-              icon: Icon(Icons.ac_unit_outlined),
+              icon: Icon(Icons.align_horizontal_left_sharp),
             ),
           ],
         ),
@@ -29,7 +29,8 @@ class ChemWidget extends StatelessWidget {
             future: c.getfuture(c.isReverse.value),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                return Column(children: buildChemWidget());
+                return SingleChildScrollView(
+                    child: Column(children: buildChemWidget()));
               } else {
                 return LinearProgressIndicator();
               }
@@ -49,17 +50,27 @@ class ChemWidget extends StatelessWidget {
   List<Widget> buildChemWidget() {
     List<Widget> toPublish = <Widget>[];
     var list = c.listModel;
+    double maxValue = 0;
+    // I find max value
+    for (var model in list) {
+      if (maxValue <= model.percent) {
+        maxValue = model.percent;
+      }
+    }
 
     for (var model in list) {
-      toPublish.add(Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      toPublish.add(Stack(
         children: [
-          Text(model.abrv),
-          Text(model.name),
-          Text('${model.percent}%'),
-          Text(model.value)
+          Container(
+            width: (Get.width * (model.percent / maxValue))*1,
+            height: 40,
+            color: Colors.amber,
+          ),
+          ListTile(
+            leading: Text(model.abrv),
+            title: Text(model.name),
+            trailing: Text(model.value),
+          ),
         ],
       ));
     }
