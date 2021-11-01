@@ -35,6 +35,7 @@ class AppPage {
         page: () => const ClassesPage(),
         binding: BindingsBuilder(() {
           Get.put<ClassesController>(ClassesController());
+
         })),
     GetPage(
         name: Routes.search,

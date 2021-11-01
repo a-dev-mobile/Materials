@@ -4,9 +4,11 @@ import 'package:get/get.dart';
 import 'package:materials/pages/4_all_info/controller/info_controller.dart';
 import 'package:materials/pages/4_all_info/models/info_m.dart';
 import 'package:materials/routes/app_page.dart';
+import 'package:materials/services/app_remote_serv.dart';
+import 'package:materials/utils/logger.dart';
 
 late InfoController c = InfoController.to;
-
+late AppRemoteServ sRemote = AppRemoteServ.to;
 class InfoWidget extends StatelessWidget {
   const InfoWidget({Key? key}) : super(key: key);
   static const titleItemsMaterialInfo = [];
@@ -15,6 +17,8 @@ class InfoWidget extends StatelessWidget {
     InfoModel model;
 
     Map<String, String> mapChem = {};
+
+
     return Scaffold(
       appBar: AppBar(title: Text('info ${sGlob.nameMaterial}'),
       actions: [
@@ -31,6 +35,10 @@ class InfoWidget extends StatelessWidget {
       
       ),
         body: Column(children: [
+
+
+
+
       FutureBuilder(
         future: c.getFutureDataInfo(),
         builder: (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {

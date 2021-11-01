@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:materials/pages/1_1_material_classes/controller/classes_c.dart';
 import 'package:materials/pages/1_1_material_classes/models/classes_m.dart';
 import 'package:materials/pages/1_2_search/controller/search_controller.dart';
@@ -13,8 +14,9 @@ import 'package:materials/services/app_global_serv.dart';
 import 'package:materials/utils/logger.dart';
 
 late ClassesController c = ClassesController.to;
+
 late SearchController cSearch = SearchController.to;
-late AppRemoteServ remote = AppRemoteServ.to;
+
 late AppGlobalServ s = AppGlobalServ.to;
 
 class ClassesPage extends StatelessWidget {
@@ -23,6 +25,7 @@ class ClassesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<MaterialClassesModel> modelList;
+
 
     return Scaffold(
       appBar: AppBar(
@@ -37,19 +40,18 @@ class ClassesPage extends StatelessWidget {
       ),
       body: Column(
         children: [
+      
           //! future for search
           FutureBuilder(
-             future: c.getFutureSearchData(),
+              future: c.getFutureSearchData(),
               builder:
                   (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-              
                   c.listDataForSearch = c.getSearchModelList(snapshot);
                   return buildSearch();
                 } else {
                   return const LinearProgressIndicator();
                 }
-           
               }),
           //! future for name class
           FutureBuilder(
