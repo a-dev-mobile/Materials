@@ -2,9 +2,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:materials/pages/1_1_material_classes/controller/material_classes_controller.dart';
-import 'package:materials/pages/1_1_material_classes/models/material_classes_model.dart';
-import 'package:materials/pages/1_1_material_classes/models/search_model.dart';
+import 'package:materials/pages/1_1_material_classes/controller/classes_c.dart';
+import 'package:materials/pages/1_1_material_classes/models/classes_m.dart';
 import 'package:materials/pages/1_2_search/controller/search_controller.dart';
 
 import 'package:materials/services/app_remote_serv.dart';
@@ -13,13 +12,13 @@ import 'package:materials/routes/app_page.dart';
 import 'package:materials/services/app_global_serv.dart';
 import 'package:materials/utils/logger.dart';
 
-late MaterialClassesController c = MaterialClassesController.to;
+late ClassesController c = ClassesController.to;
 late SearchController cSearch = SearchController.to;
 late AppRemoteServ remote = AppRemoteServ.to;
 late AppGlobalServ s = AppGlobalServ.to;
 
-class MaterialClassesPage extends StatelessWidget {
-  const MaterialClassesPage({Key? key}) : super(key: key);
+class ClassesPage extends StatelessWidget {
+  const ClassesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +71,7 @@ class MaterialClassesPage extends StatelessWidget {
                           s.idClass = modelList[index].idClass;
                           s.nameClass = modelList[index].nameClass;
 
-                          Get.toNamed(Routes.materialSubClasses);
+                          Get.toNamed(Routes.subClasses);
                         },
                       );
                     },
@@ -96,7 +95,7 @@ class MaterialClassesPage extends StatelessWidget {
       },
       title: const Text(
         'Search',
-        style: const TextStyle(color: Colors.grey),
+        style: TextStyle(color: Colors.grey),
       ),
     );
   }

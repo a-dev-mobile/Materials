@@ -1,6 +1,6 @@
 import 'package:materials/utils/app_const.dart';
 
-class MaterialInfoModel {
+class InfoModel {
   final String addInfo;
   final String idClass;
   final String idMaterial;
@@ -12,7 +12,7 @@ class MaterialInfoModel {
   final String replaceMaterial;
   final String use;
 
-  MaterialInfoModel({
+  InfoModel({
     required this.addInfo,
     required this.nameClass,
     required this.nameSubClass,
@@ -25,8 +25,8 @@ class MaterialInfoModel {
     required this.nameOtherMaterial,
   });
 
-  factory MaterialInfoModel.fromJson(Map<String, dynamic> data) {
-    return MaterialInfoModel(
+  factory InfoModel.fromJson(Map<String, dynamic> data) {
+    return InfoModel(
       addInfo: data['add_info'] ?? AppConstString.NO_DATA,
       idClass: data['id_class'] ?? AppConstString.NO_DATA,
       idMaterial: data['id_name_material'] ?? AppConstString.NO_DATA,

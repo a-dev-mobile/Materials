@@ -1,15 +1,12 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:materials/pages/2_material_sub_classes/controller/material_sub_classes_controller.dart';
 import 'package:materials/pages/2_material_sub_classes/models/material_sub_classes_model.dart';
 
-import 'package:materials/services/app_remote_serv.dart';
 
 import 'package:materials/routes/app_page.dart';
 import 'package:materials/services/app_global_serv.dart';
-import 'package:materials/utils/logger.dart';
 
 late MaterialSubClassesController c = MaterialSubClassesController.to;
 late AppGlobalServ s = AppGlobalServ.to;
@@ -46,7 +43,7 @@ class MaterialSubClassesPage extends StatelessWidget {
             
                         onTap: () {
                                s.idSubClass =  modelList[index].idSubClass;
-                          Get.toNamed(Routes.materialNames);
+                          Get.toNamed(Routes.names);
                         },
                       );
                     },

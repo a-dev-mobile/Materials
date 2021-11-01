@@ -1,18 +1,15 @@
 // ignore_for_file: constant_identifier_names
 
 import 'dart:async';
-import 'dart:collection';
-import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:materials/pages/1_1_material_classes/models/material_classes_model.dart';
-import 'package:materials/pages/1_1_material_classes/models/search_model.dart';
-import 'package:materials/utils/logger.dart';
+import 'package:materials/pages/1_1_material_classes/models/classes_m.dart';
+import 'package:materials/pages/1_1_material_classes/models/search_m.dart';
 
-class MaterialClassesController extends GetxController {
-  static MaterialClassesController get to => Get.find();
+class ClassesController extends GetxController {
+  static ClassesController get to => Get.find();
   static const _MATERIAL_CLASS_PATH = 'data_base/material_classes/';
   static const _SEARCH_PATH = 'search_data/';
 

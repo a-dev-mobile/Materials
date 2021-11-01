@@ -1,11 +1,11 @@
 // ignore_for_file: avoid_print, constant_identifier_names
 
 import 'package:get/get.dart';
-import 'package:materials/pages/1_1_material_classes/controller/material_classes_controller.dart';
+import 'package:materials/pages/1_1_material_classes/controller/classes_c.dart';
 
-import 'package:materials/pages/1_1_material_classes/models/search_model.dart';
+import 'package:materials/pages/1_1_material_classes/models/search_m.dart';
 
-late MaterialClassesController c = MaterialClassesController.to;
+late ClassesController c = ClassesController.to;
 
 class SearchController extends GetxController {
   static SearchController get to => Get.find();

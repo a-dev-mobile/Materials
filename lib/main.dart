@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
-import 'package:computer/computer.dart';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
-import 'package:logger/logger.dart';
 
 import 'package:materials/services/app_global_serv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -35,7 +33,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
-      initialRoute: Routes.materialClasses,
+      initialRoute: Routes.classes,
       defaultTransition: Transition.noTransition,
       getPages: AppPage.pages,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
