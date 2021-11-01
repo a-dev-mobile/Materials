@@ -6,10 +6,10 @@ import 'package:materials/pages/1_2_search/controller/search_controller.dart';
 import 'package:materials/pages/1_2_search/view/search_page.dart';
 import 'package:materials/pages/2_material_sub_classes/controller/material_sub_classes_controller.dart';
 import 'package:materials/pages/2_material_sub_classes/view/material_sub_classes_page.dart';
-import 'package:materials/pages/3_material_names/controller/material_names_controller.dart';
-import 'package:materials/pages/3_material_names/view/material_names_page.dart';
+import 'package:materials/pages/3_names/controller/names_c.dart';
+import 'package:materials/pages/3_names/view/names_page.dart';
 import 'package:materials/pages/4_all_info/controller/all_info_controller.dart';
-import 'package:materials/pages/4_all_info/controller/chem_controller.dart';
+import 'package:materials/pages/4_all_info/controller/chem_c.dart';
 import 'package:materials/pages/4_all_info/controller/info_controller.dart';
 import 'package:materials/pages/4_all_info/view/all_info_p.dart';
 
@@ -45,9 +45,9 @@ class AppPage {
         })),
     GetPage(
         name: Routes.names,
-        page: () => const MaterialNamesPage(),
+        page: () => const NamesPage(),
         binding: BindingsBuilder(() {
-          Get.put<MaterialNamesController>(MaterialNamesController());
+          Get.put<NamesController>(NamesController());
         })),
     GetPage(
         name: Routes.allInfo,

@@ -18,7 +18,7 @@ class AllInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(sGlob.nameMaterial)),
+  
       bottomNavigationBar: Obx(() => buildBottomBar()),
       body: Obx(() => getBody()),
 

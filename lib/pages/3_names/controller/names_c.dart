@@ -5,13 +5,14 @@ import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:materials/pages/3_material_names/models/material_names_model.dart';
+import 'package:materials/pages/3_names/models/names_m.dart';
+
 import 'package:materials/services/app_global_serv.dart';
 
 late AppGlobalServ s = AppGlobalServ.to;
 
-class MaterialNamesController extends GetxController {
-  static MaterialNamesController get to => Get.find();
+class NamesController extends GetxController {
+  static NamesController get to => Get.find();
       
 
 
@@ -24,9 +25,9 @@ final String _pathDB = 'data_base/material_names/${s.idSubClass}/';
     return data;
   }
 
-  List<MaterialNamesModel> getModelList(
+  List<NamesModel> getModelList(
       AsyncSnapshot<DataSnapshot> snapshot) {
-    List<MaterialNamesModel> models = [];
+    List<NamesModel> models = [];
     var listValues = [];
     // перебираю чтобы забрать значения буз ключей
 
@@ -37,7 +38,7 @@ final String _pathDB = 'data_base/material_names/${s.idSubClass}/';
     // for (var value in snapshot.data!.value) {
     for (var value in listValues) {
       models.add(
-          MaterialNamesModel.fromJson(Map<String, dynamic>.from(value)));
+          NamesModel.fromJson(Map<String, dynamic>.from(value)));
     }
 
     return models;

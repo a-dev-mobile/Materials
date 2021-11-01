@@ -1,13 +1,13 @@
 import 'package:materials/utils/app_const.dart';
 
-class MaterialNamesModel {
+class NamesModel {
   final String idClass;
   final String idMaterial;
   final String idSubClass;
   final String nameMaterial;
   final String nameOtherMaterial;
 
-  MaterialNamesModel({
+  NamesModel({
     required this.idMaterial,
     required this.idClass,
     required this.nameMaterial,
@@ -15,8 +15,8 @@ class MaterialNamesModel {
     required this.nameOtherMaterial,
   });
 
-  factory MaterialNamesModel.fromJson(Map<String, dynamic> data) {
-    return MaterialNamesModel(
+  factory NamesModel.fromJson(Map<String, dynamic> data) {
+    return NamesModel(
       nameMaterial: data['name_material'] ?? AppConstString.NO_DATA,
       idSubClass: data['id_sub_class'] ?? AppConstString.NO_DATA,
       idClass: data['id_class'] ?? AppConstString.NO_DATA,

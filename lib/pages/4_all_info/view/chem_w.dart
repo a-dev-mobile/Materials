@@ -1,67 +1,69 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:materials/pages/4_all_info/controller/chem_controller.dart';
-
-
-
+import 'package:get/get.dart';
+import 'package:materials/pages/4_all_info/controller/chem_c.dart';
+import 'package:materials/services/app_global_serv.dart';
 
 late ChemController c = ChemController.to;
-
+late AppGlobalServ sGlob = AppGlobalServ.to;
 
 class ChemWidget extends StatelessWidget {
   const ChemWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-    Map<String, String> mapChem = {};
     return Scaffold(
-     
-        body:SingleChildScrollView(
-          child: Column(children: [
-                // Text('Search'),
-                       
-                FutureBuilder(
-                  future: c.getFutureDataChem(),
-                  builder: (context, AsyncSnapshot<DataSnapshot> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      mapChem = c.getMapChem(snapshot);
-                        
-                      return ListView.builder(
-                        shrinkWrap:true,
-                        itemCount: mapChem.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return ListTile(
-                            leading: Text(mapChem.keys.elementAt(index)),
-                            trailing: Text(mapChem.values.elementAt(index)),
-                          );
-                        },
-                      );
-                    } else {
-                      return LinearProgressIndicator();
-                    }
-                  },
-                ),
-              
-                // const Expanded(
-                //   flex: 1,
-                //   child: Placeholder()
-                // ),
-              ]
-            
-          ),
-        ));
+        appBar: AppBar(
+          title: Text('chem ${sGlob.nameMaterial}'),
+          actions: [
+            IconButton(
+              onPressed: () {
+                c.isReverse.value = !(c.isReverse.value);
+              },
+              icon: Icon(Icons.ac_unit_outlined),
+            ),
+          ],
+        ),
+        body: Obx(() {
+          return FutureBuilder(
+            future: c.getfuture(c.isReverse.value),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return Column(children: buildChemWidget());
+              } else {
+                return LinearProgressIndicator();
+              }
+            },
+          );
+        })
+
+        // Obx(() {
+        //   return c.isLoad.value
+        //       ? const LinearProgressIndicator()
+        //       : Column(children: buildChemWidget());
+        // })
+
+        );
   }
 
-  List<Widget> buildChemWidget(Map<String, String> mapChem) {
-    List<Widget> chem = <Widget>[];
+  List<Widget> buildChemWidget() {
+    List<Widget> toPublish = <Widget>[];
+    var list = c.listModel;
 
-    mapChem.forEach((k, v) {
-      chem.add(Column(
-        children: [Text(k), Text(v)],
+    for (var model in list) {
+      toPublish.add(Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(model.abrv),
+          Text(model.name),
+          Text('${model.percent}%'),
+          Text(model.value)
+        ],
       ));
-    });
+    }
 
-    return chem;
+    return toPublish;
   }
 }

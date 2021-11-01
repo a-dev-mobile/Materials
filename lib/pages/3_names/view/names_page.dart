@@ -1,22 +1,24 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:materials/pages/3_material_names/controller/material_names_controller.dart';
-import 'package:materials/pages/3_material_names/models/material_names_model.dart';
+import 'package:materials/pages/3_names/controller/names_c.dart';
+import 'package:materials/pages/3_names/models/names_m.dart';
+
+
 
 
 import 'package:materials/routes/app_page.dart';
 import 'package:materials/services/app_global_serv.dart';
 
-late MaterialNamesController c = MaterialNamesController.to;
+late NamesController c = NamesController.to;
 late AppGlobalServ s = AppGlobalServ.to;
 
-class MaterialNamesPage extends StatelessWidget {
-  const MaterialNamesPage({Key? key}) : super(key: key);
+class NamesPage extends StatelessWidget {
+  const NamesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<MaterialNamesModel> modelList;
+    List<NamesModel> modelList;
 
     return Scaffold(
       appBar: AppBar(title: Text(s.nameClass)),
@@ -37,10 +39,12 @@ class MaterialNamesPage extends StatelessWidget {
                     
                       return ListTile(
                         title: Text( modelList[index].nameMaterial),
+                     
                         subtitle: Text(
                             modelList[index].nameOtherMaterial),
                         onTap: () {
                           s.idMaterial =  modelList[index].idMaterial;
+                          s.nameMaterial =  modelList[index].nameMaterial;
                           Get.toNamed(Routes.allInfo);
                         },
                       );
