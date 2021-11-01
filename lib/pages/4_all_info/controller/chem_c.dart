@@ -155,6 +155,8 @@ class ChemController extends GetxController {
       case 'As':
         return 'Мышьяк';
 // Pb
+      case 'Pb':
+        return 'Cdbytw';
 // Zn
 // Sb
 // Bi
@@ -181,17 +183,23 @@ class ChemController extends GetxController {
         return 'Титан';
 // Ta
 // other
+      case 'other':
+        return 'Другие';
 // Zr
 // Ce
 // Se
 // Te
 // Mg
 // REE
+
 // La
 // Y
 // Hf
 // Ba
 // impurities
+      case 'impurities':
+        return 'Примеси';
+
 // Nd
 // Be
 // Na
@@ -206,14 +214,19 @@ class ChemController extends GetxController {
 // Ag
 // Au
 // Pt
+
 // Pd
 // Rh
 // Cl
 // Cu+P
 // Ir
+
 // Ru
 // Re
 // Tl
+      case 'Tl':
+        return 'Таллий';
+
 // In
 // Hg
     }

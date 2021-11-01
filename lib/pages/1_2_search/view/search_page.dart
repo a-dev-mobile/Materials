@@ -18,7 +18,13 @@ class SearchPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('search'),
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.add))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                Get.toNamed(Routes.add);
+              },
+              icon: const Icon(Icons.add))
+        ],
       ),
       body: Column(
         children: [

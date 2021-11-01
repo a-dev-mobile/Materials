@@ -1,7 +1,9 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:materials/pages/4_all_info/controller/info_controller.dart';
 import 'package:materials/pages/4_all_info/models/info_m.dart';
+import 'package:materials/routes/app_page.dart';
 
 late InfoController c = InfoController.to;
 
@@ -14,7 +16,20 @@ class InfoWidget extends StatelessWidget {
 
     Map<String, String> mapChem = {};
     return Scaffold(
-      appBar: AppBar(title: Text('info ${sGlob.nameMaterial}'),),
+      appBar: AppBar(title: Text('info ${sGlob.nameMaterial}'),
+      actions: [
+            
+             IconButton(
+              onPressed: () {
+                Get.toNamed(Routes.edit);
+              },
+              icon: Icon(Icons.edit),
+            ),
+          ],
+      
+      
+      
+      ),
         body: Column(children: [
       FutureBuilder(
         future: c.getFutureDataInfo(),
@@ -29,7 +44,7 @@ class InfoWidget extends StatelessWidget {
                 buildInfoWidget(title: model.nameSubClass, subTitle: 'Тип'),
                 //=========================
                 buildInfoWidget(
-                    title: model.nameMaterial, subTitle: 'Марка Материала'),
+                    title: model.nameMaterial, subTitle: 'Марка'),
                 //=========================
                 if (model.nameOtherMaterial.isNotEmpty)
                   buildInfoWidget(

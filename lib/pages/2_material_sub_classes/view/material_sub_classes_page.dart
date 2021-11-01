@@ -43,6 +43,8 @@ class MaterialSubClassesPage extends StatelessWidget {
             
                         onTap: () {
                                s.idSubClass =  modelList[index].idSubClass;
+                               s.idClass =  modelList[index].idClass;
+                               s.nameSubMaterial =  modelList[index].nameSubClass;
                           Get.toNamed(Routes.names);
                         },
                       );

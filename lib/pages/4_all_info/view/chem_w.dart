@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:materials/pages/4_all_info/controller/chem_c.dart';
+import 'package:materials/routes/app_page.dart';
 import 'package:materials/services/app_global_serv.dart';
 
 late ChemController c = ChemController.to;
@@ -21,6 +22,12 @@ class ChemWidget extends StatelessWidget {
                 c.isReverse.value = !(c.isReverse.value);
               },
               icon: Icon(Icons.align_horizontal_left_sharp),
+            ),
+             IconButton(
+              onPressed: () {
+                Get.toNamed(Routes.edit);
+              },
+              icon: Icon(Icons.edit),
             ),
           ],
         ),
