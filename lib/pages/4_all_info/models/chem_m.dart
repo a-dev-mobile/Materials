@@ -20,11 +20,5 @@ class ChemModel {
     return super.toString();
   }
 
-  String getTranslate(String abrv) {
-    switch (abrv) {
-      case 'Mn':
-        return AppLocalizations.of(Get.context!)!.mn;
-    }
-    return 'no data';
-  }
+ 
 }

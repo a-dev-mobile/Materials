@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'dart:async';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +14,7 @@ late AppGlobalServ sGlob = AppGlobalServ.to;
 
 class ChemController extends GetxController {
   static ChemController get to => Get.find();
-  var isReverse = false.obs;
+  var isReverse = true.obs;
 
   RxList<ChemModel> listModel = <ChemModel>[].obs;
   Map<String, String> _mapChem = {};
@@ -28,19 +28,13 @@ class ChemController extends GetxController {
     return data;
   }
 
-
-
   Future<void> getfuture(bool isReverseData) async {
     //  isLoad.value = true;
-  
-    
+
     DataSnapshot snapshot = await getFutureDataChem();
     _mapChem = _getMapChem(snapshot);
-    _mapChemSort =_parsingValueInDouble(isReverseData);
-    listModel.value =getChemModel();
-
-    
-
+    _mapChemSort = _parsingValueInDouble(isReverseData);
+    listModel.value = getChemModel();
   }
 
   Map<String, String> _getMapChem(DataSnapshot snapshot) {
@@ -117,5 +111,123 @@ class ChemController extends GetxController {
     v = v.replaceAll('=', '');
     v = v.replaceAll('#', '');
     return v;
+  }
+
+  String getTranslateTitle(String abrv) {
+    switch (abrv) {
+
+//      C
+      case 'C':
+        return 'Углерод';
+
+// Si
+      case 'Si':
+        return 'Кремний';
+// Mn
+      case 'Mn':
+        return 'Марганец';
+// S
+      case 'S':
+        return 'Сера';
+// P
+      case 'P':
+        return 'Фосфор';
+
+// N
+      case 'N':
+        return 'Азот';
+// Al
+      case 'Al':
+        return 'Алюминий';
+// Ca
+      case 'Ca':
+        return 'Кальций';
+// Fe
+      case 'Fe':
+        return 'Железо';
+// Cr
+      case 'Cr':
+        return 'Хром';
+// Cu
+      case 'Cu':
+        return 'Медь';
+// As
+      case 'As':
+        return 'Мышьяк';
+// Pb
+// Zn
+// Sb
+// Bi
+// Sn
+// O
+// H
+// Co
+      case 'Co':
+        return 'Кобальт';
+// B
+      case 'B':
+        return 'Бор';
+// V
+      case 'V':
+        return 'Ванадий';
+// Ni
+      case 'Ni':
+        return 'Никель';
+// Mo
+// W
+// Nb
+// Ti
+      case 'Ti':
+        return 'Титан';
+// Ta
+// other
+// Zr
+// Ce
+// Se
+// Te
+// Mg
+// REE
+// La
+// Y
+// Hf
+// Ba
+// impurities
+// Nd
+// Be
+// Na
+// Cd
+// Ni+Co
+// Ga
+// Al+Mg
+// Li
+// Sc
+// F
+// Sr
+// Ag
+// Au
+// Pt
+// Pd
+// Rh
+// Cl
+// Cu+P
+// Ir
+// Ru
+// Re
+// Tl
+// In
+// Hg
+    }
+    return 'no data';
+  }
+
+  String getChangeValue(String value) {
+    // TODO rename
+    value = value.replaceAll('!', 'прочие, каждая ');
+    value = value.replaceAll('^', 'min ');
+    value = value.replaceAll('>', 'до ');
+    value = value.replaceAll('=', 'всего ');
+    value = value.replaceAll('#', 'прочие ');
+
+    return value;
   }
 }

@@ -68,8 +68,8 @@ class ChemWidget extends StatelessWidget {
           ),
           ListTile(
             leading: Text(model.abrv),
-            title: Text(model.name),
-            trailing: Text(model.value),
+            title: Text(c.getTranslateTitle(model.abrv)),
+            trailing: Text('${c.getChangeValue(model.value)} %'),
           ),
         ],
       ));
