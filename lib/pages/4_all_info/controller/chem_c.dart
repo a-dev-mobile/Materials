@@ -156,7 +156,7 @@ class ChemController extends GetxController {
         return 'Мышьяк';
 // Pb
       case 'Pb':
-        return 'Cdbytw';
+        return 'Свинец';
 // Zn
 // Sb
 // Bi

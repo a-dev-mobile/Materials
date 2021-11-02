@@ -2,9 +2,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:materials/pages/1_1_classes/controller/classes_c.dart';
+import 'package:materials/pages/1_1_classes/models/classes_m.dart';
 
-import 'package:materials/pages/1_1_material_classes/controller/classes_c.dart';
-import 'package:materials/pages/1_1_material_classes/models/classes_m.dart';
 import 'package:materials/pages/1_2_search/controller/search_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:materials/services/app_remote_serv.dart';
@@ -34,7 +34,20 @@ class ClassesPage extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                logger.i('help for user');
+                Get.defaultDialog(
+                  title: 'Что за цифры?',
+                  content: Column(
+                    // TODO это что?
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      const Text(
+                          'Первая цифра - это количество материалов в данной группе'),
+                          SizedBox(height: 20,),
+                      const Text(
+                          'Вторая цифра - это количество марок материала в данной группе'),
+                    ],
+                  ),
+                );
               },
               icon: const Icon(Icons.info_outline))
         ],

@@ -10,19 +10,24 @@ abstract class AppConstString {
       'http://play.google.com/store/apps/details?id=a.dev.calc_triangle';
 }
 
-abstract class AppConstColor {
+class AppConstColor {
   static const Color primary_800 = Color(0xFF2D5385);
+  static const Color primary_500 = Color(0xFF2F80ED);
   static const Color neutral_white = Color(0xFFffffff);
   static const Color neutral_grey_800 = Color(0xFF323F4B);
   static const Color neutral_grey_400 = Color(0xFF7B8794);
+  static const Color neutral_grey_100 = Color(0xFFE3E7EB);
 
 }
 
-abstract class AppConstTextStyle {
+class AppConstTextStyle {
   static const TextStyle H3 =
       TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: AppConstColor.neutral_grey_800);
  static const TextStyle label_extra_bold =
-      TextStyle(fontWeight: FontWeight.bold, fontSize: 12,color: AppConstColor.neutral_grey_400);
+      TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: AppConstColor.neutral_grey_800);
+ static const TextStyle label_regular =
+      TextStyle(fontWeight: FontWeight.normal, fontSize: 12,color: AppConstColor.neutral_grey_400);
+
 
 
 }

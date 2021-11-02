@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:materials/pages/1_1_material_classes/controller/classes_c.dart';
+import 'package:materials/pages/1_1_classes/controller/classes_c.dart';
+import 'package:materials/pages/1_1_classes/view/classes_p.dart';
 
-import 'package:materials/pages/1_1_material_classes/view/classes_p.dart';
 import 'package:materials/pages/1_2_search/controller/change_log_c.dart';
 import 'package:materials/pages/1_2_search/controller/search_controller.dart';
 import 'package:materials/pages/1_2_search/view/search_page.dart';

@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import 'package:materials/pages/4_all_info/controller/info_controller.dart';
 import 'package:materials/pages/4_all_info/models/info_m.dart';
 import 'package:materials/routes/app_page.dart';
+import 'package:materials/services/app_global_serv.dart';
 import 'package:materials/services/app_remote_serv.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:materials/utils/app_const.dart';
 import 'package:materials/utils/logger.dart';
 
@@ -23,11 +25,12 @@ class InfoWidget extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Column(
           children: [
-            Text(sGlob.nameMaterial),
-            const Text(
-              'Информация',
-              style: AppConstTextStyle.label_extra_bold,
+           Text(sGlob.nameMaterial,style: AppConstTextStyle.H3,),
+            Text(
+                AppLocalizations.of(context)!.info,
+              style: AppConstTextStyle.label_regular,
             )
+            
           ],
         ),
       actions: [
@@ -56,12 +59,12 @@ class InfoWidget extends StatelessWidget {
             return Column(
               children: [
                 //=========================
-                buildInfoWidget(title: model.nameClass, subTitle: 'Класс'),
+                buildInfoWidget(title: model.nameClass, subTitle: AppLocalizations.of(context)!.material_group),
                 //=========================
-                buildInfoWidget(title: model.nameSubClass, subTitle: 'Тип'),
+                buildInfoWidget(title: model.nameSubClass, subTitle: AppLocalizations.of(context)!.material),
                 //=========================
                 buildInfoWidget(
-                    title: model.nameMaterial, subTitle: 'Марка'),
+                    title: model.nameMaterial, subTitle:  AppLocalizations.of(context)!.grade),
                 //=========================
                 if (model.nameOtherMaterial.isNotEmpty)
                   buildInfoWidget(

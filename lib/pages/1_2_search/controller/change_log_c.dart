@@ -14,9 +14,9 @@ class ChangeLogController extends GetxController {
 
   @override
   void onReady() {
-    // if (_sRemote.isUpdateChangeLog) {
+    if (_sRemote.isUpdateChangeLog) {
       viewDialogChangeLog();
-    // }
+    }
     super.onReady();
   }
 

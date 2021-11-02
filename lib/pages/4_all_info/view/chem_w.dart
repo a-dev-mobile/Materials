@@ -6,6 +6,7 @@ import 'package:materials/routes/app_page.dart';
 import 'package:materials/services/app_global_serv.dart';
 import 'package:materials/utils/app_const.dart';
 import 'package:materials/utils/logger.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 late ChemController c = ChemController.to;
 late AppGlobalServ sGlob = AppGlobalServ.to;
@@ -17,15 +18,18 @@ class ChemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title:Column(
-          children: [
-            Text(sGlob.nameMaterial),
-            const Text(
-              'Хим состав',
-              style: AppConstTextStyle.label_extra_bold,
-            )
-          ],
-        ),
+          title: Column(
+            children: [
+              Text(
+                sGlob.nameMaterial,
+                style: AppConstTextStyle.H3,
+              ),
+              Text(
+                AppLocalizations.of(context)!.chem_composition,
+                style: AppConstTextStyle.label_regular,
+              )
+            ],
+          ),
           actions: [
             IconButton(
               onPressed: () {
@@ -53,15 +57,7 @@ class ChemWidget extends StatelessWidget {
               }
             },
           );
-        })
-
-        // Obx(() {
-        //   return c.isLoad.value
-        //       ? const LinearProgressIndicator()
-        //       : Column(children: buildChemWidget());
-        // })
-
-        );
+        }));
   }
 
   List<Widget> buildChemWidget() {
@@ -75,7 +71,7 @@ class ChemWidget extends StatelessWidget {
       }
     }
     log.i(list.length);
-    //if there is no data on chemical 
+    //if there is no data on chemical
     if (list.isEmpty) {
       toPublish.add(const Center(
         child: Text(
@@ -90,8 +86,8 @@ class ChemWidget extends StatelessWidget {
         children: [
           Container(
             width: (Get.width * (model.percent / maxValue)) * 1,
-            height: 40,
-            color: Colors.amber,
+            height: 50,
+            color: AppConstColor.neutral_grey_100,
           ),
           ListTile(
             leading: Text(model.abrv),

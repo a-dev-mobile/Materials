@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:materials/pages/1_1_material_classes/controller/classes_c.dart';
+import 'package:materials/pages/1_1_classes/controller/classes_c.dart';
+import 'package:materials/pages/1_1_classes/models/search_m.dart';
 
-import 'package:materials/pages/1_1_material_classes/models/search_m.dart';
 import 'package:materials/services/app_global_serv.dart';
 import 'package:materials/services/app_remote_serv.dart';
 

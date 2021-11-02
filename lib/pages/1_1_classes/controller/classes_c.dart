@@ -5,8 +5,10 @@ import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:materials/pages/1_1_material_classes/models/classes_m.dart';
-import 'package:materials/pages/1_1_material_classes/models/search_m.dart';
+import 'package:materials/pages/1_1_classes/models/classes_m.dart';
+import 'package:materials/pages/1_1_classes/models/search_m.dart';
+
+
 import 'package:materials/services/app_remote_serv.dart';
 import 'package:materials/utils/logger.dart';
 

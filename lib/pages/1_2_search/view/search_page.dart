@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:materials/pages/1_1_material_classes/controller/classes_c.dart';
+import 'package:materials/pages/1_1_classes/controller/classes_c.dart';
+
 
 import 'package:materials/pages/1_2_search/controller/search_controller.dart';
 import 'package:materials/routes/app_page.dart';
@@ -27,7 +28,7 @@ class SearchPage extends StatelessWidget {
               onPressed: () {
                 Get.toNamed(Routes.add);
               },
-              icon: const Icon(Icons.add))
+              icon: const Icon(Icons.add)),
         ],
       ),
       body: Column(
@@ -45,11 +46,25 @@ class SearchPage extends StatelessWidget {
                   ),
                 ),
                 IconButton(
+                    onPressed: () {
+                      Get.defaultDialog(
+                        title: 'Расширенный поиск',
+                        middleText:
+                            'Используйте пробел для поиска любого символа',
+                        // content: Align(
+                        //   alignment: Alignment.center,
+                        //   child: Text(
+                        //       'Используйте пробел для поиска любого символа'),
+                        // ));
+                      );
+                    },
+                    icon: const Icon(Icons.info_outline)),
+                IconButton(
                   onPressed: () {
                     c.searchLogicRun();
                   },
                   icon: Icon(Icons.search),
-                )
+                ),
               ],
             ),
           ),

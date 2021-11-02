@@ -23,10 +23,11 @@ class NamesPage extends StatelessWidget {
       appBar: AppBar(
         title: Column(
           children: [
-            Text(s.nameClass),
+            Text(s.nameClass, style: AppConstTextStyle.label_extra_bold,),
             Text(
-              s.nameSubMaterial,
-              style: AppConstTextStyle.label_extra_bold,
+              s.nameSubMaterial,overflow: TextOverflow.ellipsis,
+                 softWrap: true,
+              style: AppConstTextStyle.label_regular,
             )
           ],
         ),
