@@ -1,11 +1,15 @@
 // ignore_for_file: avoid_print, constant_identifier_names
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:materials/pages/1_1_material_classes/controller/classes_c.dart';
 
 import 'package:materials/pages/1_1_material_classes/models/search_m.dart';
+import 'package:materials/services/app_global_serv.dart';
+import 'package:materials/services/app_remote_serv.dart';
 
 late ClassesController c = ClassesController.to;
+
 
 class SearchController extends GetxController {
   static SearchController get to => Get.find();
@@ -86,4 +90,12 @@ class SearchController extends GetxController {
 
     return listToPub;
   }
+
+  @override
+  void onReady() {
+
+    super.onReady();
+  }
+
+  
 }

@@ -8,7 +8,8 @@ class AppRemoteServ extends GetxService {
   static AppRemoteServ get to => Get.find();
   final RemoteConfig _remoteConfig = RemoteConfig.instance;
 
-  var isChangeLog = false;
+  var isUpdateChangeLog = false;
+
 
   static const _keyWelcome = 'welcome';
   static const _defaultWelcome = 'welcome';
@@ -73,11 +74,11 @@ class AppRemoteServ extends GetxService {
 
     if (_textChangeLog != oldTextChangeLog) {
       LocalStorage().setItemString(_keyChangeLog, _textChangeLog);
-      isChangeLog = true;
+      isUpdateChangeLog = true;
       log.w('isChangeLog.value = true;');
     } else {
       log.w('isChangeLog.value = false;');
-      isChangeLog = false;
+      isUpdateChangeLog = false;
     }
 
     super.onInit();

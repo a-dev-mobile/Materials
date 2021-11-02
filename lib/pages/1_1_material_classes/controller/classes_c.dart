@@ -57,9 +57,4 @@ class ClassesController extends GetxController {
     return models;
   }
 
-  @override
-  void onInit() {
-
-    super.onInit();
-  }
 }

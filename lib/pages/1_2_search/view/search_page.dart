@@ -5,6 +5,7 @@ import 'package:materials/pages/1_1_material_classes/controller/classes_c.dart';
 import 'package:materials/pages/1_2_search/controller/search_controller.dart';
 import 'package:materials/routes/app_page.dart';
 import 'package:materials/services/app_global_serv.dart';
+import 'package:materials/services/app_remote_serv.dart';
 
 late SearchController c = SearchController.to;
 late AppGlobalServ sGlob = AppGlobalServ.to;
@@ -28,6 +29,7 @@ class SearchPage extends StatelessWidget {
       ),
       body: Column(
         children: [
+
           SizedBox(
             width: Get.width,
             height: Get.height * 0.1,
@@ -59,6 +61,7 @@ class SearchPage extends StatelessWidget {
       ),
     );
   }
+
 
   Widget itemFindText(
       {required String title,

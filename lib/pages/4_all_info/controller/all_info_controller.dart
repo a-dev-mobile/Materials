@@ -7,7 +7,7 @@ import 'package:materials/services/app_global_serv.dart';
 import 'package:materials/services/app_remote_serv.dart';
 
 late AppGlobalServ sGlob = AppGlobalServ.to;
-late AppRemoteServ sRemote = AppRemoteServ.to;
+
 
 class AllInfoController extends GetxController {
   static AllInfoController get to => Get.find();
@@ -20,15 +20,7 @@ class AllInfoController extends GetxController {
 
   @override
   void onReady() {
-    if (sRemote.isChangeLog) {
-      Get.defaultDialog(
-          title: 'update db',
-          content: Text('data'),
-   
-          onCancel: () {
-            sRemote.isChangeLog = false;
-          });
-    }
+  
     super.onReady();
   }
 }
