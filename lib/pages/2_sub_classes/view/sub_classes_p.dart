@@ -1,29 +1,31 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:materials/pages/2_material_sub_classes/controller/material_sub_classes_controller.dart';
-import 'package:materials/pages/2_material_sub_classes/models/material_sub_classes_model.dart';
-
-
+import 'package:materials/pages/2_sub_classes/controller/sub_classes_c.dart';
+import 'package:materials/pages/2_sub_classes/models/sub_classes_m.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:materials/routes/app_page.dart';
 import 'package:materials/services/app_global_serv.dart';
+import 'package:materials/utils/app_widget.dart';
 
-late MaterialSubClassesController c = MaterialSubClassesController.to;
+late SubClassesController c = SubClassesController.to;
 late AppGlobalServ s = AppGlobalServ.to;
 
-class MaterialSubClassesPage extends StatelessWidget {
-  const MaterialSubClassesPage({Key? key}) : super(key: key);
+class SubClassesPage extends StatelessWidget {
+  const SubClassesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
 
-    List<MaterialSubClassesModel> modelList;
+    List<SubClassesModel> modelList;
 
     return Scaffold(
       appBar: AppBar(title: Text(s.nameClass)),
       body: Column(
         children: [
-
+  AppWidget.title(
+            title: AppLocalizations.of(context)!.select_material,
+          ),
           FutureBuilder(
             // get futture data
             future: c.getFutureData(),

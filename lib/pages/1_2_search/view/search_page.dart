@@ -6,6 +6,7 @@ import 'package:materials/pages/1_2_search/controller/search_controller.dart';
 import 'package:materials/routes/app_page.dart';
 import 'package:materials/services/app_global_serv.dart';
 import 'package:materials/services/app_remote_serv.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 late SearchController c = SearchController.to;
 late AppGlobalServ sGlob = AppGlobalServ.to;
@@ -18,7 +19,9 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('search'),
+        title: Text(
+            AppLocalizations.of(AppGlobalServ.navigatorKey.currentContext!)!
+                .search_title),
         actions: [
           IconButton(
               onPressed: () {
@@ -29,23 +32,28 @@ class SearchPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-
-          SizedBox(
-            width: Get.width,
-            height: Get.height * 0.1,
-            child: TextField(
-              autofocus: true,
-              onChanged: (inputText) {
-                c.findText = inputText;
-              },
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    autofocus: true,
+                    onChanged: (inputText) {
+                      c.findText = inputText;
+                    },
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    c.searchLogicRun();
+                  },
+                  icon: Icon(Icons.search),
+                )
+              ],
             ),
           ),
-          ElevatedButton(
-              onPressed: () {
-                c.searchLogicRun();
-              },
-              child: const Text('start compure')),
-          Obx(() => Text('Find count = ${c.listFilteredData.length}')),
+          Obx(() => Text('Найдено = ${c.listFilteredData.length}')),
           Obx(() {
             return Expanded(
               child: ListView.builder(
@@ -61,7 +69,6 @@ class SearchPage extends StatelessWidget {
       ),
     );
   }
-
 
   Widget itemFindText(
       {required String title,

@@ -3,7 +3,12 @@
 "appTitle":"Steels and alloys",
 "mn":"Manganese",
 "version":"Version",
-"updating_base":"Обновление"
+"updating_base":"Обновление",
+"search_title":"Поиск материала",
+"select_material_group":"Выберите группу материала",
+"select_material":"Выберите материал",
+"select_material_grade":"Выберите марку материала",
+"find":"Найти"
 
 
 }

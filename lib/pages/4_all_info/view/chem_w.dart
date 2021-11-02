@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:materials/pages/4_all_info/controller/chem_c.dart';
 import 'package:materials/routes/app_page.dart';
 import 'package:materials/services/app_global_serv.dart';
+import 'package:materials/utils/app_const.dart';
+import 'package:materials/utils/logger.dart';
 
 late ChemController c = ChemController.to;
 late AppGlobalServ sGlob = AppGlobalServ.to;
@@ -15,19 +17,27 @@ class ChemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('chem ${sGlob.nameMaterial}'),
+          title:Column(
+          children: [
+            Text(sGlob.nameMaterial),
+            const Text(
+              'Хим состав',
+              style: AppConstTextStyle.label_extra_bold,
+            )
+          ],
+        ),
           actions: [
             IconButton(
               onPressed: () {
                 c.isReverse.value = !(c.isReverse.value);
               },
-              icon: Icon(Icons.align_horizontal_left_sharp),
+              icon: const Icon(Icons.align_horizontal_left_sharp),
             ),
-             IconButton(
+            IconButton(
               onPressed: () {
                 Get.toNamed(Routes.edit);
               },
-              icon: Icon(Icons.edit),
+              icon: const Icon(Icons.edit),
             ),
           ],
         ),
@@ -39,7 +49,7 @@ class ChemWidget extends StatelessWidget {
                 return SingleChildScrollView(
                     child: Column(children: buildChemWidget()));
               } else {
-                return LinearProgressIndicator();
+                return const LinearProgressIndicator();
               }
             },
           );
@@ -64,12 +74,22 @@ class ChemWidget extends StatelessWidget {
         maxValue = model.percent;
       }
     }
-
+    log.i(list.length);
+    //if there is no data on chemical 
+    if (list.isEmpty) {
+      toPublish.add(const Center(
+        child: Text(
+          'Нет данных',
+          style: AppConstTextStyle.H3,
+        ),
+      ));
+      return toPublish;
+    }
     for (var model in list) {
       toPublish.add(Stack(
         children: [
           Container(
-            width: (Get.width * (model.percent / maxValue))*1,
+            width: (Get.width * (model.percent / maxValue)) * 1,
             height: 40,
             color: Colors.amber,
           ),

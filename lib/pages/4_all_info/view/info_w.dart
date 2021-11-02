@@ -5,6 +5,7 @@ import 'package:materials/pages/4_all_info/controller/info_controller.dart';
 import 'package:materials/pages/4_all_info/models/info_m.dart';
 import 'package:materials/routes/app_page.dart';
 import 'package:materials/services/app_remote_serv.dart';
+import 'package:materials/utils/app_const.dart';
 import 'package:materials/utils/logger.dart';
 
 late InfoController c = InfoController.to;
@@ -20,7 +21,15 @@ class InfoWidget extends StatelessWidget {
 
 
     return Scaffold(
-      appBar: AppBar(title: Text('info ${sGlob.nameMaterial}'),
+      appBar: AppBar(title: Column(
+          children: [
+            Text(sGlob.nameMaterial),
+            const Text(
+              'Информация',
+              style: AppConstTextStyle.label_extra_bold,
+            )
+          ],
+        ),
       actions: [
             
              IconButton(

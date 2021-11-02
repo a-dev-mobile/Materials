@@ -72,12 +72,12 @@ class ChemController extends GetxController {
       if (v.contains('-')) {
         vList = v.split('-');
         if (vList.length == 2) {
-          vD1 = double.tryParse(vList[0])!;
-          vD2 = double.tryParse(vList[1])!;
+          vD1 = double.tryParse(vList[0]) ?? 0;
+          vD2 = double.tryParse(vList[1]) ?? 0;
           vD = (vD1 + vD2) / 2;
         }
       } else {
-        vD = double.tryParse(v)!;
+        vD = double.tryParse(v) ?? 0;
       }
 
       mapNotSort[k] = vD;

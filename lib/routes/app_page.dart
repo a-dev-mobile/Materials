@@ -7,8 +7,9 @@ import 'package:materials/pages/1_2_search/controller/search_controller.dart';
 import 'package:materials/pages/1_2_search/view/search_page.dart';
 import 'package:materials/pages/1_3_add/controller/add_c.dart';
 import 'package:materials/pages/1_3_add/view/add_p.dart';
-import 'package:materials/pages/2_material_sub_classes/controller/material_sub_classes_controller.dart';
-import 'package:materials/pages/2_material_sub_classes/view/material_sub_classes_page.dart';
+import 'package:materials/pages/2_sub_classes/controller/sub_classes_c.dart';
+import 'package:materials/pages/2_sub_classes/view/sub_classes_p.dart';
+
 import 'package:materials/pages/3_names/controller/names_c.dart';
 import 'package:materials/pages/3_names/view/names_page.dart';
 import 'package:materials/pages/4_all_info/controller/all_info_controller.dart';
@@ -46,9 +47,9 @@ class AppPage {
         })),
     GetPage(
         name: Routes.subClasses,
-        page: () => const MaterialSubClassesPage(),
+        page: () => const SubClassesPage(),
         binding: BindingsBuilder(() {
-          Get.put<MaterialSubClassesController>(MaterialSubClassesController());
+          Get.put<SubClassesController>(SubClassesController());
         })),
     GetPage(
         name: Routes.names,

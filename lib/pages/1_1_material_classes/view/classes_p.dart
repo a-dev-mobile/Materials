@@ -6,11 +6,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:materials/pages/1_1_material_classes/controller/classes_c.dart';
 import 'package:materials/pages/1_1_material_classes/models/classes_m.dart';
 import 'package:materials/pages/1_2_search/controller/search_controller.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:materials/services/app_remote_serv.dart';
 
 import 'package:materials/routes/app_page.dart';
 import 'package:materials/services/app_global_serv.dart';
+import 'package:materials/utils/app_const.dart';
+import 'package:materials/utils/app_widget.dart';
 import 'package:materials/utils/logger.dart';
 
 late ClassesController c = ClassesController.to;
@@ -26,7 +28,6 @@ class ClassesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     List<MaterialClassesModel> modelList;
 
-
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.appTitle),
@@ -35,12 +36,11 @@ class ClassesPage extends StatelessWidget {
               onPressed: () {
                 logger.i('help for user');
               },
-              icon: const Icon(Icons.help_outline_outlined))
+              icon: const Icon(Icons.info_outline))
         ],
       ),
       body: Column(
         children: [
-      
           //! future for search
           FutureBuilder(
               future: c.getFutureSearchData(),
@@ -53,6 +53,9 @@ class ClassesPage extends StatelessWidget {
                   return const LinearProgressIndicator();
                 }
               }),
+          AppWidget.title(
+            title: AppLocalizations.of(context)!.select_material_group,
+          ),
           //! future for name class
           FutureBuilder(
             // get futture data
@@ -90,14 +93,22 @@ class ClassesPage extends StatelessWidget {
   }
 
   Widget buildSearch() {
-    return ListTile(
-      leading: const Icon(Icons.search),
-      onTap: () {
-        Get.toNamed(Routes.search);
-      },
-      title: const Text(
-        'Search',
-        style: TextStyle(color: Colors.grey),
+    return Container(
+      margin: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(3),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: AppConstColor.neutral_grey_800, width: 1)),
+      child: ListTile(
+        leading: const Icon(Icons.search),
+        onTap: () {
+          Get.toNamed(Routes.search);
+        },
+        title: Text(
+          AppLocalizations.of(AppGlobalServ.navigatorKey.currentContext!)!
+              .search_title,
+          style: const TextStyle(color: Colors.grey),
+        ),
       ),
     );
   }

@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:materials/services/app_global_serv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:materials/services/app_remote_serv.dart';
+import 'package:materials/utils/app_const.dart';
 
 import 'routes/app_page.dart';
 
@@ -21,7 +22,14 @@ Future<void> main() async {
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
+
+
+
+
     runApp(const MyApp());
+     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: AppConstColor.neutral_white,
+  ));
   });
 }
 
@@ -41,9 +49,18 @@ class MyApp extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       themeMode: AppRemoteServ.to.isDark ? ThemeMode.dark : ThemeMode.light,
       theme: ThemeData(
+        primarySwatch: Colors.blueGrey,
         brightness: Brightness.light,
+        scaffoldBackgroundColor: AppConstColor.neutral_white,
         /* light theme settings */
-      ),
+        appBarTheme: const AppBarTheme(
+            backgroundColor: AppConstColor.neutral_white,
+            centerTitle: true,
+             elevation: 1,
+           iconTheme: IconThemeData(color: AppConstColor.neutral_grey_400),
+            titleTextStyle: AppConstTextStyle.H3 ),
+           ),
+     
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         /* dark theme settings */

@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:materials/pages/3_names/controller/names_c.dart';
 import 'package:materials/pages/3_names/models/names_m.dart';
-
-
-
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:materials/routes/app_page.dart';
 import 'package:materials/services/app_global_serv.dart';
+import 'package:materials/utils/app_const.dart';
+import 'package:materials/utils/app_widget.dart';
 
 late NamesController c = NamesController.to;
 late AppGlobalServ s = AppGlobalServ.to;
@@ -21,10 +20,22 @@ class NamesPage extends StatelessWidget {
     List<NamesModel> modelList;
 
     return Scaffold(
-      appBar: AppBar(title: Text(s.nameClass)),
+      appBar: AppBar(
+        title: Column(
+          children: [
+            Text(s.nameClass),
+            Text(
+              s.nameSubMaterial,
+              style: AppConstTextStyle.label_extra_bold,
+            )
+          ],
+        ),
+      ),
       body: Column(
         children: [
-          const Text('Search'),
+            AppWidget.title(
+            title: AppLocalizations.of(context)!.select_material_grade,
+          ),
           FutureBuilder(
             // get futture data
             future: c.getFutureData(),
@@ -36,15 +47,12 @@ class NamesPage extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: modelList.length,
                     itemBuilder: (context, index) {
-                    
                       return ListTile(
-                        title: Text( modelList[index].nameMaterial),
-                     
-                        subtitle: Text(
-                            modelList[index].nameOtherMaterial),
+                        title: Text(modelList[index].nameMaterial),
+                        subtitle: Text(modelList[index].nameOtherMaterial),
                         onTap: () {
-                          s.idMaterial =  modelList[index].idMaterial;
-                          s.nameMaterial =  modelList[index].nameMaterial;
+                          s.idMaterial = modelList[index].idMaterial;
+                          s.nameMaterial = modelList[index].nameMaterial;
                           Get.toNamed(Routes.allInfo);
                         },
                       );
@@ -56,7 +64,6 @@ class NamesPage extends StatelessWidget {
               }
             },
           )
-        
         ],
       ),
     );
