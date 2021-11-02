@@ -6,7 +6,7 @@ import 'package:materials/pages/1_2_search/models/change_log_m.dart';
 import 'package:materials/services/app_global_serv.dart';
 import 'package:materials/services/app_remote_serv.dart';
 import 'package:materials/utils/logger.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 late AppRemoteServ _sRemote = AppRemoteServ.to;
 
 class ChangeLogController extends GetxController {
@@ -14,9 +14,9 @@ class ChangeLogController extends GetxController {
 
   @override
   void onReady() {
-    if (_sRemote.isUpdateChangeLog) {
+    // if (_sRemote.isUpdateChangeLog) {
       viewDialogChangeLog();
-    }
+    // }
     super.onReady();
   }
 
@@ -45,8 +45,12 @@ class ChangeLogController extends GetxController {
       builder: (context) {
         return AlertDialog(
           scrollable: true,
-          title: const Text('Change Log'),
+          title:Text( AppLocalizations.of(context)!.updating_base,),
           content: Column(
+            
+                 mainAxisSize: MainAxisSize.max,
+            //     mainAxisAlignment: MainAxisAlignment.start,
+            //     crossAxisAlignment: CrossAxisAlignment.start,
             children: _getListChangeData(),
           ),
           actions: [
@@ -72,24 +76,22 @@ class ChangeLogController extends GetxController {
           textAlign: TextAlign.center,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        
       );
-            listToPublish.add(
+      listToPublish.add(
         Text(
           element.date,
           textAlign: TextAlign.center,
-          style: const TextStyle(fontWeight: FontWeight.w100),
+          style: const TextStyle(fontWeight: FontWeight.w300),
         ),
-        
       );
-       listToPublish.add(
+      listToPublish.add(
         Text(
           element.changes,
           textAlign: TextAlign.start,
           style: const TextStyle(fontWeight: FontWeight.normal),
         ),
-        
       );
+      listToPublish.add(const Divider(height: 5,));
     }
 
     return listToPublish;
