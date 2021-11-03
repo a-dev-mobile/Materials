@@ -50,12 +50,8 @@ class SearchPage extends StatelessWidget {
                       Get.defaultDialog(
                         title: 'Расширенный поиск',
                         middleText:
-                            'Используйте пробел для поиска любого символа',
-                        // content: Align(
-                        //   alignment: Alignment.center,
-                        //   child: Text(
-                        //       'Используйте пробел для поиска любого символа'),
-                        // ));
+                            'Используйте пробел если не помните символ',
+ 
                       );
                     },
                     icon: const Icon(Icons.info_outline)),
@@ -63,7 +59,7 @@ class SearchPage extends StatelessWidget {
                   onPressed: () {
                     c.searchLogicRun();
                   },
-                  icon: Icon(Icons.search),
+                  icon: const Icon(Icons.search),
                 ),
               ],
             ),

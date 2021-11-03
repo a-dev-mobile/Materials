@@ -41,6 +41,7 @@ class ChangeLogController extends GetxController {
   void viewDialogChangeLog() {
     var context = AppGlobalServ.navigatorKey.currentContext!;
     showDialog(
+        barrierDismissible: false,
       context: context,
       builder: (context) {
         return AlertDialog(
@@ -49,10 +50,9 @@ class ChangeLogController extends GetxController {
           content: Column(
             
                  mainAxisSize: MainAxisSize.max,
-            //     mainAxisAlignment: MainAxisAlignment.start,
-            //     crossAxisAlignment: CrossAxisAlignment.start,
             children: _getListChangeData(),
           ),
+
           actions: [
             TextButton(
                 onPressed: () {

@@ -12,6 +12,7 @@ import 'package:materials/utils/app_const.dart';
 import 'routes/app_page.dart';
 
 Future<void> main() async {
+  
   WidgetsFlutterBinding.ensureInitialized();
   await firebase_core.Firebase.initializeApp();
 

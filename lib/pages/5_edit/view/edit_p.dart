@@ -16,9 +16,21 @@ class EditPage extends StatelessWidget {
         body: Column(
           children: [
             Text(
-                '${sGlob.nameClass} > ${sGlob.nameSubMaterial} > ${sGlob.nameMaterial}')
+                '${sGlob.nameClass} > ${sGlob.nameSubMaterial} > ${sGlob.nameMaterial}'),
           
-          
+           Padding(
+              padding: EdgeInsets.all(8.0),
+              child: TextField(
+                  controller: _controller,
+                  maxLines: 10,
+                  textCapitalization: TextCapitalization.sentences,
+                  decoration: const InputDecoration(
+                      labelText: 'Марка, ГОСТ, применение, аналоги и др.',
+                      hintText: 'Введите, что нибудь...',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(16)))),
+              ),
+            ),
           ],
         ));
   }
