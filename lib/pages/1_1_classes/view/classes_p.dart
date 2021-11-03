@@ -36,16 +36,10 @@ class ClassesPage extends StatelessWidget {
               onPressed: () {
                 Get.defaultDialog(
                   title: 'Что за цифры?',
-                  content: Column(
-                    // TODO это что?
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      const Text(
-                          'Первая цифра - это количество материалов в данной группе'),
-                          SizedBox(height: 20,),
-                      const Text(
-                          'Вторая цифра - это количество марок материала в данной группе'),
-                    ],
+                  content: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: const Text(
+                        'Это сумма материалов и марок материала в данной группе'),
                   ),
                 );
               },

@@ -90,7 +90,7 @@ class SearchPage extends StatelessWidget {
       onTap: () {
         sGlob.idMaterial = idMaterial;
         sGlob.nameMaterial = title;
-        sGlob.nameSubMaterial = subTitle;
+        sGlob.nameSubClass = subTitle;
         Get.toNamed(Routes.allInfo);
       },
       subtitle: Text(subTitle),

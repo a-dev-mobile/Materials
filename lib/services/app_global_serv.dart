@@ -11,5 +11,5 @@ class AppGlobalServ extends GetxService {
 
   String nameClass = '';
   String nameMaterial = '';
-  String nameSubMaterial = '';
+  String nameSubClass = '';
 }

@@ -25,7 +25,7 @@ class NamesPage extends StatelessWidget {
           children: [
             Text(s.nameClass, style: AppConstTextStyle.label_extra_bold,),
             Text(
-              s.nameSubMaterial,overflow: TextOverflow.ellipsis,
+              s.nameSubClass,overflow: TextOverflow.ellipsis,
                  softWrap: true,
               style: AppConstTextStyle.label_regular,
             )

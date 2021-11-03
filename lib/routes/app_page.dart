@@ -14,9 +14,9 @@ import 'package:materials/pages/3_names/controller/names_c.dart';
 import 'package:materials/pages/3_names/view/names_page.dart';
 import 'package:materials/pages/4_all_info/controller/all_info_controller.dart';
 import 'package:materials/pages/4_all_info/controller/chem_c.dart';
-import 'package:materials/pages/4_all_info/controller/edit_c.dart';
-import 'package:materials/pages/4_all_info/controller/info_controller.dart';
+import 'package:materials/pages/4_all_info/controller/info_c.dart';
 import 'package:materials/pages/4_all_info/view/all_info_p.dart';
+import 'package:materials/pages/5_edit/controller/edit_c.dart';
 import 'package:materials/pages/5_edit/view/edit_p.dart';
 
 abstract class Routes {

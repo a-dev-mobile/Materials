@@ -29,4 +29,9 @@ class InfoController extends GetxController {
 
     return model;
   }
+
+
+
+
+
 }
