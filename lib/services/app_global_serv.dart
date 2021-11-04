@@ -18,8 +18,7 @@ class AppGlobalServ extends GetxService {
   String nameMaterial = '';
   String nameSubClass = '';
 
-  @override
-  void onInit() async {
+  Future<AppGlobalServ> init() async {
     logger.d('onInit global service');
 
     bool isNullFirstStartApp =
@@ -33,6 +32,6 @@ class AppGlobalServ extends GetxService {
       isFirstStartApp = false;
     }
 
-    super.onInit();
+    return this;
   }
 }

@@ -19,8 +19,7 @@ class AppRemoteServ extends GetxService {
 
   static const _keyChangeLog = 'change_log';
 
-
-  int get _versionDB => _getIntData(_keyVersionDB, _defaultVersionDB);
+  int get versionDB => _getIntData(_keyVersionDB, _defaultVersionDB);
   bool get isDark => _getBoolData(_keyIsDark);
   String get changeLog => _getJsonData(_keyChangeLog, "");
 
@@ -62,8 +61,7 @@ class AppRemoteServ extends GetxService {
     await _remoteConfig.fetchAndActivate();
   }
 
-  @override
-  void onInit() async {
+  Future<AppRemoteServ> init() async {
     logger.d('onInit AppRemoteServ');
 
     await _initConfig();
@@ -72,14 +70,15 @@ class AppRemoteServ extends GetxService {
     int oldVersionDB =
         await LocalStorage().getItemInt(AppConstString.keyVersionDB);
 
-    if (_versionDB != oldVersionDB) {
-      LocalStorage().setItemBool(AppConstString.keyIsUpdateDB, true);
-      log.w('isUpdateDB.value = true;');
+    if (versionDB != oldVersionDB) {
+      isUpdateDB = true;
+      log.w('isUpdateDB.value = true; $versionDB');
     } else {
-      LocalStorage().setItemBool(AppConstString.keyIsUpdateDB, false);
-     log.w('isUpdateDB.value = false;');
+      isUpdateDB = false;
+
+      log.w('isUpdateDB.value = false; $versionDB');
     }
 
-    super.onInit();
+    return this;
   }
 }

@@ -24,7 +24,7 @@ class LoadDBPage extends StatelessWidget {
           title: Text('обновление DB'),
         ),
         body: Container(
-          color: Colors.amber,
+          color: Colors.amber, 
         ));
   }
 

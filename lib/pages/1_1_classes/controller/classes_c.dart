@@ -18,7 +18,10 @@ class ClassesController extends GetxController {
   static ClassesController get to => Get.find();
   @override
   void onInit() {
-   
+   if (AppRemoteServ.to.isUpdateDB) {
+      LocalStorage()
+          .setItemInt(AppConstString.keyVersionDB, AppRemoteServ.to.versionDB);
+    }
     super.onInit();
   }
 }

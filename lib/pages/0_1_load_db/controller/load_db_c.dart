@@ -32,6 +32,7 @@ class LoadDBController extends GetxController {
           .writeToFile(downloadToFile);
     } on firebase_core.FirebaseException catch (e) {
       e.code == 'canceled';
+      Get.defaultDialog(title: 'error db',middleText: 'Попробуйте перезагрузить чайник');
       log.w(e);
     }
     log.i('end load');
@@ -40,20 +41,16 @@ class LoadDBController extends GetxController {
 
   @override
   void onInit() async {
-    
     if (AppGlobalServ.to.isFirstStartApp) {
       LocalStorage().setItemBool(AppConstString.keyIsFirstStartApp, false);
     }
 
     log.i(' start init');
-    // if (AppRemoteServ.to.isUpdateDB) {
+    if (AppRemoteServ.to.isUpdateDB) {
     await downloadDB();
-    // }
-    log.i(' end init');
- if (AppRemoteServ.to.isUpdateDB) {
-      LocalStorage()
-          .setItemInt(AppConstString.keyVersionDB, AppRemoteServ.to.versionDB);
     }
+    log.i(' end init');
+
     super.onInit();
   }
 }

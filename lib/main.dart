@@ -13,12 +13,8 @@ import 'routes/app_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await firebase_core.Firebase.initializeApp();
-
+  await initServices();
   // Logger.level = Level.nothing; //TODO on LOG
-
-  await Get.putAsync<AppRemoteServ>(() async => AppRemoteServ());
-  await Get.putAsync<AppGlobalServ>(() async => AppGlobalServ());
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
@@ -27,6 +23,16 @@ Future<void> main() async {
       statusBarColor: AppConstColor.neutral_white,
     ));
   });
+}
+
+initServices() async {
+  print('starting services ...');
+  await firebase_core.Firebase.initializeApp();
+
+  await Get.putAsync(() => AppRemoteServ().init());
+  await Get.putAsync(() => AppGlobalServ().init());
+
+  print('All services started...');
 }
 
 class MyApp extends StatelessWidget {
