@@ -12,25 +12,20 @@ import 'package:materials/utils/app_const.dart';
 import 'routes/app_page.dart';
 
 Future<void> main() async {
-  
   WidgetsFlutterBinding.ensureInitialized();
   await firebase_core.Firebase.initializeApp();
 
   // Logger.level = Level.nothing; //TODO on LOG
 
-  Get.putAsync<AppGlobalServ>(() async => AppGlobalServ());
-  Get.putAsync<AppRemoteServ>(() async => AppRemoteServ());
+  await Get.putAsync<AppRemoteServ>(() async => AppRemoteServ());
+  await Get.putAsync<AppGlobalServ>(() async => AppGlobalServ());
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
-
-
-
-
     runApp(const MyApp());
-     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: AppConstColor.neutral_white,
-  ));
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: AppConstColor.neutral_white,
+    ));
   });
 }
 
@@ -43,7 +38,11 @@ class MyApp extends StatelessWidget {
       navigatorKey: AppGlobalServ.navigatorKey,
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
-      initialRoute: Routes.classes,
+      initialRoute: AppGlobalServ.to.isFirstStartApp
+          ? Routes.welcome
+          : AppRemoteServ.to.isUpdateDB
+              ? Routes.loadDB
+              : Routes.classes,
       defaultTransition: Transition.noTransition,
       getPages: AppPage.pages,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -57,11 +56,10 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
             backgroundColor: AppConstColor.neutral_white,
             centerTitle: true,
-             elevation: 1,
-           iconTheme: IconThemeData(color: AppConstColor.neutral_grey_400),
-            titleTextStyle: AppConstTextStyle.H3 ),
-           ),
-     
+            elevation: 1,
+            iconTheme: IconThemeData(color: AppConstColor.neutral_grey_400),
+            titleTextStyle: AppConstTextStyle.H3),
+      ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         /* dark theme settings */

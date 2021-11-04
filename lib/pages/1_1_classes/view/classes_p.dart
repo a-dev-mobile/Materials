@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,10 +16,9 @@ import 'package:materials/services/app_global_serv.dart';
 import 'package:materials/utils/app_const.dart';
 import 'package:materials/utils/app_widget.dart';
 import 'package:materials/utils/logger.dart';
+import 'package:path_provider/path_provider.dart';
 
-late ClassesController c = ClassesController.to;
-
-late SearchController cSearch = SearchController.to;
+late ClassesController cClass = ClassesController.to;
 
 late AppGlobalServ s = AppGlobalServ.to;
 
@@ -36,9 +37,9 @@ class ClassesPage extends StatelessWidget {
               onPressed: () {
                 Get.defaultDialog(
                   title: 'Что за цифры?',
-                  content: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: const Text(
+                  content: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
                         'Это сумма материалов и марок материала в данной группе'),
                   ),
                 );
@@ -48,52 +49,13 @@ class ClassesPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          //! future for search
-          FutureBuilder(
-              future: c.getFutureSearchData(),
-              builder:
-                  (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  c.listDataForSearch = c.getSearchModelList(snapshot);
-                  return buildSearch();
-                } else {
-                  return const LinearProgressIndicator();
-                }
-              }),
-          AppWidget.title(
-            title: AppLocalizations.of(context)!.select_material_group,
-          ),
-          //! future for name class
-          FutureBuilder(
-            // get futture data
-            future: c.getFutureNameClass(),
-            builder:
-                (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                modelList = c.getNameClassModelList(snapshot);
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: modelList.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(modelList[index].nameClass),
-                        trailing: Text(
-                            '${modelList[index].numberUniqSubClass} | ${modelList[index].numberUniqMaterials}'),
-                        onTap: () {
-                          s.idClass = modelList[index].idClass;
-                          s.nameClass = modelList[index].nameClass;
+          // Obx(() {
+        
 
-                          Get.toNamed(Routes.subClasses);
-                        },
-                      );
-                    },
-                  ),
-                );
-              } else {
-                return const LinearProgressIndicator();
-              }
-            },
-          )
+          //   return cClass.isLoadDB.value
+          //       ? LinearProgressIndicator()
+          //       :;
+          // })
         ],
       ),
     );

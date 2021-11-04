@@ -20,7 +20,7 @@ class SearchController extends GetxController {
   @override
   void onInit() {
     //transfer data from another controller
-    _listDataForSearch.value = c.listDataForSearch;
+    // _listDataForSearch.value = c.listDataForSearch;
     super.onInit();
   }
 

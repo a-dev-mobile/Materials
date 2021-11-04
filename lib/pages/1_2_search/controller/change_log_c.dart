@@ -14,7 +14,7 @@ class ChangeLogController extends GetxController {
 
   @override
   void onReady() {
-    if (_sRemote.isUpdateChangeLog) {
+    if (_sRemote.isUpdateDB) {
       viewDialogChangeLog();
     }
     super.onReady();
@@ -58,7 +58,7 @@ class ChangeLogController extends GetxController {
                 onPressed: () {
                   Navigator.pop(context, 'OK');
                   //so that it won't show next time.
-                  AppRemoteServ.to.isUpdateChangeLog = false;
+                  AppRemoteServ.to.isUpdateDB = false;
                 },
                 child: const Text('OK'))
           ],

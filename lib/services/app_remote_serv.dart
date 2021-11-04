@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:materials/utils/app_const.dart';
 import 'package:materials/utils/local_torage.dart';
 import 'package:materials/utils/logger.dart';
 
@@ -8,29 +9,24 @@ class AppRemoteServ extends GetxService {
   static AppRemoteServ get to => Get.find();
   final RemoteConfig _remoteConfig = RemoteConfig.instance;
 
-  var isUpdateChangeLog = false;
+  var isUpdateDB = false;
 
+  static const _defaultVersionDB = 1;
 
-  static const _keyWelcome = 'welcome';
-  static const _defaultWelcome = 'welcome';
-
-  static const _keyAuthor = 'author';
-  static const _defaultAuthor = 'Dmitriy';
-
+  static const _keyVersionDB = 'version_db';
   static const _keyIsDark = 'isDarkTheme';
   static const _defaultIsDark = false;
 
   static const _keyChangeLog = 'change_log';
 
-  String get author => _getStringData(_keyAuthor, _defaultAuthor);
-  String get welcome => _getStringData(_keyWelcome, _defaultWelcome);
+
+  int get _versionDB => _getIntData(_keyVersionDB, _defaultVersionDB);
   bool get isDark => _getBoolData(_keyIsDark);
   String get changeLog => _getJsonData(_keyChangeLog, "");
 
   void setDefaults() {
     _remoteConfig.setDefaults(<String, dynamic>{
-      _keyWelcome: _defaultWelcome,
-      _keyAuthor: _defaultAuthor,
+      _keyVersionDB: _defaultVersionDB,
       _keyIsDark: _defaultIsDark,
       _keyChangeLog: "",
     });
@@ -40,6 +36,10 @@ class AppRemoteServ extends GetxService {
     return _remoteConfig.getString(key).isNotEmpty
         ? _remoteConfig.getString(key)
         : defaultValue;
+  }
+
+  int _getIntData(String key, int defaultValue) {
+    return _remoteConfig.getInt(key);
   }
 
   _getJsonData(String key, String defaultValue) {
@@ -64,21 +64,20 @@ class AppRemoteServ extends GetxService {
 
   @override
   void onInit() async {
+    logger.d('onInit AppRemoteServ');
+
     await _initConfig();
     setDefaults();
-   
-   
-   
-    String _textChangeLog = AppRemoteServ.to.changeLog;
-    String oldTextChangeLog = await LocalStorage().getItemString(_keyChangeLog);
 
-    if (_textChangeLog != oldTextChangeLog) {
-      LocalStorage().setItemString(_keyChangeLog, _textChangeLog);
-      isUpdateChangeLog = true;
-      log.w('isChangeLog.value = true;');
+    int oldVersionDB =
+        await LocalStorage().getItemInt(AppConstString.keyVersionDB);
+
+    if (_versionDB != oldVersionDB) {
+      LocalStorage().setItemBool(AppConstString.keyIsUpdateDB, true);
+      log.w('isUpdateDB.value = true;');
     } else {
-      log.w('isChangeLog.value = false;');
-      isUpdateChangeLog = false;
+      LocalStorage().setItemBool(AppConstString.keyIsUpdateDB, false);
+     log.w('isUpdateDB.value = false;');
     }
 
     super.onInit();

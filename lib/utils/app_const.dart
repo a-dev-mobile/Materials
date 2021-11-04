@@ -3,6 +3,9 @@
 import 'package:flutter/material.dart';
 
 abstract class AppConstString {
+  static const String keyIsFirstStartApp = 'isFirstStartApp';
+  static const String keyVersionDB = 'versionDB';
+  static const String keyIsUpdateDB = 'isUpdateDB';
   static const String NO_DATA = 'n/a';
   static const String EMAIL = 'a.dev.mobile@gmail.com';
 

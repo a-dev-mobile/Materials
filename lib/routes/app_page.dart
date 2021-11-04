@@ -1,4 +1,8 @@
 import 'package:get/get.dart';
+import 'package:materials/pages/0_0_welcome/controller/welcome_c.dart';
+import 'package:materials/pages/0_0_welcome/view/welcome_p.dart';
+import 'package:materials/pages/0_1_load_db/controller/load_db_c.dart';
+import 'package:materials/pages/0_1_load_db/view/load_db_p.dart';
 import 'package:materials/pages/1_1_classes/controller/classes_c.dart';
 import 'package:materials/pages/1_1_classes/view/classes_p.dart';
 
@@ -20,6 +24,8 @@ import 'package:materials/pages/5_edit/controller/edit_c.dart';
 import 'package:materials/pages/5_edit/view/edit_p.dart';
 
 abstract class Routes {
+  static const welcome = '/welcome';
+  static const loadDB = '/loadDB';
   static const classes = '/classes';
   static const search = '/search';
   static const subClasses = '/subClasses';
@@ -31,6 +37,18 @@ abstract class Routes {
 
 class AppPage {
   static final pages = [
+    GetPage(
+        name: Routes.welcome,
+        page: () => const WelcomePage(),
+        binding: BindingsBuilder(() {
+          Get.put<WelcomeController>(WelcomeController());
+        })),
+    GetPage(
+        name: Routes.loadDB,
+        page: () => const LoadDBPage(),
+        binding: BindingsBuilder(() {
+          Get.put<LoadDBController>(LoadDBController());
+        })),
     GetPage(
         name: Routes.classes,
         page: () => const ClassesPage(),
