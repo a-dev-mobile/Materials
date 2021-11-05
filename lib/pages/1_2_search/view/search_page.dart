@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:materials/pages/1_1_classes/controller/classes_c.dart';
+
 
 
 import 'package:materials/pages/1_2_search/controller/search_controller.dart';
@@ -11,7 +11,7 @@ import 'package:materials/translations/translate_helper.dart';
 
 late SearchController c = SearchController.to;
 late AppGlobalServ sGlob = AppGlobalServ.to;
-late ClassesController cClass = ClassesController.to;
+
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);

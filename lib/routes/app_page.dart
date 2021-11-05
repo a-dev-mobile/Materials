@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
-import 'package:materials/pages/0_0_welcome/controller/welcome_c.dart';
-import 'package:materials/pages/0_0_welcome/view/welcome_p.dart';
-import 'package:materials/pages/0_1_load_db/controller/load_db_c.dart';
-import 'package:materials/pages/0_1_load_db/view/load_db_p.dart';
-import 'package:materials/pages/1_1_classes/controller/classes_c.dart';
-import 'package:materials/pages/1_1_classes/view/classes_p.dart';
+import 'package:materials/pages/0_load_db/controller/load_db_c.dart';
+import 'package:materials/pages/0_load_db/view/load_db_p.dart';
+import 'package:materials/pages/0_welcome/controller/welcome_c.dart';
+import 'package:materials/pages/0_welcome/view/welcome_p.dart';
+import 'package:materials/pages/1_1_home/controller/home_c.dart';
+import 'package:materials/pages/1_1_home/view/home_p.dart';
 
 import 'package:materials/pages/1_2_search/controller/change_log_c.dart';
 import 'package:materials/pages/1_2_search/controller/search_controller.dart';
@@ -26,7 +26,7 @@ import 'package:materials/pages/5_edit/view/edit_p.dart';
 abstract class Routes {
   static const welcome = '/welcome';
   static const loadDB = '/loadDB';
-  static const classes = '/classes';
+  static const home = '/home';
   static const search = '/search';
   static const subClasses = '/subClasses';
   static const names = '/names';
@@ -50,10 +50,10 @@ class AppPage {
           Get.put<LoadDBController>(LoadDBController());
         })),
     GetPage(
-        name: Routes.classes,
-        page: () => const ClassesPage(),
+        name: Routes.home,
+        page: () => const HomePage(),
         binding: BindingsBuilder(() {
-          Get.put<ClassesController>(ClassesController());
+          Get.put<HomeController>(HomeController());
         })),
     GetPage(
         name: Routes.search,

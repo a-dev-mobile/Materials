@@ -3,9 +3,12 @@
 import 'package:flutter/material.dart';
 
 abstract class AppConstString {
-  static const String keyIsFirstStartApp = 'isFirstStartApp';
-  static const String keyVersionDB = 'versionDB';
-  static const String keyIsUpdateDB = 'isUpdateDB';
+  static const String TABLE_INFO_CHEM = 'info_chem_property';
+  static const String TABLE_PHYS = 'phys_property';
+  static const String keyIsFirstStartApp = 'is_first_start_app';
+  static const String keyVersionDB = 'version_db';
+  static const String keyIsUpdateDB = 'is_update_db';
+  static const String keyPathDB = 'path_db';
   static const String NO_DATA = 'n/a';
   static const String EMAIL = 'a.dev.mobile@gmail.com';
   static const String localeRu = 'ru';

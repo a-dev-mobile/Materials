@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => TranslateHelper.onGenerateTitle,
       initialRoute:
-          AppGlobalServ.to.isFirstStartApp ? Routes.welcome : Routes.loadDB,
+          AppGlobalServ.to.isFirstStartApp ? Routes.loadDB : Routes.home,
       defaultTransition: Transition.noTransition,
       getPages: AppPage.pages,
       translations: AppTranslation(),
