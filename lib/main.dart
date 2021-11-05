@@ -5,11 +5,14 @@ import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
 
 import 'package:materials/services/app_global_serv.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:materials/services/app_remote_serv.dart';
+import 'package:materials/translations/translate_helper.dart';
 import 'package:materials/utils/app_const.dart';
 
 import 'routes/app_page.dart';
+import 'translations/app_translations.dart';
+import 'utils/logger.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,13 +29,13 @@ Future<void> main() async {
 }
 
 initServices() async {
-  print('starting services ...');
+  log.i('starting services ...');
   await firebase_core.Firebase.initializeApp();
-
-  await Get.putAsync(() => AppRemoteServ().init());
+//TODO off remote
+  // await Get.putAsync(() => AppRemoteServ().init());
   await Get.putAsync(() => AppGlobalServ().init());
 
-  print('All services started...');
+  log.i('All services started...');
 }
 
 class MyApp extends StatelessWidget {
@@ -43,17 +46,14 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       navigatorKey: AppGlobalServ.navigatorKey,
       debugShowCheckedModeBanner: false,
-      onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
-      initialRoute: AppGlobalServ.to.isFirstStartApp
-          ? Routes.welcome
-          : AppRemoteServ.to.isUpdateDB
-              ? Routes.loadDB
-              : Routes.classes,
+      onGenerateTitle: (context) => TranslateHelper.onGenerateTitle,
+      initialRoute:
+          AppGlobalServ.to.isFirstStartApp ? Routes.welcome : Routes.loadDB,
       defaultTransition: Transition.noTransition,
       getPages: AppPage.pages,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      themeMode: AppRemoteServ.to.isDark ? ThemeMode.dark : ThemeMode.light,
+      translations: AppTranslation(),
+      locale: const Locale(AppConstString.localeEn),
+      themeMode: ThemeMode.light,
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
         brightness: Brightness.light,

@@ -7,7 +7,7 @@ import 'package:materials/pages/1_2_search/controller/search_controller.dart';
 import 'package:materials/routes/app_page.dart';
 import 'package:materials/services/app_global_serv.dart';
 import 'package:materials/services/app_remote_serv.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:materials/translations/translate_helper.dart';
 
 late SearchController c = SearchController.to;
 late AppGlobalServ sGlob = AppGlobalServ.to;
@@ -21,8 +21,7 @@ class SearchPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-            AppLocalizations.of(AppGlobalServ.navigatorKey.currentContext!)!
-                .search_title),
+           TranslateHelper.search_title),
         actions: [
           IconButton(
               onPressed: () {

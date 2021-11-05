@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:materials/utils/logger.dart';
 
 class AddController extends GetxController {
@@ -17,7 +16,7 @@ class AddController extends GetxController {
     _addMaterialRef
         .add({
           '1_text': text,
-          '2_date': DateFormat("yyyy-MM-dd hh:mm:ss").format(DateTime.now()),
+          // '2_date': DateFormat("yyyy-MM-dd hh:mm:ss").format(DateTime.now()),
         })
         .then((value) => logger.w('add material'))
         .catchError((error) => logger.e("Failed to add : $error"));

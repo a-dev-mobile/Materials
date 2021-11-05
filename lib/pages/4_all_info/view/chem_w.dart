@@ -1,12 +1,11 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:materials/pages/4_all_info/controller/chem_c.dart';
 import 'package:materials/routes/app_page.dart';
 import 'package:materials/services/app_global_serv.dart';
+import 'package:materials/translations/translate_helper.dart';
 import 'package:materials/utils/app_const.dart';
 import 'package:materials/utils/logger.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 late ChemController c = ChemController.to;
 late AppGlobalServ sGlob = AppGlobalServ.to;
@@ -25,7 +24,7 @@ class ChemWidget extends StatelessWidget {
                 style: AppConstTextStyle.H3,
               ),
               Text(
-                AppLocalizations.of(context)!.chem_composition,
+            TranslateHelper.chem_composition,
                 style: AppConstTextStyle.label_regular,
               )
             ],

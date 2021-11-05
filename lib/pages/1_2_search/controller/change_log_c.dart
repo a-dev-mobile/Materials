@@ -5,8 +5,8 @@ import 'package:get/state_manager.dart';
 import 'package:materials/pages/1_2_search/models/change_log_m.dart';
 import 'package:materials/services/app_global_serv.dart';
 import 'package:materials/services/app_remote_serv.dart';
+import 'package:materials/translations/translate_helper.dart';
 import 'package:materials/utils/logger.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 late AppRemoteServ _sRemote = AppRemoteServ.to;
 
 class ChangeLogController extends GetxController {
@@ -46,7 +46,7 @@ class ChangeLogController extends GetxController {
       builder: (context) {
         return AlertDialog(
           scrollable: true,
-          title:Text( AppLocalizations.of(context)!.updating_base,),
+          title:Text('updating_base,'),
           content: Column(
             
                  mainAxisSize: MainAxisSize.max,

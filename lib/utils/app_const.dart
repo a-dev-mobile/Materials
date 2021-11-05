@@ -8,9 +8,15 @@ abstract class AppConstString {
   static const String keyIsUpdateDB = 'isUpdateDB';
   static const String NO_DATA = 'n/a';
   static const String EMAIL = 'a.dev.mobile@gmail.com';
-
+  static const String localeRu = 'ru';
+  static const String localeEn = 'en';
   static var PLAY_STORE_URL =
       'http://play.google.com/store/apps/details?id=a.dev.calc_triangle';
+}
+
+abstract class AppConstBool {
+  //TODO check isDebug
+  static const bool isDebug = true;
 }
 
 class AppConstColor {
@@ -20,17 +26,19 @@ class AppConstColor {
   static const Color neutral_grey_800 = Color(0xFF323F4B);
   static const Color neutral_grey_400 = Color(0xFF7B8794);
   static const Color neutral_grey_100 = Color(0xFFE3E7EB);
-
 }
 
 class AppConstTextStyle {
-  static const TextStyle H3 =
-      TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: AppConstColor.neutral_grey_800);
- static const TextStyle label_extra_bold =
-      TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: AppConstColor.neutral_grey_800);
- static const TextStyle label_regular =
-      TextStyle(fontWeight: FontWeight.normal, fontSize: 12,color: AppConstColor.neutral_grey_400);
-
-
-
+  static const TextStyle H3 = TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 20,
+      color: AppConstColor.neutral_grey_800);
+  static const TextStyle label_extra_bold = TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 16,
+      color: AppConstColor.neutral_grey_800);
+  static const TextStyle label_regular = TextStyle(
+      fontWeight: FontWeight.normal,
+      fontSize: 12,
+      color: AppConstColor.neutral_grey_400);
 }

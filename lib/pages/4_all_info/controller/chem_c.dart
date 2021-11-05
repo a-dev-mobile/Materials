@@ -1,8 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
 import 'dart:async';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:materials/pages/4_all_info/models/chem_m.dart';
@@ -19,25 +17,16 @@ class ChemController extends GetxController {
   RxList<ChemModel> listModel = <ChemModel>[].obs;
   Map<String, String> _mapChem = {};
   Map<String, double> _mapChemSort = {};
-  final _database = FirebaseDatabase.instance.reference();
-
-  Future<DataSnapshot> getFutureDataChem() async {
-    final String _pathDB = 'data_base/material_chem/${sGlob.idMaterial}/';
-    var data = _database.child(_pathDB).once();
-
-    return data;
-  }
+ 
 
   Future<void> getfuture(bool isReverseData) async {
     //  isLoad.value = true;
 
-    DataSnapshot snapshot = await getFutureDataChem();
-    _mapChem = _getMapChem(snapshot);
     _mapChemSort = _parsingValueInDouble(isReverseData);
     listModel.value = getChemModel();
   }
 
-  Map<String, String> _getMapChem(DataSnapshot snapshot) {
+  Map<String, String> _getMapChem( snapshot) {
     Map<String, String> mapChem = {};
     snapshot.value.forEach((key, value) {
       mapChem[key] = value;

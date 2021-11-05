@@ -5,7 +5,6 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:materials/pages/1_1_classes/models/search_m.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:materials/services/app_global_serv.dart';
 import 'package:materials/services/app_remote_serv.dart';
 import 'package:materials/utils/app_const.dart';

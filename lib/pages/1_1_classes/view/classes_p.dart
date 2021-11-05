@@ -1,18 +1,16 @@
 import 'dart:io';
 
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:materials/pages/1_1_classes/controller/classes_c.dart';
 import 'package:materials/pages/1_1_classes/models/classes_m.dart';
 
 import 'package:materials/pages/1_2_search/controller/search_controller.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:materials/services/app_remote_serv.dart';
 
 import 'package:materials/routes/app_page.dart';
 import 'package:materials/services/app_global_serv.dart';
+import 'package:materials/translations/translate_helper.dart';
 import 'package:materials/utils/app_const.dart';
 import 'package:materials/utils/app_widget.dart';
 import 'package:materials/utils/logger.dart';
@@ -31,7 +29,7 @@ class ClassesPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.appTitle),
+        title: Text(TranslateHelper.app_title),
         actions: [
           IconButton(
               onPressed: () {
@@ -74,8 +72,7 @@ class ClassesPage extends StatelessWidget {
           Get.toNamed(Routes.search);
         },
         title: Text(
-          AppLocalizations.of(AppGlobalServ.navigatorKey.currentContext!)!
-              .search_title,
+         TranslateHelper.search_title,
           style: const TextStyle(color: Colors.grey),
         ),
       ),

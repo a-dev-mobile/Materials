@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:materials/pages/4_all_info/controller/all_info_controller.dart';
 import 'package:materials/pages/4_all_info/view/chem_w.dart';
 import 'package:materials/pages/4_all_info/view/info_w.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:materials/services/app_global_serv.dart';
+import 'package:materials/translations/translate_helper.dart';
 
 late AllInfoController c = AllInfoController.to;
 late AppGlobalServ sGlob = AppGlobalServ.to;
@@ -39,8 +39,8 @@ class AllInfoPage extends StatelessWidget {
       onTap: c.changeCurrentIndex,
       items:  [
         BottomNavigationBarItem(
-            icon: Icon(Icons.info), label: AppLocalizations.of(AppGlobalServ.navigatorKey.currentContext!)!.info),
-        BottomNavigationBarItem(icon: Icon(Icons.analytics), label: AppLocalizations.of(AppGlobalServ.navigatorKey.currentContext!)!.chem_composition),
+            icon: Icon(Icons.info), label: TranslateHelper.info),
+        BottomNavigationBarItem(icon: Icon(Icons.analytics), label: TranslateHelper.chem_composition),
       ],
     );
   }

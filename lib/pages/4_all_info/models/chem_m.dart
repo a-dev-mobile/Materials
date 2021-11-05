@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:materials/utils/logger.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChemModel {
   final String abrv;

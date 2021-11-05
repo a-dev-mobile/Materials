@@ -1,6 +1,6 @@
-{
-
-"appTitle":"Steels and alloys",
+Map<String, String> en = {
+"app_title":"Steels and alloys",
+"onGenerateTitle":"onGenerateTitle",
 
 "version":"Version",
 "updating_base":"Обновление",
@@ -16,4 +16,4 @@
 "info":"Инфо"
 
 
-}
+};

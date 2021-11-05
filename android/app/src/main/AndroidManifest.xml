@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="a.dev.mobile.materials"
-    android:usesCleartextTraffic="true">
+    package="a.dev.mobile.materials">
    <application
         android:label="materials"
+        android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

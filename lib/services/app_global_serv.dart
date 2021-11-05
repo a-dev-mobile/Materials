@@ -6,13 +6,12 @@ import 'package:materials/utils/logger.dart';
 
 class AppGlobalServ extends GetxService {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+ 
   static AppGlobalServ get to => Get.find();
 
   var isFirstStartApp = false;
 
   String idMaterial = '';
-  String idClass = "";
-  String idSubClass = '';
 
   String nameClass = '';
   String nameMaterial = '';
@@ -20,17 +19,10 @@ class AppGlobalServ extends GetxService {
 
   Future<AppGlobalServ> init() async {
     logger.d('onInit global service');
-
-    bool isNullFirstStartApp =
-        await LocalStorage().isNull(AppConstString.keyIsFirstStartApp);
-
     // если первый запуск
-    if (isNullFirstStartApp) {
-      isFirstStartApp = true;
-    } else {
       // устанавливаем если не первый запуск
-      isFirstStartApp = false;
-    }
+   isFirstStartApp =
+        await LocalStorage().isNull(AppConstString.keyIsFirstStartApp);
 
     return this;
   }

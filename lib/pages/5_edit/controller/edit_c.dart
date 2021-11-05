@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:materials/services/app_global_serv.dart';
 import 'package:materials/utils/logger.dart';
 
@@ -20,9 +19,6 @@ late final TextEditingController _controller;
         .add({
           '1_edit': text,
           '2_name': _sGlob.nameMaterial,
-          '3_date': DateFormat("yyyy-MM-dd hh:mm:ss").format(DateTime.now()),
-          'id_class': _sGlob.idClass,
-          'id_sub_class': _sGlob.idSubClass,
           'id_material': _sGlob.idMaterial,
           'class': _sGlob.nameClass,
           'sub_class': _sGlob.nameSubClass,
