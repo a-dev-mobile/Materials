@@ -1,12 +1,10 @@
 import 'dart:io';
 
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:materials/pages/1_1_classes/models/classes_m.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:materials/routes/app_page.dart';
 import 'package:materials/services/app_global_serv.dart';
